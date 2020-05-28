@@ -11,6 +11,10 @@
     <link rel="icon" href="/images/quickmess.ico" type="image/x-icon" />
     <script src="/js/script.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <% if (typeof css_file != "undefined" && css_file == "chat.css"){%>
+        <link rel="stylesheet" type="text/css" href="/css/chat.css">
+    <% } %>
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -33,7 +37,7 @@
                     <a class="nav-link p-2" href="/"><i class="fas fa-home"></i> Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link p-2" href="/inbox"><i class="fas fa-envelope"></i> Inbox</a>
+                    <a class="nav-link p-2" href="/inbox"><i class="fas fa-envelope"></i> Message</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link p-2" href="/friends"><i class="fas fa-user-friends"></i> Friends</a>

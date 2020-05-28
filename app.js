@@ -4,11 +4,14 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const path = require('path');
+const io = require("socket.io");
 
 const utilities = require('./modules/utilities.js');
 
 const app = express();
 const port = 2014;
+//integrating socketio
+socket = io(http);
 
 app.set('view engine', 'ejs');                      // directorul 'views' va conține fișierele .ejs (html + js executat la server)
 app.use(expressLayouts);                            // suport pentru layout-uri - implicit fișierul care reprezintă template-ul site-ului este views/layout.ejs
@@ -35,6 +38,10 @@ app.get('/', async (req, res) => {
 
 app.get('/register', (req, res) => {
     res.render('register');
+});
+
+app.get('/inbox', (req, res) => {
+    res.render('inbox', {css_file: "chat.css"});
 });
 
 

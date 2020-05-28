@@ -1,9 +1,16 @@
 body{
     color: black;
 }
+
+html, body {
+    height: 100%;
+}
+
 footer, nav {
     background: black;
 }
+
+
 
 li a:hover {
     background: purple;
@@ -46,10 +53,6 @@ input[type='radio']:after {
 
 input[type='radio']:checked:after {
     background-color: #ffa500;
-}
-
-html, body {
-    height: 100%;
 }
 
 #container {
