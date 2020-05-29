@@ -19,6 +19,7 @@ textarea {
 .chat {
     margin-top: 5px;
     margin-bottom: 5px;
+    height: 750px;
 }
 
 .card {

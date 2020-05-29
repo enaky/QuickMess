@@ -10,13 +10,11 @@ const utilities = require('./modules/utilities.js');
 const app = express();
 const port = 2014;
 
+//var io = require('socket.io').listen(server);
+
 //set the express.static middleware
 app.use(express.static(__dirname + "/public"));
-const io = require('socket.io');
 
-//integrating socketio
-const http = require("http").Server(app);
-socket = io(http);
 
 app.set('view engine', 'ejs');                      // directorul 'views' va conține fișierele .ejs (html + js executat la server)
 app.use(expressLayouts);                            // suport pentru layout-uri - implicit fișierul care reprezintă template-ul site-ului este views/layout.ejs
