@@ -4,8 +4,9 @@
 
     <div class="d-flex justify-content-center p-2 w-25 bg-dark" style="border-radius: 20px; border: solid #ffa500;">
         <form action="/verificare-autentificare" method="post">
-            <% if (messageError) { %>
-                <div class="text-center p-1 m-1" style="color: #ff0000">*** Date invalide ***</div>
+            <img class="mx-auto d-block mt-2 mb-2" src="/images/quickmesslogo.png" alt="" style="height:50px">
+            <% if (error.status) { %>
+                <div class="text-center p-1 m-1" style="color: #ff0000">*** <%= error.message %>> ***</div>
             <% } %>
             <div class="input-group">
                 <div class="input-group-prepend">
@@ -30,7 +31,7 @@
                     <button type="submit" class="btn  btn-primary">Login</button>
                 </div>
                 <div class="col">
-                    <a type="submit" href="/register" class="btn btn-primary">Înregistrare</a>
+                    <a type="submit" href="/register" class="btn btn-primary">Register</a>
                 </div>
             </div>
         </form>

@@ -71,3 +71,7 @@ nav ul li a{
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
     font-size: 1.2rem;
 }
+
+.text-orange {
+    color: orange !important;
+}
