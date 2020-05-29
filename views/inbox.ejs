@@ -112,7 +112,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="card-body msg_card_body">
+                <div id="message_inbox" class="card-body msg_card_body">
                     <div class="d-flex justify-content-start mb-4">
                         <div class="img_cont_msg">
                             <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
@@ -184,17 +184,17 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-footer bg-dark">
-                    <div class="input-group">
-                        <div class="input-group-append">
-                            <span class="input-group-text attach_btn"><i class="fas fa-paperclip"></i></span>
-                        </div>
-                        <textarea name="" class="form-control type_msg" placeholder="Type your message..."></textarea>
-                        <div class="input-group-append">
-                            <span class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></span>
+                <form id="message_send_form">
+                    <div class="card-footer bg-dark">
+                        <div class="input-group">
+                            <textarea id="message" name="" class="form-control type_msg" placeholder="Type your message..."></textarea>
+
+                            <div class="input-group-append">
+                                <button type=submit class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></button>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>

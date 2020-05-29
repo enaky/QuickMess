@@ -4,13 +4,18 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const path = require('path');
-const io = require("socket.io");
 
 const utilities = require('./modules/utilities.js');
 
 const app = express();
 const port = 2014;
+
+//set the express.static middleware
+app.use(express.static(__dirname + "/public"));
+const io = require('socket.io');
+
 //integrating socketio
+const http = require("http").Server(app);
 socket = io(http);
 
 app.set('view engine', 'ejs');                      // directorul 'views' va conține fișierele .ejs (html + js executat la server)
@@ -65,15 +70,15 @@ app.get('/login', (req, res) => {
 
 
 //handle invalid urls
-app.use((req, res) => {
-    let client_ip = req.connection.remoteAddress;
-    console.log("Client " + client_ip + " is requesting the resource: " + req.url);
-    if (security.needToBlockIp(client_ip)){
-        res.sendStatus(405)
-    } else {
-        res.redirect("/");
-    }
-});
+// app.use((req, res) => {
+//     let client_ip = req.connection.remoteAddress;
+//     console.log("Client " + client_ip + " is requesting the resource: " + req.url);
+//     if (security.needToBlockIp(client_ip)){
+//         res.sendStatus(405)
+//     } else {
+//         res.redirect("/");
+//     }
+// });
 
 
 app.listen(port, () => console.log(`Serverul rulează la adresa http://localhost:2014`));

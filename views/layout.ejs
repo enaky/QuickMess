@@ -9,10 +9,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="icon" href="/images/quickmess.ico" type="image/x-icon" />
-    <script src="/js/script.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/style.css">
     <% if (typeof css_file != "undefined" && css_file == "chat.css"){%>
         <link rel="stylesheet" type="text/css" href="/css/chat.css">
+
     <% } %>
 
     <!-- Bootstrap CSS -->
@@ -76,6 +76,12 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+<script src="/js/socket.js"></script>
+
+<script src="/js/script.js"></script>
+<% if (typeof css_file != "undefined" && css_file == "chat.css"){%>
+    <script src="/js/chat.js"></script>
+<% } %>
 </body>
 
 </html>
