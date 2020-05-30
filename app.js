@@ -3,18 +3,16 @@ const expressLayouts = require('express-ejs-layouts');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const path = require('path');
 
 const utilities = require('./modules/utilities.js');
+const routes = require('./modules/routes/routes.js');
 
 const app = express();
 const port = 2014;
 
-//var io = require('socket.io').listen(server);
 
 //set the express.static middleware
 app.use(express.static(__dirname + "/public"));
-
 
 app.set('view engine', 'ejs');                      // directorul 'views' va conține fișierele .ejs (html + js executat la server)
 app.use(expressLayouts);                            // suport pentru layout-uri - implicit fișierul care reprezintă template-ul site-ului este views/layout.ejs
@@ -29,54 +27,38 @@ app.use(session({
     resave: false
 }));
 
-app.get('/', async (req, res) => {
-    console.log('cookies: ', req.cookies);
-    let username = null;
-    if (req.session.user) {
-        username = req.session.user.firstname;
-    }
-    res.render('index', {user: username});
+app.get('/', routes.index);
+app.get('/register', routes.registerGet);
+app.get('/inbox', routes.inbox);
+app.get('/login', routes.loginGet);
+app.post('/register', routes.registerPost);
+app.post('/login', routes.loginPost);
+
+
+//----------------------------------SOCKET PART----------------------------------
+
+//require the http module
+const http = require("http").Server(app);
+
+// require the socket.io module
+const io = require("socket.io");
+
+//integrating socketio
+socket = io(http);
+socket.on("connection", socket => {
+    const socketId = socket.id;
+    const clientIp = socket.request.connection.remoteAddress;
+
+    console.log(socketId);
+    console.log(clientIp);
+    socket.on("chat message", function(msg) {
+        console.log("message: " + msg);
+
+        //broadcast message to everyone in port:5000 except yourself.
+        socket.broadcast.emit("received", { message: msg });
+        //save chat to the database
+
+    });
 });
 
-
-app.get('/register', (req, res) => {
-    res.render('register');
-});
-
-app.get('/inbox', (req, res) => {
-    res.render('inbox', {css_file: "chat.css"});
-});
-
-
-app.get('/login', (req, res) => {
-    if (req.session.user) {   //if logged
-        res.redirect("/");
-        return;
-    }
-    let user = req.cookies["autentificare_user"];
-    let username = null;
-    if (user) {
-        username = user["nume"];
-    }
-    let messageError = false;
-    if (typeof req.cookies.messageError != "undefined" && req.cookies.messageError === "yes") {
-        messageError = true;
-        res.clearCookie("messageError");
-    }
-    res.render("login", {user: username, messageError: messageError});
-});
-
-
-//handle invalid urls
-// app.use((req, res) => {
-//     let client_ip = req.connection.remoteAddress;
-//     console.log("Client " + client_ip + " is requesting the resource: " + req.url);
-//     if (security.needToBlockIp(client_ip)){
-//         res.sendStatus(405)
-//     } else {
-//         res.redirect("/");
-//     }
-// });
-
-
-app.listen(port, () => console.log(`Serverul rulează la adresa http://localhost:2014`));
+http.listen(port, () => console.log(`Serverul rulează la adresa http://localhost:2014`));
