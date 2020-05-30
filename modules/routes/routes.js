@@ -2,6 +2,12 @@ const dbSchema = require('../database/dbSchema.js');
 const auth = require('../database/auth.js');
 const validation = require('../validation/validation.js');
 const CryptoJS = require('crypto-js');
+const utilities = require('../utilities');
+let countries;
+
+(async function () {
+    countries = await utilities.readFileAsync("public/data/country.json");
+})();
 
 module.exports = {
     index: async function(req, res){
@@ -15,7 +21,7 @@ module.exports = {
     },
 
     registerGet: function(req, res){
-        res.render('register');
+        res.render('register', {countries: countries});
     },
 
     registerPost: async function(req, res){

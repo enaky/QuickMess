@@ -1,3 +1,9 @@
+let countries;
+$.getJSON("/data/country.json", function (data) {
+    countries = data;
+    console.log(countries);
+});
+
 $('#register_form').submit(function(e) {
     e.preventDefault(); // avoid to execute the actual submit of the form.
 
@@ -25,4 +31,23 @@ $('#login_form').submit(function(e) {
         url: url,
         data: data, // serializes the form's elements.
     });
+});
+
+$('#country').on('change', function() {
+    let city_input = document.getElementById("city");
+    let first = city_input.firstElementChild;
+    while (first) {
+        first.remove();
+        first = city_input.firstElementChild;
+    }
+    for (let i = 0; i < countries.length; i++){
+        if (countries[i].name === this.value){
+            for (let j = 0; j < countries[i]["cities"].length; j++){
+                let select_element = document.createElement("option");
+                select_element.value = countries[i].cities[j];
+                select_element.innerHTML = countries[i].cities[j];
+                city_input.appendChild(select_element);
+            }
+        }
+    }
 });

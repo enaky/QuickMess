@@ -6,9 +6,9 @@
             <div class="row">
                 <img class="mx-auto d-block mt-1 mb-1" src="/images/quickmesslogo.png" alt="" style="height:75px">
                 <% if (typeof error != "undefined" && error.status) { %>
-                <div class="input-group">
-                    <div class="col text-center p-1 m-1" style="color: #ff0000">*** <%= error.message %> ***</div>
-                </div>
+                    <div class="input-group">
+                        <div class="col text-center p-1 m-1" style="color: #ff0000">*** <%= error.message %> ***</div>
+                    </div>
                 <% } %>
                 <!-- Username -->
                 <div class="input-group col-lg-12 mb-4">
@@ -74,7 +74,8 @@
                             </span>
                     </div>
                     <input id="birthday" type="text" name="birthday" placeholder="Birthday"
-                           class="form-control bg-white border-left-0 border-md" onfocus="(this.type='date')" onfocusout="(this.type='text')" required>
+                           class="form-control bg-white border-left-0 border-md" onfocus="(this.type='date')"
+                           onfocusout="(this.type='text')" required>
                 </div>
 
                 <!-- Gender -->
@@ -87,6 +88,36 @@
                     <select class="form-control" name="gender" id="gender" required>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
+                    </select>
+                </div>
+
+                <!-- Country -->
+                <div class="input-group col-lg-6 mb-4">
+                    <div class="input-group-prepend">
+                            <span class="input-group-text bg-white px-4 border-md border-right-0">
+                                <i class="fas fa-globe"></i>
+                            </span>
+                    </div>
+                    <select class="form-control" name="country" id="country" required>
+                        <%
+                        for (let i = 0; i < countries.length; i++){ %>
+                            <option value="<%= countries[i].name %>"><%= countries[i].name %></option>
+                        <% } %>
+                    </select>
+                </div>
+
+                <!-- City -->
+                <div class="input-group col-lg-6 mb-4">
+                    <div class="input-group-prepend">
+                            <span class="input-group-text bg-white px-4 border-md border-right-0">
+                                <i class="far fa-building"></i>
+                            </span>
+                    </div>
+                    <select class="form-control" name="city" id="city" required>
+                        <%
+                        for (let i = 0; i < countries[0].cities.length; i++){ %>
+                            <option value="<%= countries[0].cities[i] %>"><%= countries[0].cities[i] %></option>
+                        <% } %>
                     </select>
                 </div>
 
@@ -118,7 +149,7 @@
                 <!-- Already Registered -->
                 <div class="text-center w-100">
                     <p class="text-orange font-weight-bold">Already Registered? <a href="/login"
-                                                                                  class="text-primary ml-2">Login</a>
+                                                                                   class="text-primary ml-2">Login</a>
                     </p>
                 </div>
             </div>
