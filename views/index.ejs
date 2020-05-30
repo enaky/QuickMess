@@ -1,7 +1,7 @@
 <div class="container text-center">
     <div class='container-fluid'>
         <h1 class="m-3" style="color: red">Welcome
-            <% if (user){ %>, <%= user %>
+            <% if (typeof user != "undefined"){ %>, <%= user.firstName %>
             <% } %>
             !
         </h1>
@@ -11,11 +11,26 @@
     <div class="row my-2 ">
         <div class="card col-12 col-lg-2 col-md-2 col-sm-12 ml-5 align-self-start profile_container px-2 "
              style="width: 100%;">
-            <img class="card-img-top mt-3" id="profile_photo" src="images/male.png">
+            <% if (typeof user != "undefined"){ %>
+                <img class="card-img-top mt-3" id="profile_photo" src="<%= user.profileImagePath %>" alt="images/male.png">
+            <% } else {%>
+                <img class="card-img-top mt-3" id="profile_photo" src="images/male.png" alt="images/male.png">
+            <%}%>
             <div class="card-body mt-2">
-                <h2 id="profile_name" class="card-title">Ricardo Sanchez</h2>
-                <p class="card-text">Age: <span id="profile_age"></span></p>
-                <p class="card-text">Email: <span id="profile_email"></span></p>
+
+                <% if (typeof user != "undefined") { %>
+                    <h2 id="profile_name" class="card-title"><%=user.firstName%> <%= user.lastName%></h2>
+                    <p class="card-text">Age: <span id="profile_age"><%= user.age %></span></p>
+                    <p class="card-text">Email: <span id="profile_email"><%= user.email %></span></p>
+                    <p class="card-text">Country: <span id="profile_email"><%= user.country %></span></p>
+                    <p class="card-text">City: <span id="profile_email"><%= user.city %></span></p>
+                <% } else { %>
+                    <h2 id="profile_name" class="card-title">Ricardo Sanchez</h2>
+                    <p class="card-text">Age: <span id="profile_age"></span></p>
+                    <p class="card-text">Email: <span id="profile_email"></span></p>
+                    <p class="card-text">Country: <span id="profile_email"></span></p>
+                    <p class="card-text">City: <span id="profile_email"></span></p>
+                <% } %>
             </div>
         </div>
         <div class="col-md-1 col-lg-1"></div>

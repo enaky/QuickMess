@@ -10,7 +10,6 @@ const routes = require('./modules/routes/routes.js');
 const app = express();
 const port = 2014;
 
-
 //set the express.static middleware
 app.use(express.static(__dirname + "/public"));
 
@@ -33,6 +32,7 @@ app.get('/chat', routes.inbox);
 app.get('/login', routes.loginGet);
 app.post('/register', routes.registerPost);
 app.post('/login', routes.loginPost);
+app.get('/logout', routes.logout);
 
 
 //----------------------------------SOCKET PART----------------------------------

@@ -98,7 +98,7 @@
                                 <i class="fas fa-globe"></i>
                             </span>
                     </div>
-                    <select class="form-control" name="country" id="country" required>
+                    <select class="form-control" name="country" id="country">
                         <%
                         for (let i = 0; i < countries.length; i++){ %>
                             <option value="<%= countries[i].name %>"><%= countries[i].name %></option>
@@ -113,7 +113,7 @@
                                 <i class="far fa-building"></i>
                             </span>
                     </div>
-                    <select class="form-control" name="city" id="city" required>
+                    <select class="form-control" name="city" id="city">
                         <%
                         for (let i = 0; i < countries[0].cities.length; i++){ %>
                             <option value="<%= countries[0].cities[i] %>"><%= countries[0].cities[i] %></option>

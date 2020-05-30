@@ -10,21 +10,20 @@ let countries;
 })();
 
 module.exports = {
-    index: async function(req, res){
+    index: async function (req, res) {
         //console.log('cookies: ', req.cookies);
-
-        let username = null;
-        if (req.session.user) {
-            username = req.session.user.firstname;
-        }
-        res.render('index', {user: username, enable_index_css: true});
+        let error = req.cookies["error"];
+        res.clearCookie("error")
+        res.render('index', {user: req.session.user, enable_index_css: true, error: error});
     },
 
-    registerGet: function(req, res){
-        res.render('register', {countries: countries});
+    registerGet: function (req, res) {
+        let error = req.cookies["error"];
+        res.clearCookie("error");
+        res.render('register', {countries: countries, error: error});
     },
 
-    registerPost: async function(req, res){
+    registerPost: async function (req, res) {
         let username = req.body.username;
         let password = req.body.password;
         let passwordConfirmation = req.body.passwordConfirmation;
@@ -33,51 +32,88 @@ module.exports = {
         let firstName = req.body.firstname;
         let lastName = req.body.lastname;
         let gender = req.body.gender;
+        let city = req.body.city;
+        let country = req.body.country;
 
-        if (!validation.validateEmail(email) || !validation.validateName(firstName) || !validation.validateName(lastName) || !validation.validateUsername(username)){
-            res.render("register", {error: {status: true, message: "Invalid data"}});
+        if (!validation.validateEmail(email) || !validation.validateName(firstName) || !validation.validateName(lastName) || !validation.validateUsername(username)) {
+            res.cookie("error", {status: true, message: "Invalid data"});
+            res.sendStatus(400);
             return;
         }
-        if (password !== passwordConfirmation){
-            res.render("register", {error: {status: true, message: "Passwords don't match"}});
+        if (password !== passwordConfirmation) {
+            res.cookie("error", {status: true, message: "Passwords don't match"});
+            res.sendStatus(400);
             return;
         }
         let user = await auth.getUser(username);
-        if (user != null){
-            res.render("register", {error: {status: true, message: "Username already exists"}});
+        if (user != null) {
+            res.cookie("error", {status: true, message: "Username already exists"});
+            res.sendStatus(400);
             return;
         }
-        let new_user = new dbSchema.User({ username: username, password: password, email: email,
-            birthDay: birthDay, firstName: firstName, lastName: lastName, role: "user", gender: gender});
+        let imagePath;
+        if (gender === "male"){
+            imagePath = "images/male.png";
+        } else if (gender === "female"){
+            imagePath = "images/female.jpg";
+        }
+        let new_user = new dbSchema.User({
+            username: username,
+            password: password,
+            email: email,
+            birthDay: birthDay,
+            firstName: firstName,
+            lastName: lastName,
+            role: "user",
+            gender: gender,
+            city: city,
+            country: country,
+            status: "offline",
+            profileImagePath: imagePath,
+        });
         await auth.insertUser(new_user);
-        res.redirect('login');
+        res.sendStatus(200);
+
     },
 
-    inbox: function(req, res){
+    inbox: function (req, res) {
         res.render('chat', {enable_chat_css: true});
     },
 
-    loginGet: function(req, res){
+    loginGet: function (req, res) {
+        let error = req.cookies["error"];
+        res.clearCookie("error");
         if (req.session.user) {   //if logged
             res.redirect("/");
             return;
         }
-        res.render("login");
+        res.render("login", {error: error});
     },
-    loginPost: async function(req, res){
-        if (!validation.validateUsername(req.body.username)){
-            res.render("login", {error: {status: true, message: "Invalid username"}});
+    loginPost: async function (req, res) {
+        if (!validation.validateUsername(req.body.username)) {
+            res.cookie("error", {status: true, message: "Invalid username"});
+            res.sendStatus(400);
             return;
         }
-
+        console.log("Parola hash orimita:" + req.body.password);
         let user = await auth.getUser(req.body.username, req.body.password);
         console.log(user)
-        if (user == null){
-            res.render("login", {error: {status: true, message: "Incorrect data"}});
+        if (user == null) {
+            res.cookie("error", {status: true, message: "Incorrect data"});
+            res.sendStatus(400);
             return;
         }
         delete user.password;
-        console.log(user)
-        res.redirect("/");
-    }
+        user["age"] = utilities.calculateAge(user.birthDay);
+        req.session.user = user;
+        console.log(user);
+        res.sendStatus(200);
+    },
+    logout: function (req, res) {
+        if (req.session.user) {   //if logged
+            console.log("Sesiune utilizator [Log-OUT]: ", req.session.user);
+            req.session.user = undefined;
+        }
+        res.redirect("/login");
+    },
 }
