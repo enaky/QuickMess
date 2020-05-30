@@ -45,6 +45,7 @@ const userSchema = new Schema(
         email: {type: String},
         role: {type: String},
         gender: {type: String},
+        status: {type: String},
         profileImagePath: {type: String},
         posts: [{type: mongoose.Schema.Types.ObjectId, ref: 'Post'}]
     }
