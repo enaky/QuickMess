@@ -10,7 +10,7 @@ module.exports = {
         if (req.session.user) {
             username = req.session.user.firstname;
         }
-        res.render('index', {user: username});
+        res.render('index', {user: username, enable_index_css: true});
     },
 
     registerGet: function(req, res){
@@ -47,12 +47,12 @@ module.exports = {
     },
 
     inbox: function(req, res){
-        res.render('inbox', {css_file: "chat.css"});
+        res.render('chat', {enable_chat_css: true});
     },
 
     loginGet: function(req, res){
         if (req.session.user) {   //if logged
-            res.redirect("/");
+            res.redirect("/", {enable_index_css: true});
             return;
         }
         res.render("login");
@@ -71,6 +71,6 @@ module.exports = {
         }
         delete user.password;
         console.log(user)
-        res.redirect("/");
+        res.redirect("/", {enable_index_css: true});
     }
 }

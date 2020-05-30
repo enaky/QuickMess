@@ -10,9 +10,11 @@
 
     <link rel="icon" href="/images/quickmess.ico" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" href="/css/style.css">
-    <% if (typeof css_file != "undefined" && css_file == "chat.css"){%>
+    <% if (typeof enable_chat_css != "undefined" && enable_chat_css){%>
         <link rel="stylesheet" type="text/css" href="/css/chat.css">
-
+    <% }
+    if (typeof enable_index_css != "undefined" && enable_index_css){%>
+        <link rel="stylesheet" type="text/css" href="/css/index.css">
     <% } %>
 
     <!-- Bootstrap CSS -->
@@ -37,7 +39,7 @@
                     <a class="nav-link p-2" href="/"><i class="fas fa-home"></i> Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link p-2" href="/inbox"><i class="fas fa-envelope"></i> Message</a>
+                    <a class="nav-link p-2" href="/chat"><i class="fas fa-envelope"></i> Message</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link p-2" href="/friends"><i class="fas fa-user-friends"></i> Friends</a>
@@ -77,6 +79,7 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 <script src="/js/socket.js"></script>
+<script src="/js/index.js"></script>
 <script src="/js/script.js"></script>
 <script src="/js/chat.js"></script>
 

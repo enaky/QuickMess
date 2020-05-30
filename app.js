@@ -29,7 +29,7 @@ app.use(session({
 
 app.get('/', routes.index);
 app.get('/register', routes.registerGet);
-app.get('/inbox', routes.inbox);
+app.get('/chat', routes.inbox);
 app.get('/login', routes.loginGet);
 app.post('/register', routes.registerPost);
 app.post('/login', routes.loginPost);
