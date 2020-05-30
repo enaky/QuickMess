@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
 const utilities = require('./modules/utilities.js');
-const routes = require('./modules/routes.js');
+const routes = require('./modules/routes/routes.js');
 
 const app = express();
 const port = 2014;
@@ -29,9 +29,10 @@ app.use(session({
 
 app.get('/', routes.index);
 app.get('/register', routes.registerGet);
-app.post('/register', routes.registerPost);
 app.get('/inbox', routes.inbox);
-app.get('/login', routes.login);
+app.get('/login', routes.loginGet);
+app.post('/register', routes.registerPost);
+app.post('/login', routes.loginPost);
 
 
 //----------------------------------SOCKET PART----------------------------------
@@ -55,7 +56,6 @@ socket.on("connection", socket => {
 
         //broadcast message to everyone in port:5000 except yourself.
         socket.broadcast.emit("received", { message: msg });
-
         //save chat to the database
 
     });

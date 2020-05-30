@@ -1,20 +1,7 @@
-const dbSchema = require('./../database/dbSchema.js');
-const auth = require('./../database/auth.js');
+const dbSchema = require('../database/dbSchema.js');
+const auth = require('../database/auth.js');
+const validation = require('../validation/validation.js');
 
-function validateEmail(email)
-{
-    return /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email);
-}
-
-function validateUsername(email)
-{
-    return /^[a-zA-Z0-9_.]+$/.test(email);
-}
-
-function validateName(email)
-{
-    return /^[a-zA-Z\-]+$/.test(email);
-}
 
 module.exports = {
     index: async function(req, res){
@@ -40,7 +27,7 @@ module.exports = {
         let lastName = req.body.lastname;
         let gender = req.body.gender;
 
-        if (!validateEmail(email) || !validateName(firstName) || !validateName(lastName) || !validateUsername(username)){
+        if (!validation.validateEmail(email) || !validation.validateName(firstName) || !validation.validateName(lastName) || !validation.validateUsername(username)){
             res.render("register", {error: {status: true, message: "Invalid data"}});
             return;
         }
@@ -63,21 +50,27 @@ module.exports = {
         res.render('inbox', {css_file: "chat.css"});
     },
 
-    login: function(req, res){
+    loginGet: function(req, res){
         if (req.session.user) {   //if logged
             res.redirect("/");
             return;
         }
-        let user = req.cookies["autentificare_user"];
-        let username = null;
-        if (user) {
-            username = user["nume"];
+        res.render("login");
+    },
+    loginPost: async function(req, res){
+        if (!validation.validateUsername(req.body.username)){
+            res.render("login", {error: {status: true, message: "Invalid username"}});
+            return;
         }
-        let messageError = false;
-        if (typeof req.cookies.messageError != "undefined" && req.cookies.messageError === "yes") {
-            messageError = true;
-            res.clearCookie("messageError");
+
+        let user = await auth.getUser(req.body.username, req.body.password);
+        console.log(user)
+        if (user == null){
+            res.render("login", {error: {status: true, message: "Username does not exist"}});
+            return;
         }
-        res.render("login", {user: username, messageError: messageError});
+        delete user.password;
+        console.log(user)
+        res.redirect("/");
     }
 }
