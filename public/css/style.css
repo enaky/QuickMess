@@ -18,12 +18,6 @@ li a {
     color: orange;
 }
 
-.question {
-    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
-    font-size: 1.2rem;
-    font-weight: bold;
-}
-
 .title {
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
     font-size: 2rem;
@@ -61,11 +55,6 @@ input[type='radio']:checked:after {
     overflow: auto;
 }
 
-.quiz_question{
-    background: #e0ecc9;
-    border: solid #ffa500;
-    border-radius: 20px;
-}
 
 nav ul li a{
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
@@ -75,3 +64,4 @@ nav ul li a{
 .text-orange {
     color: orange !important;
 }
+

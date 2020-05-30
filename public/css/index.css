@@ -1,0 +1,70 @@
+#profile_photo{
+    padding: 5px;
+    border: 3px solid darkorange;
+    border-radius: 4px;
+}
+
+.profile_container{
+    background-color: #4cd137;
+}
+
+.profile_container .wrapper {
+    max-width: 75%;
+    margin: auto;
+}
+
+.profile_container h1 {
+    color: #555;
+    margin: 3rem 0 1rem 0;
+    padding: 0;
+    font-size: 1.5rem;
+}
+
+.profile_container textarea {
+    width: 100%;
+    min-height: 100px;
+    resize: none;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    padding: 0.5rem;
+    color: #666;
+    box-shadow: inset 0 0 0.25rem #ddd;
+}
+.profile_container textarea:focus {
+    outline: none;
+    border: 1px solid red;
+    box-shadow: inset 0 0 0.5rem #555555;
+}
+
+.profile_container textarea[placeholder] {
+    font-style: italic;
+    font-size: 0.875rem;
+}
+
+
+#the-count {
+    float: right;
+    padding: 0.1rem 0 0 0;
+    font-size: 0.875rem;
+}
+
+
+.post{
+    background: #e0ecc9;
+    border: solid #ffa500;
+    border-radius: 20px;
+}
+
+.post_text {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+textarea {
+    resize: none !important;
+}
+#posts {
+    height: 500px;
+    overflow-y: auto;
+}

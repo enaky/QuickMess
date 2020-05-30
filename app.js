@@ -10,7 +10,6 @@ const routes = require('./modules/routes/routes.js');
 const app = express();
 const port = 2014;
 
-
 //set the express.static middleware
 app.use(express.static(__dirname + "/public"));
 
@@ -29,10 +28,11 @@ app.use(session({
 
 app.get('/', routes.index);
 app.get('/register', routes.registerGet);
-app.get('/inbox', routes.inbox);
+app.get('/chat', routes.inbox);
 app.get('/login', routes.loginGet);
 app.post('/register', routes.registerPost);
 app.post('/login', routes.loginPost);
+app.get('/logout', routes.logout);
 
 
 //----------------------------------SOCKET PART----------------------------------
@@ -61,4 +61,8 @@ socket.on("connection", socket => {
     });
 });
 
-http.listen(port, () => console.log(`Serverul rulează la adresa http://localhost:2014`));
+http.listen(port, () => {
+    console.log(`Serverul rulează la adresa http://localhost:2014`)
+    console.log(`Login http://localhost:2014/login`)
+    console.log(`Register http://localhost:2014/register`)
+});

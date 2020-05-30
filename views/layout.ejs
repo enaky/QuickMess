@@ -8,11 +8,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="icon" href="/images/quickmess.ico" type="image/x-icon" />
+    <link rel="icon" href="/images/quickmess.ico" type="image/x-icon"/>
     <link rel="stylesheet" type="text/css" href="/css/style.css">
-    <% if (typeof css_file != "undefined" && css_file == "chat.css"){%>
+    <% if (typeof enable_chat_css != "undefined" && enable_chat_css){ %>
         <link rel="stylesheet" type="text/css" href="/css/chat.css">
-
+    <% }
+    if (typeof enable_index_css != "undefined" && enable_index_css){ %>
+        <link rel="stylesheet" type="text/css" href="/css/index.css">
     <% } %>
 
     <!-- Bootstrap CSS -->
@@ -29,29 +31,29 @@
 
 <nav class="navbar-dark bg-black">
 
-            <ul class="nav nav-tabs nav-fill">
-                <li class="navbar-item pl-5 pr-5 ml-5 mr-5">
-                    <img src="/images/quickmesslogo.png" alt="" style="height:50px">
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link p-2" href="/"><i class="fas fa-home"></i> Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link p-2" href="/inbox"><i class="fas fa-envelope"></i> Message</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link p-2" href="/friends"><i class="fas fa-user-friends"></i> Friends</a>
-                </li>
+    <ul class="nav nav-tabs nav-fill">
+        <li class="navbar-item pl-5 pr-5 ml-5 mr-5">
+            <img src="/images/quickmesslogo.png" alt="" style="height:50px">
+        </li>
+        <li class="nav-item">
+            <a class="nav-link p-2" href="/"><i class="fas fa-home"></i> Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link p-2" href="/chat"><i class="fas fa-envelope"></i> Message</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link p-2" href="/friends"><i class="fas fa-user-friends"></i> Friends</a>
+        </li>
 
-                <li class="nav-item">
-                    <a class="nav-link p-2" href="/logout"><i class="fas fa-sign-out-alt" aria-hidden="true"></i> Log Out</a>
-                </li>
-                <%if (typeof role != "undefined" && role === "admin") {%>
-                    <li class="nav-item">
-                        <a class="nav-link p-2" href="/admin"><i class="fa fa-user-secret" aria-hidden="true"></i> Admin</a>
-                    </li>
-                <%}%>
-            </ul>
+        <li class="nav-item">
+            <a class="nav-link p-2" href="/logout"><i class="fas fa-sign-out-alt" aria-hidden="true"></i> Log Out</a>
+        </li>
+        <% if (typeof role != "undefined" && role === "admin") { %>
+            <li class="nav-item">
+                <a class="nav-link p-2" href="/admin"><i class="fa fa-user-secret" aria-hidden="true"></i> Admin</a>
+            </li>
+        <% } %>
+    </ul>
 </nav>
 <div id="container">
     <div id="main">
@@ -67,8 +69,8 @@
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT"
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
@@ -76,10 +78,12 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+<script src="/bower_components/crypto-js/crypto-js.js"></script>
 <script src="/js/socket.js"></script>
+<script src="/js/index.js"></script>
 <script src="/js/script.js"></script>
 <script src="/js/chat.js"></script>
-
 </body>
 
 </html>
