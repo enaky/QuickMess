@@ -1,8 +1,8 @@
 let posts = document.getElementById("posts");
 
-$('textarea').keyup(function() {
+$('textarea').keyup(function () {
 
-    var characterCount = $(this).val().length,
+    const characterCount = $(this).val().length,
         current = $('#current'),
         maximum = $('#maximum'),
         theCount = $('#the-count');
@@ -29,10 +29,10 @@ $('textarea').keyup(function() {
     if (characterCount >= 140) {
         maximum.css('color', '#8f0001');
         current.css('color', '#8f0001');
-        theCount.css('font-weight','bold');
+        theCount.css('font-weight', 'bold');
     } else {
-        maximum.css('color','#666');
-        theCount.css('font-weight','normal');
+        maximum.css('color', '#666');
+        theCount.css('font-weight', 'normal');
     }
 });
 
@@ -53,9 +53,6 @@ const post = function (content, date) {
     div_element.appendChild(div_element_12);
 
     posts.insertAdjacentElement('afterbegin', div_element);
-    //if (posts.scrollTop != null){
-    //    posts.scrollTop = messages.scrollHeight;
-    //}
 };
 
 (function () {
@@ -63,13 +60,25 @@ const post = function (content, date) {
         if ($("#post-textarea").val() === "") {
             return false;
         }
+        e.preventDefault();
         console.log("I am posting something");
-        post($("#post-textarea").val(), "8:40 AM, ffffff");
-
-        e.preventDefault(); // prevents page reloading
-        //socket.emit("chat message", $("#message").val());
+        const form = $(this);
+        let date = form.serialize();
+        console.log(date)
+        $.ajax({
+            async: false,
+            type: "POST",
+            data: date, // serializes the form's elements.
+            success: function (result) {
+                //if the submit was successful, you redirect
+                console.log(result.status);
+                post($("#post-textarea").val(), moment(Date.now()).format('MMMM Do YYYY, hh:mm:ss'));
+            },
+            error: function (e) {
+                console.log(e.status);
+            }
+        });
         $("#post-textarea").val("");
         return false;
     });
-
 })();

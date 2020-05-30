@@ -1,4 +1,4 @@
-var socket = io();
+let socket = io();
 let messages = document.getElementById("message_inbox");
 let contacts = document.getElementById("contacts");
 

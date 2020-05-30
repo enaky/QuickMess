@@ -6,10 +6,8 @@ const messageSchema = new Schema(
     {
         message: {type: String, required: true},
         sender: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true},
-        receiver: {type: mongoose.Schema.Types.ObjectId, ref: 'Chat', required: true}
-    },
-    {
-        timestamps: true
+        receiver: {type: mongoose.Schema.Types.ObjectId, ref: 'Chat', required: true},
+        date: {type: Date, required: true}
     }
 );
 const Message = mongoose.model("Message", messageSchema);
@@ -27,9 +25,7 @@ const postSchema = new Schema(
     {
         message: {type: String, required: true},
         owner: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-    },
-    {
-        timestamps: true
+        date: {type: Date, required: true}
     }
 );
 const Post = mongoose.model("Post", postSchema);

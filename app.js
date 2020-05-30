@@ -27,6 +27,7 @@ app.use(session({
 }));
 
 app.get('/', routes.index);
+app.post('/', routes.indexPost);
 app.get('/register', routes.registerGet);
 app.get('/chat', routes.inbox);
 app.get('/login', routes.loginGet);

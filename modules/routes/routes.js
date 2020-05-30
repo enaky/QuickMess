@@ -2,6 +2,7 @@ const dbSchema = require('../database/dbSchema.js');
 const auth = require('../database/auth.js');
 const validation = require('../validation/validation.js');
 const CryptoJS = require('crypto-js');
+const moment = require('moment');
 const utilities = require('../utilities');
 let countries;
 
@@ -13,8 +14,30 @@ module.exports = {
     index: async function (req, res) {
         //console.log('cookies: ', req.cookies);
         let error = req.cookies["error"];
-        res.clearCookie("error")
-        res.render('index', {user: req.session.user, enable_index_css: true, error: error});
+        res.clearCookie("error");
+        let posts = await auth.getUserPostsById(req.session.user._id);
+        posts.sort(function(a,b){
+            return new Date(b.date) - new Date(a.date);
+        });
+
+        if (posts){
+            req.session.user.posts = posts;
+        }
+        res.render('index', {user: req.session.user, enable_index_css: true, error: error, moment: moment});
+    },
+    indexPost: async function (req, res) {
+        let newPost = new dbSchema.Post({
+            message: req.body["post-textarea"],
+            owner: req.body["user_id"],
+            date: moment()
+        })
+        console.log("Postare Primita : " + newPost);
+        try{
+            await auth.insertPostMessage(newPost);
+            res.sendStatus(200);
+        } catch(exception){
+            res.sendStatus(400);
+        }
     },
 
     registerGet: function (req, res) {
