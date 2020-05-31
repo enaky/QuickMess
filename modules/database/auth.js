@@ -15,6 +15,7 @@ const getUserBasicInfoMap = function(users){
             lastName: user.lastName,
             username: user.username,
             age: utilities.calculateAge(user.birthDay),
+            status: user.status,
             city: user.city,
             country: user.country,
             profileImagePath: user.profileImagePath,
@@ -130,6 +131,8 @@ module.exports = {
                     if (err) throw err;
                     if (result != null && typeof result != "undefined")
                         resolve(result["friends"]);
+                    else
+                        resolve([]);
                     db.close();
                 });
             });
@@ -226,6 +229,8 @@ module.exports = {
                     if (err) throw err;
                     if (result != null && typeof result != "undefined"){
                         resolve(getUserBasicInfoMap(result));
+                    } else {
+                        resolve([]);
                     }
                     db.close();
                 });
@@ -244,6 +249,8 @@ module.exports = {
                     if (err) throw err;
                     if (result != null && typeof result != "undefined"){
                         resolve(getUserBasicInfoMap(result));
+                    } else {
+                        resolve([]);
                     }
                     db.close();
                 });

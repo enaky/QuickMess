@@ -1,5 +1,6 @@
 const dbSchema = require('../database/dbSchema.js');
 const auth = require('../database/auth.js');
+const chatDatabase = require('../database/chatDatabase.js');
 const validation = require('../validation/validation.js');
 const CryptoJS = require('crypto-js');
 const moment = require('moment');
@@ -115,8 +116,27 @@ module.exports = {
         res.sendStatus(200);
     },
 
-    inbox: function (req, res) {
-        res.render('chat', {enable_chat_css: true, socket_enable: true});
+    inbox: async function (req, res) {
+        let friends, currentFriend, messages, user;
+        try {
+            if (typeof req.session.user != "undefined") {
+                user = req.session.user;
+                friends = await auth.getFriendsById(req.session.user._id);
+                friends = friends.map(id => id.toString());
+                friends = await auth.getUsersBasicInfoByMultipleIds(friends);
+                currentFriend = friends[0];
+                messages = await chatDatabase.getMessages(currentFriend._id.toString(), user._id.toString())
+            }
+        } catch(UnhandledPromiseRejectionWarning){
+            console.log("Error ocurred in inbox page. Probably because user is not logged in.");
+        }
+        res.render('chat', {
+            enable_chat_css: true,
+            socket_enable: true,
+            friends: friends,
+            currentFriend: currentFriend,
+            messages: messages
+        });
     },
 
     loginGet: function (req, res) {

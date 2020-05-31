@@ -81,8 +81,9 @@ socket.on("connection", socket => {
 
 
 http.listen(port, () => {
-    console.log(`Serverul rulează la adresa http://localhost:2014`)
-    console.log(`Login http://localhost:2014/login`)
-    console.log(`Register http://localhost:2014/register`)
-    console.log(`Discover http://localhost:2014/discover`)
+    console.log(`Serverul rulează la adresa http://localhost:2014`);
+    console.log(`Login http://localhost:2014/login`);
+    console.log(`Register http://localhost:2014/register`);
+    console.log(`Discover http://localhost:2014/discover`);
+    console.log(`Chat http://localhost:2014/chat`);
 });

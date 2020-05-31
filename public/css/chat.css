@@ -267,6 +267,16 @@ textarea {
     background-color: rgba(0, 0, 0, 0.2);
 }
 
+#message_inbox {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.card-footer{
+    position:absolute;
+    bottom:0;
+    width:100%;
+}
 @media (max-width: 576px) {
     .contacts_card {
         margin-bottom: 15px ;

@@ -6,7 +6,7 @@ let contacts = document.getElementById("contacts");
 const own_message = function (content, date, img) {
 
     let div_element_1 = document.createElement("div");
-    div_element_1.className = "d-flex justify-content-start mb-4";
+    div_element_1.className = "d-flex justify-content-start mb-4 ml-5";
 
     let div_element_11 = document.createElement("div");
     div_element_11.className = "img_cont_msg";
@@ -33,7 +33,7 @@ const own_message = function (content, date, img) {
 const other_message = function (content, date, img) {
 
     let div_element_1 = document.createElement("div");
-    div_element_1.className = "d-flex justify-content-end mb-4";
+    div_element_1.className = "d-flex justify-content-end mb-4 mr-5";
 
     let div_element_11 = document.createElement("div");
     div_element_11.className = "msg_cotainer_send"
