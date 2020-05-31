@@ -64,6 +64,7 @@
                         <div class="w-100 d-none d-xl-block "><!-- wrap every 3 on xl--></div>
                     <% } %>
                     <div class="card p-1 m-1">
+
                         <img class="card-img-top embed-responsive-16by9" src="<%= users[i].profileImagePath %>"
                              alt="Card image">
                         <div class="card-body text-center">
@@ -74,7 +75,11 @@
                                     <% if (typeof (user) != "undefined"){ %>
                                         <input type="hidden" name="user_request_id" value="<%= user._id %>">
                                     <% } %>
-                                    <button type="submit" class="btn btn-success">Add Friend</button>
+                                    <% if (users[i].friendshipAlreadyRequested){%>
+                                        <button type="submit" class="btn btn-secondary" disabled>Add Friend</button>
+                                    <%} else {%>
+                                        <button type="submit" class="btn btn-success">Add Friend</button>
+                                    <%}%>
                                 </form>
                             </div>
 
@@ -94,18 +99,21 @@
                 for (let i = 0; i < friendRequests.length; i++){%>
 
                 <div class="card p-1 m-1 col">
+                    <div class="card-header text-center">
+                        <h6>Friend Request</h6>
+                    </div>
                     <img class="card-img-top embed-responsive-16by9" src="<%= friendRequests[i].profileImagePath %>"
                          alt="Card image">
                     <div class="card-body text-center">
                         <h6 class="card-title"><%= friendRequests[i].firstName %> <%= friendRequests[i].lastName %></h6>
                         <div class="card-footer">
-                            <form action="/" method="post">
+                            <form action="/friendship-notification" method="post">
                                 <input type="hidden" name="user_request_id" value="<%= friendRequests[i]._id %>">
                                 <% if (typeof (user) != "undefined"){ %>
                                     <input type="hidden" name="user_id" value="<%= user._id %>">
                                 <% } %>
-                                <button type="submit" class="btn btn-danger">Refuse</button>
-                                <button type="submit" class="btn btn-success">Accept</button>
+                                <button type="submit" name="accept_friendship" value="false" class="btn btn-danger">Refuse</button>
+                                <button type="submit" name="accept_friendship" value="true" class="btn btn-success">Accept</button>
                             </form>
                         </div>
 

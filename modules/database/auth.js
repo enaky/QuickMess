@@ -76,13 +76,13 @@ module.exports = {
             MongoClient.connect(url, {useUnifiedTopology: true,}, function (err, db) {
                 if (err) throw err;
                 let dbo = db.db("quickMess");
-                dbo.collection("users").update(
+                dbo.collection("users").updateOne(
                     {_id: ObjectId(user_id)},
-                    {$push: {friendRequests: user_who_requested_friendship}}, function (err, res) {
+                    {$addToSet: {friendRequests: ObjectId(user_who_requested_friendship)}}, function (err, res) {
                         if (err) throw err;
-                        dbo.collection("users").update(
+                        dbo.collection("users").updateOne(
                             {_id: ObjectId(user_who_requested_friendship)},
-                            {$push: {friendRequestsSentByMe: user_id}}, function (err, res) {
+                            {$addToSet: {friendRequestsSentByMe: ObjectId(user_id)}}, function (err, res) {
                                 if (err) throw err;
                                 resolve();
                                 db.close();
@@ -101,9 +101,68 @@ module.exports = {
                 dbo.collection("users").findOne({_id: ObjectId(user_id)}, function (err, result){
                     if (err) throw err;
                     if (result != null && typeof result != "undefined")
-                        resolve(result["friendRequests"]);
+                        resolve({friendRequests: result["friendRequests"], friendRequestsSentByMe: result["friendRequestsSentByMe"]});
                     db.close();
                 });
+            });
+        });
+    },
+    getFriendsById: async function (user_id) {
+        return new Promise((resolve, reject) => {
+            MongoClient.connect(url, {useUnifiedTopology: true,}, function (err, db) {
+                if (err) throw err;
+                let dbo = db.db("quickMess");
+                dbo.collection("users").findOne({_id: ObjectId(user_id)}, function (err, result){
+                    if (err) throw err;
+                    if (result != null && typeof result != "undefined")
+                        resolve(result["friends"]);
+                    db.close();
+                });
+            });
+        });
+    },
+    clearFriendRequest(user_id, user_who_requested_friendship){
+        return new Promise((resolve, reject) => {
+            MongoClient.connect(url, {useUnifiedTopology: true,}, function (err, db) {
+                if (err) throw err;
+                let dbo = db.db("quickMess");
+                dbo.collection("users").updateOne(
+                    {_id: ObjectId(user_id)},
+                    {$pull: {friendRequests: ObjectId(user_who_requested_friendship)}}, function (err, res) {
+                        if (err) throw err;
+                        dbo.collection("users").updateOne(
+                            {_id: ObjectId(user_who_requested_friendship)},
+                            {$pull: {friendRequestsSentByMe: ObjectId(user_id)}}, function (err, res) {
+                                if (err) throw err;
+                                resolve();
+                                db.close();
+                            }
+                        )
+                    }
+                )
+            });
+        });
+    },
+
+    insertFriendship(user_id, user_who_requested_friendship){
+        return new Promise((resolve, reject) => {
+            MongoClient.connect(url, {useUnifiedTopology: true,}, function (err, db) {
+                if (err) throw err;
+                let dbo = db.db("quickMess");
+                dbo.collection("users").updateOne(
+                    {_id: ObjectId(user_id)},
+                    {$addToSet: {friends: ObjectId(user_who_requested_friendship)}}, function (err, res) {
+                        if (err) throw err;
+                        dbo.collection("users").updateOne(
+                            {_id: ObjectId(user_who_requested_friendship)},
+                            {$addToSet: {friends: user_id}}, function (err, res) {
+                                if (err) throw err;
+                                resolve();
+                                db.close();
+                            }
+                        )
+                    }
+                )
             });
         });
     },

@@ -76,6 +76,31 @@
                 <h2 class="text-center my-2">Notifications</h2>
             </div>
             <div class="custom_card-body card-body">
+                <% if (typeof (friendRequests) != "undefined"){
+                for (let i = 0; i < friendRequests.length; i++){%>
+
+                    <div class="card p-1 m-1 col">
+                        <div class="card-header text-center">
+                            <h6>Friend Request</h6>
+                        </div>
+                        <img class="card-img-top embed-responsive-16by9" src="<%= friendRequests[i].profileImagePath %>"
+                             alt="Card image">
+                        <div class="card-body text-center">
+                            <h6 class="card-title"><%= friendRequests[i].firstName %> <%= friendRequests[i].lastName %></h6>
+                            <div class="card-footer">
+                                <form action="/friendship-notification" method="post">
+                                    <input type="hidden" name="user_request_id" value="<%= friendRequests[i]._id %>">
+                                    <% if (typeof (user) != "undefined"){ %>
+                                        <input type="hidden" name="user_id" value="<%= user._id %>">
+                                    <% } %>
+                                    <button type="submit" name="accept_friendship" value="false" class="btn btn-danger">Refuse</button>
+                                    <button type="submit" name="accept_friendship" value="true" class="btn btn-success">Accept</button>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                <% }} %>
             </div>
         </div>
     </div>

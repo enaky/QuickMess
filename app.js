@@ -38,6 +38,7 @@ app.post('/', routes.indexPost);
 app.post('/login', routes.loginPost);
 app.post('/register', routes.registerPost);
 app.post('/discover', routes.discoverPost);
+app.post('/friendship-notification', routes.friendshipNotification);
 
 
 //----------------------------------SOCKET PART----------------------------------

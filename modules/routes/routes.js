@@ -15,19 +15,27 @@ module.exports = {
         //console.log('cookies: ', req.cookies);
         let error = req.cookies["error"];
         res.clearCookie("error");
-        if (typeof req.session.user != "undefined") {
-            let posts = await auth.getUserPostsById(req.session.user._id);
-            posts.sort(function (a, b) {
-                return new Date(b.date) - new Date(a.date);
-            });
-            if (posts) {
-                req.session.user.posts = posts;
+        let friend_requests;
+        try {
+            if (typeof req.session.user != "undefined") {
+                let posts = await auth.getUserPostsById(req.session.user._id);
+                posts.sort(function (a, b) {
+                    return new Date(b.date) - new Date(a.date);
+                });
+                if (posts) {
+                    req.session.user.posts = posts;
+                }
+                let friend_requests_items = await auth.getFriendRequestsById(req.session.user._id);
+                friend_requests = friend_requests_items["friendRequests"].map(id => id.toString());
+                friend_requests = await auth.getUsersBasicInfoByMultipleIds(friend_requests);
             }
+        } catch(UnhandledPromiseRejectionWarning){
+            console.log("Error ocurred in index page. Probably because user is not logged in.");
         }
 
         res.render('index', {
             user: req.session.user, enable_index_css: true, error: error, moment: moment,
-            friendRequests: []
+            friendRequests: friend_requests
         });
     },
     indexPost: async function (req, res) {
@@ -139,12 +147,32 @@ module.exports = {
         let error = req.cookies["error"];
         res.clearCookie("error");
         let users = await auth.getUsersBasicInfo();
-        let exclude_users = [];
-        if (typeof req.session.user != "undefined") {
-            exclude_users = await auth.getFriendRequestsById(req.session.user._id);
-            exclude_users.push(req.session.user._id);
+        let friend_requests, friend_requests_sent_by_me, exclude_users, filteredUsers;
+        try{
+            let friend_requests_items = await auth.getFriendRequestsById(req.session.user._id);
+            friend_requests = friend_requests_items["friendRequests"].map(id => id.toString());
+            friend_requests_sent_by_me = friend_requests_items["friendRequestsSentByMe"].map(id => id.toString());
+
+            let friends = await auth.getFriendsById(req.session.user._id);
+            friends = friends.map(id => id.toString());
+
+            exclude_users = [...friend_requests];
+            exclude_users = exclude_users.concat(friend_requests_sent_by_me);
+            exclude_users = exclude_users.concat(friends);
+
+            //exclude current user from them
+            filteredUsers = users.filter(e => e._id.toString() !== req.session.user._id);
+
+            //add attribute friendshipAlreadyRequested
+            filteredUsers = filteredUsers.map(function(user){
+                const index = exclude_users.indexOf(user._id.toString());
+                user["friendshipAlreadyRequested"] = index > -1;
+                return user;
+            });
+            friend_requests = await auth.getUsersBasicInfoByMultipleIds(friend_requests);
+        } catch(UnhandledPromiseRejectionWarning){
+            console.log("User is not logged");
         }
-        const filteredUsers = users.filter(e => exclude_users.indexOf(e._id.toString()) === -1);
 
         res.render("discover", {
             user: req.session.user,
@@ -153,15 +181,16 @@ module.exports = {
             enable_searchbar_css: true,
             users: filteredUsers,
             enable_people_css: true,
-            friendRequests: filteredUsers
+            friendRequests: friend_requests
         });
     },
 
     discoverPost: async function (req, res) {
-        console.log("Friend Request de la: " + req.body.user_id + " de la " + req.body.user_request_id);
+        console.log("Friend Request for: " + req.body.user_id + " de la " + req.body.user_request_id);
         //res.render("discover", {user: req.session.user, enable_index_css: true, error: error, enable_searchbar_css: true, users: users,
         //    enable_people_css: true,});
-        res.redirect("");
+        await auth.insertFriendRequest(req.body.user_id, req.body.user_request_id)
+        res.redirect("/");
     },
 
     logout: function (req, res) {
@@ -170,5 +199,21 @@ module.exports = {
             req.session.user = undefined;
         }
         res.redirect("/login");
+    },
+    friendshipNotification: async function (req, res) {
+        console.log("Friend Request for: " + req.body.user_id + " de la " + req.body.user_request_id);
+        console.log("FriendShip response: " + req.body.accept_friendship );
+        try{
+            let user_id = req.body["user_id"];
+            let user_who_requested_friendship = req.body["user_request_id"];
+            await auth.clearFriendRequest(user_id, user_who_requested_friendship);
+            if (req.body.accept_friendship === "true"){
+                await auth.insertFriendship(user_id, user_who_requested_friendship);
+            }
+
+        } catch(exception){
+            console.log("Error in frienshipNotification. Probably user is not logged in.")
+        }
+        res.redirect("/");
     },
 }
