@@ -15,15 +15,20 @@ module.exports = {
         //console.log('cookies: ', req.cookies);
         let error = req.cookies["error"];
         res.clearCookie("error");
-        let posts = await auth.getUserPostsById(req.session.user._id);
-        posts.sort(function(a,b){
-            return new Date(b.date) - new Date(a.date);
-        });
-
-        if (posts){
-            req.session.user.posts = posts;
+        if (typeof req.session.user != "undefined") {
+            let posts = await auth.getUserPostsById(req.session.user._id);
+            posts.sort(function (a, b) {
+                return new Date(b.date) - new Date(a.date);
+            });
+            if (posts) {
+                req.session.user.posts = posts;
+            }
         }
-        res.render('index', {user: req.session.user, enable_index_css: true, error: error, moment: moment});
+
+        res.render('index', {
+            user: req.session.user, enable_index_css: true, error: error, moment: moment,
+            friendRequests: []
+        });
     },
     indexPost: async function (req, res) {
         let newPost = new dbSchema.Post({
@@ -32,10 +37,10 @@ module.exports = {
             date: moment()
         })
         console.log("Postare Primita de la userul " + req.body["user_id"]);
-        try{
+        try {
             await auth.insertPostMessage(newPost);
             res.sendStatus(200);
-        } catch(exception){
+        } catch (exception) {
             res.sendStatus(400);
         }
     },
@@ -75,9 +80,9 @@ module.exports = {
             return;
         }
         let imagePath;
-        if (gender === "male"){
+        if (gender === "male") {
             imagePath = "images/male.png";
-        } else if (gender === "female"){
+        } else if (gender === "female") {
             imagePath = "images/female.jpg";
         }
         let new_user = new dbSchema.User({
@@ -129,6 +134,36 @@ module.exports = {
         req.session.user = user;
         res.sendStatus(200);
     },
+
+    discoverGet: async function (req, res) {
+        let error = req.cookies["error"];
+        res.clearCookie("error");
+        let users = await auth.getUsersBasicInfo();
+        let exclude_users = [];
+        if (typeof req.session.user != "undefined") {
+            exclude_users = await auth.getFriendRequestsById(req.session.user._id);
+            exclude_users.push(req.session.user._id);
+        }
+        const filteredUsers = users.filter(e => exclude_users.indexOf(e._id.toString()) === -1);
+
+        res.render("discover", {
+            user: req.session.user,
+            enable_index_css: true,
+            error: error,
+            enable_searchbar_css: true,
+            users: filteredUsers,
+            enable_people_css: true,
+            friendRequests: filteredUsers
+        });
+    },
+
+    discoverPost: async function (req, res) {
+        console.log("Friend Request de la: " + req.body.user_id + " de la " + req.body.user_request_id);
+        //res.render("discover", {user: req.session.user, enable_index_css: true, error: error, enable_searchbar_css: true, users: users,
+        //    enable_people_css: true,});
+        res.redirect("");
+    },
+
     logout: function (req, res) {
         if (req.session.user) {   //if logged
             console.log("Sesiune utilizator [Log-OUT]: ", req.session.user);

@@ -15,6 +15,10 @@
     <% }
     if (typeof enable_index_css != "undefined" && enable_index_css){ %>
         <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <% } if (typeof enable_searchbar_css != "undefined" && enable_searchbar_css){ %>
+        <link rel="stylesheet" type="text/css" href="/css/searchbar.css">
+    <% }  if (typeof enable_people_css != "undefined" && enable_people_css){ %>
+        <link rel="stylesheet" type="text/css" href="/css/friends_card.css">
     <% } %>
 
     <!-- Bootstrap CSS -->
@@ -43,6 +47,9 @@
         </li>
         <li class="nav-item">
             <a class="nav-link p-2" href="/friends"><i class="fas fa-user-friends"></i> Friends</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link p-2" href="/discover"><i class="fa fa-search" aria-hidden="true"></i> Discover</a>
         </li>
 
         <li class="nav-item">

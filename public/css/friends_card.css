@@ -1,0 +1,10 @@
+#users .card-img-top {
+    width: 100%;
+    height: 20rem;
+    object-fit: cover;
+}
+
+.custom_card-body {
+    height: 500px;
+    overflow-y: auto;
+}

@@ -65,3 +65,16 @@ nav ul li a{
     color: orange !important;
 }
 
+.card{
+    border-color: #a09b9b !important;
+}
+
+
+
+.card-text{
+    font-weight: bold;
+}
+
+#profile_age, #profile_email, #profile_city, #profile_country{
+    color: #82ccdd;
+}

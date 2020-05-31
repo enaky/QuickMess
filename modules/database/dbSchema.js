@@ -46,7 +46,9 @@ const userSchema = new Schema(
         city: {type: String, required: true},
         profileImagePath: {type: String},
         posts: [{type: mongoose.Schema.Types.ObjectId, ref: 'Post'}],
-        friends: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}]
+        friends: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
+        friendRequests: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
+        friendRequestsSentByMe: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}]
     }
 );
 const User = mongoose.model("User", userSchema);
