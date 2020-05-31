@@ -32,6 +32,8 @@ app.get('/chat', routes.inbox);
 app.get('/login', routes.loginGet);
 app.get('/logout', routes.logout);
 app.get('/discover', routes.discoverGet);
+app.get('/friends', routes.friendsGet);
+app.get('/view-profile', routes.viewProfile);
 
 
 app.post('/', routes.indexPost);
@@ -39,6 +41,7 @@ app.post('/login', routes.loginPost);
 app.post('/register', routes.registerPost);
 app.post('/discover', routes.discoverPost);
 app.post('/friendship-notification', routes.friendshipNotification);
+app.post('/remove-friend', routes.friendshipRemove);
 
 
 //----------------------------------SOCKET PART----------------------------------

@@ -42,6 +42,20 @@ module.exports = {
             });
         });
     },
+    getUserById: async function (id) {
+        return new Promise((resolve, reject) => {
+            MongoClient.connect(url, {useUnifiedTopology: true,}, function (err, db) {
+                let query;
+                if (err) throw err;
+                let dbo = db.db("quickMess");
+                dbo.collection("users").findOne({_id: ObjectId(id)}, function (err, result) {
+                    if (err) throw err;
+                    resolve(result);
+                    db.close();
+                });
+            });
+        });
+    },
     insertUser: async function (user) {
         return new Promise((resolve, reject) => {
             MongoClient.connect(url, {useUnifiedTopology: true,}, function (err, db) {
@@ -121,7 +135,7 @@ module.exports = {
             });
         });
     },
-    clearFriendRequest(user_id, user_who_requested_friendship){
+    clearFriendRequest: async function(user_id, user_who_requested_friendship){
         return new Promise((resolve, reject) => {
             MongoClient.connect(url, {useUnifiedTopology: true,}, function (err, db) {
                 if (err) throw err;
@@ -133,6 +147,28 @@ module.exports = {
                         dbo.collection("users").updateOne(
                             {_id: ObjectId(user_who_requested_friendship)},
                             {$pull: {friendRequestsSentByMe: ObjectId(user_id)}}, function (err, res) {
+                                if (err) throw err;
+                                resolve();
+                                db.close();
+                            }
+                        )
+                    }
+                )
+            });
+        });
+    },
+    removeFriendship: async function(user_id, user_who_requested_remove_friendship){
+        return new Promise((resolve, reject) => {
+            MongoClient.connect(url, {useUnifiedTopology: true,}, function (err, db) {
+                if (err) throw err;
+                let dbo = db.db("quickMess");
+                dbo.collection("users").updateOne(
+                    {_id: ObjectId(user_id)},
+                    {$pull: {friends: ObjectId(user_who_requested_remove_friendship)}}, function (err, res) {
+                        if (err) throw err;
+                        dbo.collection("users").updateOne(
+                            {_id: ObjectId(user_who_requested_remove_friendship)},
+                            {$pull: {friends: ObjectId(user_id)}}, function (err, res) {
                                 if (err) throw err;
                                 resolve();
                                 db.close();
@@ -155,7 +191,7 @@ module.exports = {
                         if (err) throw err;
                         dbo.collection("users").updateOne(
                             {_id: ObjectId(user_who_requested_friendship)},
-                            {$addToSet: {friends: user_id}}, function (err, res) {
+                            {$addToSet: {friends: ObjectId(user_id)}}, function (err, res) {
                                 if (err) throw err;
                                 resolve();
                                 db.close();

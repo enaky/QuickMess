@@ -34,7 +34,11 @@ module.exports = {
         }
 
         res.render('index', {
-            user: req.session.user, enable_index_css: true, error: error, moment: moment,
+            user: req.session.user,
+            enable_index_css: true,
+            error: error,
+            moment: moment,
+            enable_people_css: true,
             friendRequests: friend_requests
         });
     },
@@ -186,11 +190,14 @@ module.exports = {
     },
 
     discoverPost: async function (req, res) {
-        console.log("Friend Request for: " + req.body.user_id + " de la " + req.body.user_request_id);
-        //res.render("discover", {user: req.session.user, enable_index_css: true, error: error, enable_searchbar_css: true, users: users,
-        //    enable_people_css: true,});
-        await auth.insertFriendRequest(req.body.user_id, req.body.user_request_id)
-        res.redirect("/");
+        if (req.body["user-operation"] === "view"){
+            req.session.view_profile = req.body.user_id;
+            res.redirect("/view-profile");
+        } else if (req.body["user-operation"] === "add"){
+            console.log("Friend Request for: " + req.body.user_id + " de la " + req.body.user_request_id);
+            await auth.insertFriendRequest(req.body.user_id, req.body.user_request_id)
+            res.redirect("/");
+        }
     },
 
     logout: function (req, res) {
@@ -216,4 +223,85 @@ module.exports = {
         }
         res.redirect("/");
     },
+
+    friendsGet: async function (req, res) {
+        let error = req.cookies["error"];
+        res.clearCookie("error");
+        let friends, friend_requests;
+        try{
+
+            friends = await auth.getFriendsById(req.session.user._id);
+            friends = friends.map(id => id.toString());
+            friends = await auth.getUsersBasicInfoByMultipleIds(friends);
+
+            let friend_requests_items = await auth.getFriendRequestsById(req.session.user._id);
+            friend_requests = friend_requests_items["friendRequests"].map(id => id.toString());
+            friend_requests = await auth.getUsersBasicInfoByMultipleIds(friend_requests);
+        } catch(UnhandledPromiseRejectionWarning){
+            console.log("User is not logged");
+        }
+
+        res.render("friends", {
+            user: req.session.user,
+            enable_index_css: true,
+            error: error,
+            enable_searchbar_css: true,
+            users: friends,
+            enable_people_css: true,
+            friendRequests: friend_requests
+        });
+    },
+
+    friendshipRemove:  async function (req, res) {
+        console.log("Friend Remove Request for: " + req.body.user_id + " de la " + req.body.user_id_to_remove);
+        try{
+            let user_id = req.body["user_id"];
+            let user_who_requested_friendship = req.body["friend_id"];
+            if (req.body["friend-operation"] === "remove"){
+                await auth.removeFriendship(user_id, user_who_requested_friendship);
+            } else {
+                req.session.view_profile = user_who_requested_friendship;
+                res.redirect("/view-profile");
+                return;
+            }
+        } catch(exception){
+            console.log("Error in frienshipNotification. Probably user is not logged in.")
+        }
+        res.redirect("/");
+    },
+    viewProfile: async function (req, res) {
+        //console.log('cookies: ', req.cookies);
+        let error = req.cookies["error"];
+        res.clearCookie("error");
+        let user_to_view = req.session.view_profile;
+        req.session.view_profile = undefined;
+        let friend_requests, user;
+        try {
+            if (typeof req.session.user != "undefined" && typeof user_to_view != "undefined") {
+                let posts = await auth.getUserPostsById(user_to_view);
+                posts.sort(function (a, b) {
+                    return new Date(b.date) - new Date(a.date);
+                });
+                user = await auth.getUserById(user_to_view);
+                user["age"] = utilities.calculateAge(user.birthDay);
+                if (posts) {
+                    user.posts = posts;
+                }
+                let friend_requests_items = await auth.getFriendRequestsById(req.session.user._id);
+                friend_requests = friend_requests_items["friendRequests"].map(id => id.toString());
+                friend_requests = await auth.getUsersBasicInfoByMultipleIds(friend_requests);
+            }
+        } catch(UnhandledPromiseRejectionWarning){
+            console.log("Error ocurred in index page. Probably because user is not logged in.");
+        }
+
+        res.render('view-profile', {
+            user: user,
+            enable_index_css: true,
+            error: error,
+            moment: moment,
+            friendRequests: friend_requests,
+            enable_people_css: true
+        });
+    }
 }
