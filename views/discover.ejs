@@ -1,0 +1,131 @@
+<div class="container text-center">
+    <div class='container-fluid'>
+        <h1 class="m-3" style="color: red">Welcome
+            <% if (typeof user != "undefined"){ %>, <%= user.firstName %>
+            <% } %>
+            !
+        </h1>
+    </div>
+</div>
+<div class="flex my-4">
+    <div class="row my-2 ">
+        <div class="card col-12 col-lg-2 col-md-2 col-sm-12 mx-5 mb-5 align-self-start profile_container px-2 "
+             style="width: 100%;">
+            <% if (typeof user != "undefined"){ %>
+                <img class="card-img-top mt-3" id="profile_photo" src="<%= user.profileImagePath %>"
+                     alt="images/male.png">
+            <% } else { %>
+                <img class="card-img-top mt-3" id="profile_photo" src="images/male.png" alt="images/male.png">
+            <% } %>
+            <div class="card-body mt-2">
+
+                <% if (typeof user != "undefined") { %>
+                    <h4 id="profile_name" class="card-title"><%= user.firstName %> <%= user.lastName %></h4>
+                    <p class="card-text">Age: <span id="profile_age"><%= user.age %></span></p>
+                    <p class="card-text">Email: <span id="profile_email"><%= user.email %></span></p>
+                    <p class="card-text">Country: <span id="profile_country"><%= user.country %></span></p>
+                    <p class="card-text">City: <span id="profile_city"><%= user.city %></span></p>
+                <% } else { %>
+                    <h2 id="profile_name" class="card-title">Ricardo Sanchez</h2>
+                    <p class="card-text">Age: <span id="profile_age"></span></p>
+                    <p class="card-text">Email: <span id="profile_email"></span></p>
+                    <p class="card-text">Country: <span id="profile_country"></span></p>
+                    <p class="card-text">City: <span id="profile_city"></span></p>
+                <% } %>
+            </div>
+        </div>
+
+        <div class="card col-12 col-lg-6 col-md-6 col-sm-12 posts_container px-0 mx-5 mb-5">
+            <div class="card-header mx-0 w-100">
+                <h2 class="text-center my-2">Discover People</h2>
+                <form id="search_send_form" class="mt-2">
+                    <div class="container h-100">
+                        <div class="d-flex justify-content-center h-100">
+                            <div class="searchbar">
+                                <input class="search_input" type="text" name="" placeholder="Search...">
+                                <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div id="users" class="custom_card-body card-body mt-2">
+
+                <div class="card-deck">
+                    <%
+                    if (typeof (users) != "undefined"){
+                    for (let i = 0; i < users.length; i++){
+                    if (i % 2 == 0 && users.length - i >= 2){ %>
+                        <div class="w-100 d-none d-sm-block d-md-none"><!-- wrap every 2 on sm--></div>
+                        <div class="w-100 d-none d-md-block d-lg-none"><!-- wrap every 2 on md--></div>
+                    <% } if (i % 3 == 0 && users.length - i >= 3){ %>
+                        <div class="w-100 d-none d-lg-block d-xl-none"><!-- wrap every 3 on lg--></div>
+                        <div class="w-100 d-none d-xl-block "><!-- wrap every 3 on xl--></div>
+                    <% } %>
+                    <div class="card p-1 m-1">
+
+                        <img class="card-img-top embed-responsive-16by9" src="<%= users[i].profileImagePath %>"
+                             alt="Card image">
+                        <div class="card-body text-center">
+                            <h6 class="card-title"><%= users[i].firstName %> <%= users[i].lastName %></h6>
+                            <div class="card-footer">
+                                <form action="/discover" method="post">
+                                    <input type="hidden" name="user_id" value="<%= users[i]._id %>">
+                                    <% if (typeof (user) != "undefined"){ %>
+                                        <input type="hidden" name="user_request_id" value="<%= user._id %>">
+                                    <% } %>
+                                    <div class="row">
+                                    <% if (users[i].friendshipAlreadyRequested){%>
+                                        <button type="submit" name="user-operation" value="add" class="col btn btn-secondary" disabled>Add Friend</button>
+                                    <%} else {%>
+                                        <button type="submit" name="user-operation" value="add" class="col btn btn-success">Add Friend</button>
+                                    <%}%>
+                                    </div>
+                                    <div class="row">
+                                        <button type="submit" name="user-operation" value="view" class="col mt-1 btn btn-warning btn-block">View</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                    <% }} %>
+                </div>
+            </div>
+        </div>
+
+        <div class="card col-12 col-lg-2 col-md-2 col-sm-12 mx-5 mb-5 notification_container px-0">
+            <div class="card-header mx-0 w-100 px-0">
+                <h2 class="text-center my-2">Notifications</h2>
+            </div>
+            <div class="custom_card-body card-body">
+                <% if (typeof (friendRequests) != "undefined"){
+                for (let i = 0; i < friendRequests.length; i++){%>
+
+                <div class="card p-1 m-1 col">
+                    <div class="card-header text-center">
+                        <h6>Friend Request</h6>
+                    </div>
+                    <img class="card-img-top embed-responsive-16by9" src="<%= friendRequests[i].profileImagePath %>"
+                         alt="Card image">
+                    <div class="card-body text-center">
+                        <h6 class="card-title"><%= friendRequests[i].firstName %> <%= friendRequests[i].lastName %></h6>
+                        <div class="card-footer">
+                            <form action="/friendship-notification" method="post">
+                                <input type="hidden" name="user_request_id" value="<%= friendRequests[i]._id %>">
+                                <% if (typeof (user) != "undefined"){ %>
+                                    <input type="hidden" name="user_id" value="<%= user._id %>">
+                                <% } %>
+                                <button type="submit" name="accept_friendship" value="false" class="btn btn-danger">Refuse</button>
+                                <button type="submit" name="accept_friendship" value="true" class="btn btn-success">Accept</button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+                <% }} %>
+            </div>
+        </div>
+    </div>
+</div>

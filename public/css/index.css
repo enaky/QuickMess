@@ -1,6 +1,6 @@
 #profile_photo{
     padding: 5px;
-    border: 3px solid #130f0f;
+    border: 2px solid #e1b1f6;
     border-radius: 4px;
 }
 
@@ -68,3 +68,4 @@ textarea {
     height: 500px;
     overflow-y: auto;
 }
+

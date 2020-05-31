@@ -27,13 +27,21 @@ app.use(session({
 }));
 
 app.get('/', routes.index);
-app.post('/', routes.indexPost);
 app.get('/register', routes.registerGet);
 app.get('/chat', routes.inbox);
 app.get('/login', routes.loginGet);
-app.post('/register', routes.registerPost);
-app.post('/login', routes.loginPost);
 app.get('/logout', routes.logout);
+app.get('/discover', routes.discoverGet);
+app.get('/friends', routes.friendsGet);
+app.get('/view-profile', routes.viewProfile);
+
+
+app.post('/', routes.indexPost);
+app.post('/login', routes.loginPost);
+app.post('/register', routes.registerPost);
+app.post('/discover', routes.discoverPost);
+app.post('/friendship-notification', routes.friendshipNotification);
+app.post('/remove-friend', routes.friendshipRemove);
 
 
 //----------------------------------SOCKET PART----------------------------------
@@ -46,24 +54,35 @@ const io = require("socket.io");
 
 //integrating socketio
 socket = io(http);
+let allUsers = [];
 socket.on("connection", socket => {
-    const socketId = socket.id;
+    allUsers.push(socket);
     const clientIp = socket.request.connection.remoteAddress;
 
-    console.log(socketId);
-    console.log(clientIp);
+    console.log("Got connected socket Id : " + socket.id);
     socket.on("chat message", function(msg) {
         console.log("message: " + msg);
-
         //broadcast message to everyone in port:5000 except yourself.
-        socket.broadcast.emit("received", { message: msg });
+        for (let i = 0; i < allUsers.length; i++){
+            if (allUsers[i].id != socket.id){
+                socket.to(allUsers[i].id).emit("received", { message: msg });
+                break;
+            }
+        }
         //save chat to the database
+    });
+    socket.on('disconnect', function() {
+        console.log('Got disconnect! : ' + socket.id + "\n");
 
+        const i = allUsers.indexOf(socket);
+        allUsers.splice(i, 1);
     });
 });
+
 
 http.listen(port, () => {
     console.log(`Serverul rulează la adresa http://localhost:2014`)
     console.log(`Login http://localhost:2014/login`)
     console.log(`Register http://localhost:2014/register`)
+    console.log(`Discover http://localhost:2014/discover`)
 });

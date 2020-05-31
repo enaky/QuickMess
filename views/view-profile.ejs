@@ -1,10 +1,5 @@
 <div class="container text-center">
     <div class='container-fluid'>
-        <h1 class="m-1" style="color: red">Welcome
-            <% if (typeof user != "undefined"){ %>, <%= user.firstName %>
-            <% } %>
-            !
-        </h1>
     </div>
 </div>
 <div class="flex my-4">
@@ -38,23 +33,6 @@
         <div class="card col-12 col-lg-5 col-md-5 col-sm-12 posts_container px-0 mx-5 mb-5">
             <div class="card-header mx-0 w-100">
                 <h2 class="text-center my-2">Posts</h2>
-                <form id="post_send_form" class="mt-2">
-                    <div class="input-group">
-                        <% if (typeof user != "undefined"){ %>
-                            <input type="hidden" name="user_id" value="<%= user._id %>">
-                        <% } %>
-                        <textarea class="form-control" name="post-textarea" id="post-textarea" maxlength="300"
-                                  placeholder="Start Typing..." autofocus></textarea>
-                        <div class="input-group-append">
-                            <button type=submit class="input-group-text send_btn"><i class="fas fa-location-arrow"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-                <div id="the-count" class="text-right">
-                    <span id="current">0</span>
-                    <span id="maximum">/ 300</span>
-                </div>
             </div>
 
             <div id="posts" class="card-body mt-2">
