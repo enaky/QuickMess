@@ -31,7 +31,7 @@ module.exports = {
             owner: req.body["user_id"],
             date: moment()
         })
-        console.log("Postare Primita : " + newPost);
+        console.log("Postare Primita de la userul " + req.body["user_id"]);
         try{
             await auth.insertPostMessage(newPost);
             res.sendStatus(200);
@@ -96,11 +96,10 @@ module.exports = {
         });
         await auth.insertUser(new_user);
         res.sendStatus(200);
-
     },
 
     inbox: function (req, res) {
-        res.render('chat', {enable_chat_css: true});
+        res.render('chat', {enable_chat_css: true, socket_enable: true});
     },
 
     loginGet: function (req, res) {
@@ -118,9 +117,8 @@ module.exports = {
             res.sendStatus(400);
             return;
         }
-        console.log("Parola hash orimita:" + req.body.password);
+        //console.log("Parola hash primita:" + req.body.password);
         let user = await auth.getUser(req.body.username, req.body.password);
-        console.log(user)
         if (user == null) {
             res.cookie("error", {status: true, message: "Incorrect data"});
             res.sendStatus(400);
@@ -129,7 +127,6 @@ module.exports = {
         delete user.password;
         user["age"] = utilities.calculateAge(user.birthDay);
         req.session.user = user;
-        console.log(user);
         res.sendStatus(200);
     },
     logout: function (req, res) {

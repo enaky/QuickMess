@@ -97,7 +97,7 @@ const add_user = function(name, online= false, img="https://static.turbosquid.co
 };
 
 
-const send_message = function (content, date, own = true, img = "https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"){
+const display_message = function (content, date, own = true, img = "https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"){
     if (own){
         own_message(content, date, img);
     } else {
@@ -110,8 +110,7 @@ const send_message = function (content, date, own = true, img = "https://static.
         if ($("#message").val() === "") {
             return false;
         }
-        send_message($("#message").val(), "8:40 AM, ffffff")
-        send_message($("#message").val(), "8:40 AM, ffffff", false)
+        display_message($("#message").val(), "8:40 AM, ffffff")
 
         add_user("Corinta");
         add_user("Corinta", true);
@@ -123,6 +122,7 @@ const send_message = function (content, date, own = true, img = "https://static.
     });
 
     socket.on("received", data => {
+        display_message(data.message, "8:40 AM, ffffff", false)
         console.log("Hello bingo!");
     });
 })();
