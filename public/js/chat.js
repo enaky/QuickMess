@@ -160,10 +160,15 @@ const display_message = function (content, date, own = true, img = "https://stat
         document.getElementsByClassName(user_id + " firstname")[0].innerHTML = "Chat with " + new_friend_name;
 
         //TO TO: number of messages
+        console.log("Changing chat_friend_id value from " + document.getElementById("chat_friend_id").value);
         document.getElementById("chat_friend_id").value = new_friend_id;
+        console.log("To " + document.getElementById("chat_friend_id").value);
         contact_current = document.getElementsByClassName("active change_chat")[0];
         friend_id = new_friend_id;
         friend_photo = new_friend_src;
+
+        socket.emit("change friend", {"user_id": user_id, "friend_id": friend_id});
+
         messages.innerHTML = "";
     });
 })();

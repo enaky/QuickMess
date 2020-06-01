@@ -272,11 +272,6 @@ textarea {
     padding-right: 0;
 }
 
-.card-footer{
-    position:absolute;
-    bottom:0;
-    width:100%;
-}
 @media (max-width: 576px) {
     .contacts_card {
         margin-bottom: 15px ;

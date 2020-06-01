@@ -72,12 +72,28 @@ socket.on("connection", socket => {
         console.log("\nMessage: " + data["message"]);
         console.log("Sender: " + data["user_id"]);
         console.log("To: " + data["friend_id"]);
+
         //broadcast message to everyone in port:5000 except yourself.
         for (let key in allUsers) {
             if (allUsers.hasOwnProperty(key)) {
                 if (key === data["friend_id"]) {
                     console.log("User socket connected. Send data to him.");
                     socket.to(allUsers[key]["socket"].id).emit("received", data);
+                    break;
+                }
+            }
+        }
+        console.log();
+        //save chat to the database
+    });
+
+    socket.on("change friend", function (data) {
+        console.log("\nUser: " + data["user_id"] + " changed his friend stream to: " + data["friend_id"]);
+        //broadcast message to everyone in port:5000 except yourself.
+        for (let key in allUsers) {
+            if (allUsers.hasOwnProperty(key)) {
+                if (key === data["user_id"]) {
+                    allUsers[key]["friend_id"] = data["friend_id"];
                     break;
                 }
             }
