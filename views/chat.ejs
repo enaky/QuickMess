@@ -14,21 +14,24 @@
                 </div>
                 <div class="card-body contacts_body bg-chat">
                     <ul id="contacts" class="contacts">
-                        <% for (let i = 0 ;i < friends.length; i++){
+                        <% if (typeof friends != "undefined" && typeof currentFriend != "undefined")
+                        for (let i = 0 ;i < friends.length; i++){
                         if (friends[i]._id === currentFriend._id){ %>
-                        <li class="active change_chat" id="<%= friends._id %>">
+                        <li class="active change_chat" value="<%= friends[i]._id %>">
                             <% } else { %>
-                        <li class="change_chat" id="<%= friends._id %>">
+                        <li class="change_chat" value="<%= friends[i]._id %>">
                             <% } %>
                             <div class="d-flex bd-highlight">
                                 <div class="img_cont">
-                                    <img src="<%= friends[i].profileImagePath %>"
+                                    <img id="<%= friends[i]._id %>" src="<%= friends[i].profileImagePath %>"
                                          class="rounded-circle user_img">
                                     <span class="online_icon offline"></span>
                                 </div>
                                 <div class="user_info">
+                                    <input class="name <%= friends[i]._id %>" value="<%= friends[i].firstName %>" hidden/>
+                                    <input class="status <%= friends[i]._id %>" value="<%= friends[i].status %>" hidden/>
                                     <span><%= friends[i].firstName %> <%= friends[i].lastName %></span>
-                                    <p><%= friends[i].firstName %> is <%= friends[i].status %></p>
+                                    <p ><%= friends[i].firstName %> is <%= friends[i].status %></p>
                                 </div>
                             </div>
                         </li>
@@ -42,15 +45,17 @@
             <div class="card ">
                 <div class="card-header msg_head bg-dark">
                     <div class="d-flex bd-highlight">
-                        <div class="img_cont">
-                            <img src="<%= currentFriend.profileImagePath %>"
-                                 class="rounded-circle user_img">
-                            <span class="online_icon"></span>
-                        </div>
-                        <div class="user_info">
-                            <span>Chat with <%= currentFriend.firstName %></span>
-                            <p><%= currentFriend.numberOfMessages %> Messages</p>
-                        </div>
+                        <% if (typeof currentFriend != "undefined") { %>
+                            <div class="img_cont">
+                                <img id="currentFriendImage" src="<%= currentFriend.profileImagePath %>"
+                                     class="rounded-circle user_img">
+                                <span class="online_icon"></span>
+                            </div>
+                            <div class="user_info">
+                                <span>Chat with <%= currentFriend.firstName %></span>
+                                <p><%= currentFriend.numberOfMessages %> Messages</p>
+                            </div>
+                        <% } %>
                     </div>
                     <span id="action_menu_btn"><i class="fas fa-ellipsis-v"></i></span>
                     <div class="action_menu">
@@ -63,33 +68,39 @@
                     </div>
                 </div>
                 <div id="message_inbox" class="card-body msg_card_body">
-                    <% for (let i = 0; i < messages.length; i++){
+                    <% if (typeof messages != "undefined" && typeof user != "undefined")
+                    for (let i = 0; i < messages.length; i++){
                     if (messages[i].sender === user._id){ %>
-                    <div class="d-flex justify-content-start mb-4 ml-5">
-                        <div class="img_cont_msg">
-                            <img src="<%= user.profileImagePath %>" class="rounded-circle user_img_msg">
+                        <div class="d-flex justify-content-start mb-4 ml-5">
+                            <div class="img_cont_msg">
+                                <img src="<%= user.profileImagePath %>" class="rounded-circle user_img_msg">
+                            </div>
+                            <div class="msg_cotainer">
+                                <%= messages[i].message %>
+                                <span class="msg_time"><%= moment(messages[i].date).format('MMMM Do YYYY, HH:mm:ss') %></span>
+                            </div>
                         </div>
-                        <div class="msg_cotainer">
-                            <%= messages[i].message %>
-                            <span class="msg_time"><%= moment(messages[i].date).format('MMMM Do YYYY, HH:mm:ss') %></span>
-                        </div>
-                    </div>
                     <% } else { %>
-                    <div class="d-flex justify-content-end mb-4 mr-5">
-                        <div class="msg_cotainer_send">
-                            <%= messages[i].message %>
-                            <span class="msg_time"><%= moment(messages[i].date).format('MMMM Do YYYY, HH:mm:ss') %></span>
+                        <div class="d-flex justify-content-end mb-4 mr-5">
+                            <div class="msg_cotainer_send">
+                                <%= messages[i].message %>
+                                <span class="msg_time"><%= moment(messages[i].date).format('MMMM Do YYYY, HH:mm:ss') %></span>
+                            </div>
+                            <div class="img_cont_msg">
+                                <img src="<%= currentFriend.profileImagePath %>" class="rounded-circle user_img_msg">
+                            </div>
                         </div>
-                        <div class="img_cont_msg">
-                            <img src="<%= currentFriend.profileImagePath %>" class="rounded-circle user_img_msg">
-                        </div>
-                    </div>
                     <% }} %>
                     <form id="message_send_form">
                         <div class="card-footer m-0 bg-dark">
                             <div class="input-group">
-                            <textarea id="message" name="" class="form-control type_msg"
-                                      placeholder="Type your message..."></textarea>
+                                <% if (typeof user != "undefined" && typeof currentFriend != "undefined"){ %>
+                                    <input id="chat_user_id" value="<%= user._id %>" hidden/>
+                                    <input id="chat_friend_id" value="<%= currentFriend._id %>" hidden/>
+                                    <input id="chat_user_photo" value="<%= user.profileImagePath %>" hidden/>
+                                <% } %>
+                                <textarea id="message" name="" class="form-control type_msg"
+                                          placeholder="Type your message..."></textarea>
                                 <div class="input-group-append">
                                     <button type=submit class="input-group-text send_btn"><i
                                                 class="fas fa-location-arrow"></i></button>

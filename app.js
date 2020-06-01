@@ -54,28 +54,49 @@ const io = require("socket.io");
 
 //integrating socketio
 socket = io(http);
-let allUsers = [];
+let allUsers = {};
 socket.on("connection", socket => {
-    allUsers.push(socket);
+    console.log("Got connected socket Id : " + socket.id);
+
     const clientIp = socket.request.connection.remoteAddress;
 
     console.log("Got connected socket Id : " + socket.id);
-    socket.on("chat message", function(msg) {
-        console.log("message: " + msg);
+    socket.on("establish connection", function (user_info) {
+        console.log("Stupid socket connection don't event reach here");
+        console.log("User Id: " + user_info["user_id"] + " wants to chat with " + user_info["friend_id"]);
+        allUsers[user_info["user_id"]] = {"socket": socket, "friend_id": user_info["friend_id"]};
         //broadcast message to everyone in port:5000 except yourself.
-        for (let i = 0; i < allUsers.length; i++){
-            if (allUsers[i].id != socket.id){
-                socket.to(allUsers[i].id).emit("received", { message: msg });
-                break;
+    });
+
+    socket.on("chat message", function (data) {
+        console.log("\nMessage: " + data["message"]);
+        console.log("Sender: " + data["user_id"]);
+        console.log("To: " + data["friend_id"]);
+        //broadcast message to everyone in port:5000 except yourself.
+        for (let key in allUsers) {
+            if (allUsers.hasOwnProperty(key)) {
+                if (key === data["friend_id"]) {
+                    console.log("User socket connected. Send data to him.");
+                    socket.to(allUsers[key]["socket"].id).emit("received", data);
+                    break;
+                }
             }
         }
+        console.log();
         //save chat to the database
     });
-    socket.on('disconnect', function() {
-        console.log('Got disconnect! : ' + socket.id + "\n");
-
-        const i = allUsers.indexOf(socket);
-        allUsers.splice(i, 1);
+    socket.on('disconnect', function () {
+        for (let key in allUsers) {
+            if (allUsers.hasOwnProperty(key)) {
+                if (allUsers[key]["socket"].id === socket.id) {
+                    console.log('Got disconnect! : ' + socket.id);
+                    console.log('User id! : ' + key + "\n");
+                    delete allUsers[key];
+                }
+            }
+        }
+        //const i = allUsers.indexOf(socket);
+        //allUsers.splice(i, 1);
     });
 });
 

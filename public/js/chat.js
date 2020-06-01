@@ -1,7 +1,14 @@
 let socket = io();
 let messages = document.getElementById("message_inbox");
 let contacts = document.getElementById("contacts");
+let user_id = document.getElementById("chat_user_id").value;
+let friend_id = document.getElementById("chat_friend_id").value;
+let user_photo = document.getElementById("chat_user_photo").value;
+let friend_photo = document.getElementById(friend_id).src;
 
+let contact_current = document.getElementsByClassName("active change_chat")[0];
+
+socket.emit("establish connection", {"user_id": user_id, "friend_id": friend_id});
 
 const own_message = function (content, date, img) {
 
@@ -110,19 +117,45 @@ const display_message = function (content, date, own = true, img = "https://stat
         if ($("#message").val() === "") {
             return false;
         }
-        display_message($("#message").val(), "8:40 AM, ffffff")
+        display_message($("#message").val(), moment().format('YYYY-MM-DD, HH:mm:ss'), true, user_photo)
 
-        add_user("Corinta");
-        add_user("Corinta", true);
+        //add_user("Corinta");
+        //add_user("Corinta", true);
 
         e.preventDefault(); // prevents page reloading
-        socket.emit("chat message", $("#message").val());
+        let data = {"message": $("#message").val(),
+                    "user_id": user_id,
+                    "friend_id": friend_id,
+                    "date": moment().format()
+        }
+        console.log(data);
+        socket.emit("chat message", data);
         $("#message").val("");
         return false;
     });
 
     socket.on("received", data => {
-        display_message(data.message, "8:40 AM, ffffff", false)
-        console.log("Hello bingo!");
+        console.log(data);
+        console.log("Received message with socket from " + data["user_id"]);
+        if (friend_id === data["user_id"]){
+            display_message(data.message, moment(data.date).format('YYYY-MM-DD, HH:mm:ss'), false, friend_photo)
+        }
+    });
+
+    $( "#contacts li" ).click(function() {
+        console.log("Click on friend");
+        contact_current.className = 'change_chat';
+        $(this).attr('class', 'active change_chat');
+        let new_friend_id = $(this).attr("value");
+        console.log("New friend id: " + new_friend_id);
+        let new_friend_src = document.getElementById(new_friend_id).src;
+        let new_friend_name = document.getElementsByClassName("name " + new_friend_id)[0].value;
+        let new_friend_status = document.getElementsByClassName("status " + new_friend_id)[0].value;
+        console.log("New friend src: " + new_friend_src);
+        console.log("New friend name: " + new_friend_name);
+        console.log("New friend status: " + new_friend_status);
+
+        contact_current = document.getElementsByClassName("active change_chat")[0];
+
     });
 })();

@@ -124,13 +124,19 @@ module.exports = {
                 friends = await auth.getFriendsById(req.session.user._id);
                 friends = friends.map(id => id.toString());
                 friends = await auth.getUsersBasicInfoByMultipleIds(friends);
-                currentFriend = friends[0];
-                messages = await chatDatabase.getMessages(currentFriend._id.toString(), user._id.toString())
+                if (friends.length > 0){
+                    currentFriend = friends[0];
+                    messages = await chatDatabase.getMessages(currentFriend._id.toString(), user._id.toString())
+                } else {
+                    currentFriend = undefined;
+                    messages = [];
+                }
             }
         } catch(UnhandledPromiseRejectionWarning){
             console.log("Error ocurred in inbox page. Probably because user is not logged in.");
         }
         res.render('chat', {
+            user: req.session.user,
             enable_chat_css: true,
             socket_enable: true,
             friends: friends,
@@ -222,7 +228,7 @@ module.exports = {
 
     logout: function (req, res) {
         if (req.session.user) {   //if logged
-            console.log("Sesiune utilizator [Log-OUT]: ", req.session.user);
+            console.log("Sesiune utilizator [Log-OUT]: ", req.session.user._id);
             req.session.user = undefined;
         }
         res.redirect("/login");
