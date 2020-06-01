@@ -2,7 +2,11 @@ const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const moment = require('moment');
 const session = require('express-session');
+const dbSchema = require('./modules/database/dbSchema');
+const chatDatabase = require('./modules/database/chatDatabase.js');
+
 
 const utilities = require('./modules/utilities.js');
 const routes = require('./modules/routes/routes.js');
@@ -72,6 +76,16 @@ socket.on("connection", socket => {
         console.log("\nMessage: " + data["message"]);
         console.log("Sender: " + data["user_id"]);
         console.log("To: " + data["friend_id"]);
+
+        let message_to_insert = dbSchema.Message({
+            message: data["message"],
+            sender: data["user_id"],
+            receiver: data["friend_id"],
+            date: moment()
+        });
+        chatDatabase.insertMessage(data["user_id"], data["friend_id"], message_to_insert).then(function(){
+            console.log("Message Insertion was succesfull")
+        });
 
         //broadcast message to everyone in port:5000 except yourself.
         for (let key in allUsers) {

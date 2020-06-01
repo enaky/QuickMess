@@ -48,7 +48,7 @@ module.exports = {
             message: req.body["post-textarea"],
             owner: req.body["user_id"],
             date: moment()
-        })
+        });
         console.log("Postare Primita de la userul " + req.body["user_id"]);
         try {
             await auth.insertPostMessage(newPost);
@@ -242,6 +242,7 @@ module.exports = {
             await auth.clearFriendRequest(user_id, user_who_requested_friendship);
             if (req.body.accept_friendship === "true"){
                 await auth.insertFriendship(user_id, user_who_requested_friendship);
+                await chatDatabase.insertChat(user_id, user_who_requested_friendship);
             }
 
         } catch(exception){

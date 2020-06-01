@@ -12,7 +12,7 @@ module.exports = {
             MongoClient.connect(url, {useUnifiedTopology: true,}, function (err, db) {
                 if (err) throw err;
                 let dbo = db.db("quickMess");
-                dbo.collection("Chat").update(
+                dbo.collection("chats").updateOne(
                     {
                         $and: [
                             {'users': {'$elemMatch': {_id: ObjectId(user_1)} } },
@@ -28,12 +28,33 @@ module.exports = {
             });
         });
     },
+    insertChat: async function (user_1, user_2) {
+        return new Promise((resolve, reject) => {
+            MongoClient.connect(url, {useUnifiedTopology: true,}, function (err, db) {
+                if (err) throw err;
+                let dbo = db.db("quickMess");
+                dbo.collection("chats").updateOne(
+                    {
+                        $and: [
+                            {'users': {'$elemMatch': {_id: ObjectId(user_1)} } },
+                            {'users': {'$elemMatch': {_id: ObjectId(user_2)} } }
+                        ]
+                    },
+                    {$set: {'users': [ObjectId(user_1), ObjectId(user_2)]}}, { upsert: true },function (err) {
+                        if (err) throw err;
+                        resolve();
+                        db.close();
+                    }
+                )
+            });
+        });
+    },
     getMessages: async function (user_1, user_2) {
         return new Promise((resolve, reject) => {
             MongoClient.connect(url, {useUnifiedTopology: true,}, function (err, db) {
                 if (err) throw err;
                 let dbo = db.db("quickMess");
-                dbo.collection("Chat").findOne(
+                dbo.collection("chats").findOne(
                     {
                         $and: [
                             {'users': {'$elemMatch': {_id: ObjectId(user_1)} } },
