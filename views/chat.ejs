@@ -28,10 +28,12 @@
                                     <span class="online_icon offline"></span>
                                 </div>
                                 <div class="user_info">
-                                    <input class="name <%= friends[i]._id %>" value="<%= friends[i].firstName %>" hidden/>
-                                    <input class="status <%= friends[i]._id %>" value="<%= friends[i].status %>" hidden/>
+                                    <input class="name <%= friends[i]._id %>" value="<%= friends[i].firstName %>"
+                                           hidden/>
+                                    <input class="status <%= friends[i]._id %>" value="<%= friends[i].status %>"
+                                           hidden/>
                                     <span><%= friends[i].firstName %> <%= friends[i].lastName %></span>
-                                    <p ><%= friends[i].firstName %> is <%= friends[i].status %></p>
+                                    <p><%= friends[i].firstName %> is <%= friends[i].status %></p>
                                 </div>
                             </div>
                         </li>
@@ -49,11 +51,12 @@
                             <div class="img_cont">
                                 <img id="currentFriendImage" src="<%= currentFriend.profileImagePath %>"
                                      class="rounded-circle user_img">
-                                <span class="online_icon"></span>
+                                <span class="<%= user._id %> online_icon"></span>
                             </div>
                             <div class="user_info">
-                                <span>Chat with <%= currentFriend.firstName %></span>
-                                <p><%= currentFriend.numberOfMessages %> Messages</p>
+                                <span class="<%= user._id %> firstname">Chat with <%= currentFriend.firstName %></span>
+                                <p class="<%= user._id %> number_of_messages"><%= currentFriend.numberOfMessages %>
+                                    Messages</p>
                             </div>
                         <% } %>
                     </div>
@@ -91,23 +94,26 @@
                             </div>
                         </div>
                     <% }} %>
+                </div>
+
+                <div class="card-footer m-0 bg-dark">
                     <form id="message_send_form">
-                        <div class="card-footer m-0 bg-dark">
-                            <div class="input-group">
-                                <% if (typeof user != "undefined" && typeof currentFriend != "undefined"){ %>
-                                    <input id="chat_user_id" value="<%= user._id %>" hidden/>
-                                    <input id="chat_friend_id" value="<%= currentFriend._id %>" hidden/>
-                                    <input id="chat_user_photo" value="<%= user.profileImagePath %>" hidden/>
-                                <% } %>
-                                <textarea id="message" name="" class="form-control type_msg"
-                                          placeholder="Type your message..."></textarea>
-                                <div class="input-group-append">
-                                    <button type=submit class="input-group-text send_btn"><i
-                                                class="fas fa-location-arrow"></i></button>
-                                </div>
+
+                        <div class="input-group">
+                            <% if (typeof user != "undefined" && typeof currentFriend != "undefined"){ %>
+                                <input id="chat_user_id" value="<%= user._id %>" hidden/>
+                                <input id="chat_friend_id" value="<%= currentFriend._id %>" hidden/>
+                                <input id="chat_user_photo" value="<%= user.profileImagePath %>" hidden/>
+                            <% } %>
+                            <textarea id="message" name="" class="form-control type_msg"
+                                      placeholder="Type your message..."></textarea>
+                            <div class="input-group-append">
+                                <button type=submit class="input-group-text send_btn"><i
+                                            class="fas fa-location-arrow"></i></button>
                             </div>
                         </div>
                     </form>
+
                 </div>
             </div>
         </div>

@@ -155,7 +155,15 @@ const display_message = function (content, date, own = true, img = "https://stat
         console.log("New friend name: " + new_friend_name);
         console.log("New friend status: " + new_friend_status);
 
-        contact_current = document.getElementsByClassName("active change_chat")[0];
+        document.getElementById("currentFriendImage").src = new_friend_src;
+        document.getElementsByClassName(user_id + " online_icon")[0].className = user_id + " online_icon " +  new_friend_status;
+        document.getElementsByClassName(user_id + " firstname")[0].innerHTML = "Chat with " + new_friend_name;
 
+        //TO TO: number of messages
+        document.getElementById("chat_friend_id").value = new_friend_id;
+        contact_current = document.getElementsByClassName("active change_chat")[0];
+        friend_id = new_friend_id;
+        friend_photo = new_friend_src;
+        messages.innerHTML = "";
     });
 })();
