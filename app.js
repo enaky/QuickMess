@@ -49,6 +49,7 @@ app.post('/friendship-notification', routes.friendshipNotification);
 app.post('/remove-friend', routes.friendshipRemove);
 app.post('/search_people', routes.searchPeoplePost);
 app.post('/post-delete', routes.deletePost);
+app.post('/search-friend', routes.searchFriendPost);
 
 
 //----------------------------------SOCKET PART----------------------------------

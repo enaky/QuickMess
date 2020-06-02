@@ -4,7 +4,7 @@ const chatDatabase = require('../database/chatDatabase.js');
 const validation = require('../validation/validation.js');
 const CryptoJS = require('crypto-js');
 const moment = require('moment');
-const utilities = require('../utilities');
+const utilities = require('../utilities.js');
 let countries;
 
 (async function () {
@@ -42,6 +42,20 @@ let getUsersAndFriendRequests = async function (user_id){
         console.log("User is not logged");
     }
     return null;
+}
+
+let getFriendsByUserId = async function (user_id){
+    let friends = await auth.getFriendsById(user_id);
+    friends = friends.map(id => id.toString());
+    friends = await auth.getUsersBasicInfoByMultipleIds(friends);
+
+    let friend_requests_items = await auth.getFriendRequestsById(user_id);
+    let friend_requests = friend_requests_items["friendRequests"].map(id => id.toString());
+    friend_requests = await auth.getUsersBasicInfoByMultipleIds(friend_requests);
+    return {
+        "friends": friends,
+        "friends_requests": friend_requests
+    };
 }
 
 module.exports = {
@@ -295,16 +309,9 @@ module.exports = {
         }
         let error = req.cookies["error"];
         res.clearCookie("error");
-        let friends, friend_requests;
+        let data;
         try{
-
-            friends = await auth.getFriendsById(req.session.user._id);
-            friends = friends.map(id => id.toString());
-            friends = await auth.getUsersBasicInfoByMultipleIds(friends);
-
-            let friend_requests_items = await auth.getFriendRequestsById(req.session.user._id);
-            friend_requests = friend_requests_items["friendRequests"].map(id => id.toString());
-            friend_requests = await auth.getUsersBasicInfoByMultipleIds(friend_requests);
+            data = await getFriendsByUserId(req.session.user._id);
         } catch(UnhandledPromiseRejectionWarning){
             console.log("User is not logged");
         }
@@ -314,9 +321,9 @@ module.exports = {
             enable_index_css: true,
             error: error,
             enable_searchbar_css: true,
-            users: friends,
+            users: data["friends"],
             enable_people_css: true,
-            friendRequests: friend_requests
+            friendRequests: data["friend_requests"]
         });
     },
 
@@ -408,6 +415,36 @@ module.exports = {
                 res.send(data_to_send);
             }
         } catch(exception){
+            res.sendStatus(404);
+        }
+    },
+
+    searchFriendPost: async function (req, res) {
+        if (typeof req.session.user == "undefined"){
+            res.redirect("/login");
+            return;
+        }
+        let to_search = req.body.value;
+        try {
+            if (typeof to_search != "undefined") {
+                let error = req.cookies["error"];
+                res.clearCookie("error");
+                let data = await getFriendsByUserId(req.session.user._id);
+                if (to_search !== ""){
+                    data["friends"] = utilities.filterByValue(data["friends"], to_search);
+                }
+                let data_to_send = {
+                    user: req.session.user,
+                    enable_index_css: true,
+                    error: error,
+                    enable_searchbar_css: true,
+                    users: data["friends"],
+                    enable_people_css: true,
+                    friendRequests: data["friend_requests"]
+                }
+                res.send(data_to_send);
+            }
+        } catch(exception) {
             res.sendStatus(404);
         }
     },
