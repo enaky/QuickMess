@@ -132,6 +132,8 @@ const display_message = function (content, date, own = true, img = "https://stat
         console.log(data);
         socket.emit("chat message", data);
         $("#message").val("");
+        let elementNrMessages = document.getElementById("friend_number_of_messages");
+        elementNrMessages.innerHTML = (1 + parseInt(elementNrMessages.innerHTML)).toString();
         return false;
     });
 
@@ -147,6 +149,7 @@ const display_message = function (content, date, own = true, img = "https://stat
         console.log("change friend inbox accepted");
         console.log(messages);
         if (messages != null){
+            document.getElementById("friend_number_of_messages").innerHTML = messages.length;
             for( let i = 0; i < messages.length; i++){
                 let date = moment(messages[i].date).format('YYYY-MM-DD, HH:mm:ss')
                 if (user_id === messages[i]["sender"]){
@@ -155,6 +158,8 @@ const display_message = function (content, date, own = true, img = "https://stat
                     other_message(messages[i].message, date, friend_photo);
                 }
             }
+        } else {
+            document.getElementById("friend_number_of_messages").innerHTML = 0 + " Messages";
         }
         $("#message_send").prop('disabled', false);
     });
@@ -177,7 +182,7 @@ const display_message = function (content, date, own = true, img = "https://stat
 
         document.getElementById("currentFriendImage").src = new_friend_src;
         document.getElementsByClassName(user_id + " online_icon")[0].className = user_id + " online_icon " +  new_friend_status;
-        document.getElementsByClassName(user_id + " firstname")[0].innerHTML = "Chat with " + new_friend_name;
+        document.getElementById("friend_firstname").innerHTML = "Chat with " + new_friend_name;
 
         //TO TO: number of messages
         console.log("Changing chat_friend_id value from " + document.getElementById("chat_friend_id").value);

@@ -167,8 +167,8 @@ textarea {
     color: white;
 }
 
-.user_info p {
-    font-size: 10px;
+.user_info p, .user_info p span {
+    font-size: 12px;
     color: rgb(243, 248, 13);
 }
 
