@@ -14,5 +14,9 @@
   {
     "name": "Brazil",
     "cities": ["Rio de Janeiro", "Fortaleza"]
+  },
+  {
+    "name": "Russia",
+    "cities": ["Moscow", "Saint Petersburg"]
   }
 ]
