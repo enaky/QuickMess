@@ -48,6 +48,7 @@ app.post('/discover', routes.discoverPost);
 app.post('/friendship-notification', routes.friendshipNotification);
 app.post('/remove-friend', routes.friendshipRemove);
 app.post('/search_people', routes.searchPeoplePost);
+app.post('/post-delete', routes.deletePost);
 
 
 //----------------------------------SOCKET PART----------------------------------

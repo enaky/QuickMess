@@ -61,7 +61,9 @@
 
                     <div class="post my-4">
                         <form action="post-delete" method="post">
-                            <button type="button" class="close custom_delete_button" aria-label="Close">
+                            <input name="user_id" value="<%= user._id %>" hidden>
+                            <input name="post_id" value="<%= user.posts[i]._id %>" hidden>
+                            <button type="submit" class="close custom_delete_button" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </form>

@@ -79,6 +79,7 @@ module.exports = {
             friendRequests: friend_requests
         });
     },
+
     indexPost: async function (req, res) {
         if (typeof req.session.user == "undefined"){
             res.sendStatus(403);
@@ -198,6 +199,7 @@ module.exports = {
         }
         res.render("login", {error: error});
     },
+
     loginPost: async function (req, res) {
         if (!validation.validateUsername(req.body.username)) {
             res.cookie("error", {status: true, message: "Invalid username"});
@@ -259,6 +261,7 @@ module.exports = {
         }
         res.redirect("/login");
     },
+
     friendshipNotification: async function (req, res) {
         if (typeof req.session.user == "undefined"){
             res.redirect("/login");
@@ -338,6 +341,7 @@ module.exports = {
         }
         res.redirect("/friends");
     },
+
     viewProfile: async function (req, res) {
         if (typeof req.session.user == "undefined"){
             res.redirect("/login");
@@ -377,6 +381,7 @@ module.exports = {
             enable_people_css: true
         });
     },
+
     searchPeoplePost: async function (req, res) {
         if (typeof req.session.user == "undefined"){
             res.redirect("/login");
@@ -407,4 +412,17 @@ module.exports = {
         }
     },
 
+    deletePost: async function (req,res){
+        if (typeof req.session.user == "undefined"){
+            res.redirect("/login");
+            return;
+        }
+        try{
+            console.log("User Id " + req.body.user_id + " requested deletion for:  " + req.body.post_id);
+            await auth.removePost(req.body.user_id, req.body.post_id);
+        } catch(exception){
+            console.log("Exception occured in deletion of the post");
+        }
+        res.redirect("/");
+    }
 }
