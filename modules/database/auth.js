@@ -13,7 +13,6 @@ const getUserBasicInfoMap = function(users){
             username: user.username,
             firstName: user.firstName,
             lastName: user.lastName,
-            username: user.username,
             age: utilities.calculateAge(user.birthDay),
             status: user.status,
             city: user.city,

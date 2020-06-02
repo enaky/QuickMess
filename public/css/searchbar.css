@@ -27,7 +27,8 @@
 
 .searchbar:hover > .search_icon{
     background: white;
-    color: #e74c3c;
+
+    color: #e74c3c !important;
 }
 
 .search_icon{
@@ -38,6 +39,6 @@
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    color:white;
+    color:white !important;
     text-decoration:none;
 }

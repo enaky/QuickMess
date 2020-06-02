@@ -26,5 +26,14 @@ module.exports = {
         let ageDate = new Date(ageDifMs); // miliseconds from epoch
         return Math.abs(ageDate.getUTCFullYear() - 1970);
     },
+    filterByValue: function (users, value) {
+        return users.filter(user =>
+            Object.keys(user).some(key => {
+                if (key === "profileImagePath" || key === "_id"){
+                    return false;
+                }
+                return user[key].toString().toLowerCase().includes(value.toLowerCase())
+            }));
+    },
     upload: multer({storage: storage})
 }

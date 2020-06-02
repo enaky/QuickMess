@@ -47,6 +47,7 @@ app.post('/register', routes.registerPost);
 app.post('/discover', routes.discoverPost);
 app.post('/friendship-notification', routes.friendshipNotification);
 app.post('/remove-friend', routes.friendshipRemove);
+app.post('/search_people', routes.searchPeoplePost);
 
 
 //----------------------------------SOCKET PART----------------------------------
