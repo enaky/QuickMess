@@ -15,6 +15,7 @@ const Message = mongoose.model("Message", messageSchema);
 //-------CHAT-------
 const chatSchema = new Schema(
     {
+        users: [{type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true}],
         messages: [{type: mongoose.Schema.Types.ObjectId, ref: 'Message'}]
     }
 )
@@ -38,6 +39,7 @@ const userSchema = new Schema(
         firstName: {type: String, required: true},
         lastName: {type: String, required: true},
         birthDay: {type: Date, required: true},
+        lastOnline: {type: Date, required: true},
         email: {type: String, required: true},
         role: {type: String, required: true},
         gender: {type: String, required: true},

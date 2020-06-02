@@ -1,5 +1,6 @@
 const dbSchema = require('../database/dbSchema.js');
 const auth = require('../database/auth.js');
+const chatDatabase = require('../database/chatDatabase.js');
 const validation = require('../validation/validation.js');
 const CryptoJS = require('crypto-js');
 const moment = require('moment');
@@ -47,7 +48,7 @@ module.exports = {
             message: req.body["post-textarea"],
             owner: req.body["user_id"],
             date: moment()
-        })
+        });
         console.log("Postare Primita de la userul " + req.body["user_id"]);
         try {
             await auth.insertPostMessage(newPost);
@@ -115,8 +116,33 @@ module.exports = {
         res.sendStatus(200);
     },
 
-    inbox: function (req, res) {
-        res.render('chat', {enable_chat_css: true, socket_enable: true});
+    inbox: async function (req, res) {
+        let friends, currentFriend, messages, user;
+        try {
+            if (typeof req.session.user != "undefined") {
+                user = req.session.user;
+                friends = await auth.getFriendsById(req.session.user._id);
+                friends = await auth.getUsersBasicInfoByMultipleIds(friends);
+                if (friends.length > 0){
+                    currentFriend = friends[0];
+                    messages = await chatDatabase.getMessages(currentFriend._id, user._id);
+                } else {
+                    currentFriend = undefined;
+                    messages = [];
+                }
+            }
+        } catch(UnhandledPromiseRejectionWarning){
+            console.log("Error ocurred in inbox page. Probably because user is not logged in.");
+        }
+        res.render('chat', {
+            user: req.session.user,
+            enable_chat_css: true,
+            socket_enable: true,
+            friends: friends,
+            currentFriend: currentFriend,
+            messages: messages,
+            moment: moment
+        });
     },
 
     loginGet: function (req, res) {
@@ -196,13 +222,13 @@ module.exports = {
         } else if (req.body["user-operation"] === "add"){
             console.log("Friend Request for: " + req.body.user_id + " de la " + req.body.user_request_id);
             await auth.insertFriendRequest(req.body.user_id, req.body.user_request_id)
-            res.redirect("/");
+            res.redirect("/discover");
         }
     },
 
     logout: function (req, res) {
         if (req.session.user) {   //if logged
-            console.log("Sesiune utilizator [Log-OUT]: ", req.session.user);
+            console.log("Sesiune utilizator [Log-OUT]: ", req.session.user._id);
             req.session.user = undefined;
         }
         res.redirect("/login");
@@ -216,12 +242,17 @@ module.exports = {
             await auth.clearFriendRequest(user_id, user_who_requested_friendship);
             if (req.body.accept_friendship === "true"){
                 await auth.insertFriendship(user_id, user_who_requested_friendship);
+                await chatDatabase.insertChat(user_id, user_who_requested_friendship);
             }
 
         } catch(exception){
             console.log("Error in frienshipNotification. Probably user is not logged in.")
         }
-        res.redirect("/");
+        if (typeof req.body.currentpage != "undefined"){
+            res.redirect("/" + req.body.currentpage);
+        } else {
+            res.redirect("/");
+        }
     },
 
     friendsGet: async function (req, res) {
@@ -267,7 +298,7 @@ module.exports = {
         } catch(exception){
             console.log("Error in frienshipNotification. Probably user is not logged in.")
         }
-        res.redirect("/");
+        res.redirect("/friends");
     },
     viewProfile: async function (req, res) {
         //console.log('cookies: ', req.cookies);

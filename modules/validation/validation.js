@@ -8,6 +8,6 @@ module.exports = {
     },
 
     validateName: function (email) {
-        return /^[a-zA-Z\-ășțîâȘȚĂÎÂ]+$/.test(email);
+        return /^[ЁёА-яa-zA-Z\-ășțîâȘȚĂÎÂ]+$/.test(email);
     },
 }

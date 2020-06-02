@@ -4,14 +4,23 @@ $.getJSON("/data/country.json", function (data) {
     console.log(countries);
 });
 
+function getFormDataAsJSON(form){
+    const unindexed_array = form.serializeArray();
+    const indexed_array = {};
+
+    unindexed_array.map(function(item){
+        indexed_array[item['name']] = item['value'];
+    });
+    return indexed_array;
+}
+
 $('#register_form').submit(function (e) {
     e.preventDefault(); // avoid to execute the actual submit of the form.
-    $("#password").val(CryptoJS.SHA256($("#password").val()).toString());
-    $("#passwordConfirmation").val(CryptoJS.SHA256($("#passwordConfirmation").val()).toString());
 
-    const form = $(this);
-    const url = form.attr('action');
-    let data = form.serialize();
+    const url = $(this).attr('action');
+    let data = getFormDataAsJSON($(this));
+    data["password"] = CryptoJS.SHA256(data["password"]).toString();
+    data["passwordConfirmation"] = CryptoJS.SHA256(data["passwordConfirmation"]).toString();
     console.log(data);
     $.ajax({
         async: false,
@@ -28,16 +37,14 @@ $('#register_form').submit(function (e) {
             window.location.href = "/register";
         }
     });
-
 });
 
 $('#login_form').submit(function (e) {
     e.preventDefault(); // avoid to execute the actual submit of the form.
-    $("#password").val(CryptoJS.SHA256($("#password").val()).toString());
-    const form = $(this);
-    console.log(form);
-    const url = form.attr('action');
-    let data = form.serialize();
+    //$("#password").val(CryptoJS.SHA256($("#password").val()).toString());
+    const url = $(this).attr('action');
+    let data = getFormDataAsJSON($(this));
+    data["password"] = CryptoJS.SHA256(data["password"]).toString();
     console.log(data);
     $.ajax({
         async: false,
@@ -47,7 +54,7 @@ $('#login_form').submit(function (e) {
         success: function (result) {
             //if the submit was successful, you redirect
             console.log(result.status);
-            window.location.href = "/";
+            window.location.href = "/chat";
         },
         error: function (e) {
             console.log(e.status);

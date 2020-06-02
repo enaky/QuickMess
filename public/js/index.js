@@ -72,7 +72,7 @@ const post = function (content, date) {
             success: function (result) {
                 //if the submit was successful, you redirect
                 console.log(result.status);
-                post($("#post-textarea").val(), moment(Date.now()).format('MMMM Do YYYY, hh:mm:ss'));
+                post($("#post-textarea").val(), moment(Date.now()).format('MMMM Do YYYY, HH:mm:ss'));
             },
             error: function (e) {
                 console.log(e.status);
