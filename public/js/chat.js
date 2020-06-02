@@ -181,7 +181,7 @@ const display_message = function (content, date, own = true, img = "https://stat
         console.log("New friend status: " + new_friend_status);
 
         document.getElementById("currentFriendImage").src = new_friend_src;
-        document.getElementsByClassName(user_id + " online_icon")[0].className = user_id + " online_icon " +  new_friend_status;
+        document.getElementById("friend_online_status").className = "online_icon " +  new_friend_status;
         document.getElementById("friend_firstname").innerHTML = "Chat with " + new_friend_name;
 
         //TO TO: number of messages

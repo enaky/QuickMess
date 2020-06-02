@@ -25,7 +25,7 @@
                                 <div class="img_cont">
                                     <img id="<%= friends[i]._id %>" src="<%= friends[i].profileImagePath %>"
                                          class="rounded-circle user_img">
-                                    <span class="online_icon offline"></span>
+                                    <span class="online_icon <%= friends[i].status %>"></span>
                                 </div>
                                 <div class="user_info">
                                     <input class="name <%= friends[i]._id %>" value="<%= friends[i].firstName %>"
@@ -51,7 +51,7 @@
                             <div class="img_cont">
                                 <img id="currentFriendImage" src="<%= currentFriend.profileImagePath %>"
                                      class="rounded-circle user_img">
-                                <span class="<%= user._id %> online_icon" <%= user.status %>></span>
+                                <span id="friend_online_status" class="online_icon <%= currentFriend.status %>"></span>
                             </div>
                             <div class="user_info">
                                 <span id="friend_firstname">Chat with <%= currentFriend.firstName %></span>

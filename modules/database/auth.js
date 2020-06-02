@@ -43,6 +43,7 @@ module.exports = {
             });
         });
     },
+
     getUserById: async function (id) {
         return new Promise((resolve, reject) => {
             MongoClient.connect(url, {useUnifiedTopology: true,}, function (err, db) {
@@ -57,6 +58,7 @@ module.exports = {
             });
         });
     },
+
     insertUser: async function (user) {
         return new Promise((resolve, reject) => {
             MongoClient.connect(url, {useUnifiedTopology: true,}, function (err, db) {
@@ -70,6 +72,7 @@ module.exports = {
             });
         });
     },
+
     insertPostMessage: async function (post) {
         return new Promise((resolve, reject) => {
             MongoClient.connect(url, {useUnifiedTopology: true,}, function (err, db) {
@@ -86,6 +89,7 @@ module.exports = {
             });
         });
     },
+
     insertFriendRequest: async function (user_id, user_who_requested_friendship) {
         return new Promise((resolve, reject) => {
             MongoClient.connect(url, {useUnifiedTopology: true,}, function (err, db) {
@@ -108,6 +112,7 @@ module.exports = {
             });
         });
     },
+
     getFriendRequestsById: async function (user_id) {
         return new Promise((resolve, reject) => {
             MongoClient.connect(url, {useUnifiedTopology: true,}, function (err, db) {
@@ -122,6 +127,7 @@ module.exports = {
             });
         });
     },
+
     getFriendsById: async function (user_id) {
         return new Promise((resolve, reject) => {
             MongoClient.connect(url, {useUnifiedTopology: true,}, function (err, db) {
@@ -138,6 +144,7 @@ module.exports = {
             });
         });
     },
+
     clearFriendRequest: async function(user_id, user_who_requested_friendship){
         return new Promise((resolve, reject) => {
             MongoClient.connect(url, {useUnifiedTopology: true,}, function (err, db) {
@@ -160,6 +167,7 @@ module.exports = {
             });
         });
     },
+
     removeFriendship: async function(user_id, user_who_requested_remove_friendship){
         return new Promise((resolve, reject) => {
             MongoClient.connect(url, {useUnifiedTopology: true,}, function (err, db) {
@@ -179,6 +187,20 @@ module.exports = {
                         )
                     }
                 )
+            });
+        });
+    },
+
+    updateUserStatus: async function(id, status){
+        return new Promise((resolve, reject) => {
+            MongoClient.connect(url, {useUnifiedTopology: true,}, function (err, db) {
+                if (err) throw err;
+                let dbo = db.db("quickMess");
+                dbo.collection("users").updateOne({_id: ObjectId(id)},{$set: {status: status}}, function (err){
+                    if (err) throw err;
+                    resolve();
+                    db.close();
+                });
             });
         });
     },
@@ -220,6 +242,7 @@ module.exports = {
             });
         });
     },
+
     getUsersBasicInfo: async function () {
         return new Promise((resolve, reject) => {
             MongoClient.connect(url, {useUnifiedTopology: true,}, function (err, db) {
@@ -237,6 +260,7 @@ module.exports = {
             });
         });
     },
+
     getUsersBasicInfoByMultipleIds: async function (ids) {
         return new Promise((resolve, reject) => {
             MongoClient.connect(url, {useUnifiedTopology: true,}, function (err, db) {

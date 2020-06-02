@@ -6,6 +6,7 @@ const moment = require('moment');
 const session = require('express-session');
 const dbSchema = require('./modules/database/dbSchema');
 const chatDatabase = require('./modules/database/chatDatabase.js');
+const auth = require('./modules/database/auth.js');
 
 
 const utilities = require('./modules/utilities.js');
@@ -69,6 +70,7 @@ serverSocket.on("connection", socket => {
         console.log("Stupid socket connection don't event reach here");
         console.log("User Id: " + user_info["user_id"] + " wants to chat with " + user_info["friend_id"]);
         allUsers[user_info["user_id"]] = {"socket": socket, "friend_id": user_info["friend_id"]};
+        auth.updateUserStatus(user_info["user_id"], "online").then(() => console.log("Update status online succesfully"));
         //broadcast message to everyone in port:5000 except yourself.
     });
 
@@ -119,10 +121,11 @@ serverSocket.on("connection", socket => {
 
         //save chat to the database
     });
-    socket.on('disconnect', function () {
+    socket.on('disconnect',function () {
         for (let key in allUsers) {
             if (allUsers.hasOwnProperty(key)) {
                 if (allUsers[key]["socket"].id === socket.id) {
+                    auth.updateUserStatus(key, "offline").then(() => console.log("Update status offline succesfully"));
                     console.log('Got disconnect! : ' + socket.id);
                     console.log('User id! : ' + key + "\n");
                     delete allUsers[key];
