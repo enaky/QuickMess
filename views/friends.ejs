@@ -96,6 +96,7 @@
                             <div class="card-footer">
                                 <form action="/friendship-notification" method="post">
                                     <input type="hidden" name="user_request_id" value="<%= friendRequests[i]._id %>">
+                                    <input type="hidden" name="currentpage" value="friends">
                                     <% if (typeof (user) != "undefined"){ %>
                                         <input type="hidden" name="user_id" value="<%= user._id %>">
                                     <% } %>

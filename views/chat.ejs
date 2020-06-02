@@ -71,23 +71,24 @@
                     </div>
                 </div>
                 <div id="message_inbox" class="card-body msg_card_body">
-                    <% if (typeof messages != "undefined" && typeof user != "undefined")
+                    <% if (typeof messages != "undefined" && typeof user != "undefined" && typeof currentFriend != "undefined")
                     for (let i = 0; i < messages.length; i++){
-                    if (messages[i].sender === user._id){ %>
+
+                    if (messages[i].sender.toString() === user._id){ %>
                         <div class="d-flex justify-content-start mb-4 ml-5">
                             <div class="img_cont_msg">
                                 <img src="<%= user.profileImagePath %>" class="rounded-circle user_img_msg">
                             </div>
                             <div class="msg_cotainer">
                                 <%= messages[i].message %>
-                                <span class="msg_time"><%= moment(messages[i].date).format('MMMM Do YYYY, HH:mm:ss') %></span>
+                                <span class="msg_time"><%= moment(messages[i].date).format('YYYY-MM-DD, HH:mm:ss') %></span>
                             </div>
                         </div>
                     <% } else { %>
                         <div class="d-flex justify-content-end mb-4 mr-5">
                             <div class="msg_cotainer_send">
                                 <%= messages[i].message %>
-                                <span class="msg_time"><%= moment(messages[i].date).format('MMMM Do YYYY, HH:mm:ss') %></span>
+                                <span class="msg_time_send"><%= moment(messages[i].date).format('YYYY-MM-DD, HH:mm:ss') %></span>
                             </div>
                             <div class="img_cont_msg">
                                 <img src="<%= currentFriend.profileImagePath %>" class="rounded-circle user_img_msg">
@@ -108,7 +109,7 @@
                             <textarea id="message" name="" class="form-control type_msg"
                                       placeholder="Type your message..."></textarea>
                             <div class="input-group-append">
-                                <button type=submit class="input-group-text send_btn"><i
+                                <button id="message_send" type=submit class="input-group-text send_btn"><i
                                             class="fas fa-location-arrow"></i></button>
                             </div>
                         </div>

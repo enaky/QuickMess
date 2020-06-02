@@ -33,6 +33,7 @@ const own_message = function (content, date, img) {
 
     div_element_1.appendChild(div_element_11);
     div_element_1.appendChild(div_element_12);
+
     messages.appendChild(div_element_1);
     messages.scrollTop = messages.scrollHeight;
 };
@@ -46,7 +47,7 @@ const other_message = function (content, date, img) {
     div_element_11.className = "msg_cotainer_send"
     div_element_11.innerHTML = content;
     let span_element = document.createElement("span");
-    span_element.className = "msg_time";
+    span_element.className = "msg_time_send";
     span_element.innerHTML = date;
     div_element_11.appendChild(span_element);
 
@@ -142,15 +143,34 @@ const display_message = function (content, date, own = true, img = "https://stat
         }
     });
 
+    socket.on("change friend approved", messages => {
+        console.log("change friend inbox accepted");
+        console.log(messages);
+        if (messages != null){
+            for( let i = 0; i < messages.length; i++){
+                let date = moment(messages[i].date).format('YYYY-MM-DD, HH:mm:ss')
+                if (user_id === messages[i]["sender"]){
+                    own_message(messages[i].message, date, user_photo);
+                } else {
+                    other_message(messages[i].message, date, friend_photo);
+                }
+            }
+        }
+        $("#message_send").prop('disabled', false);
+    });
+
     $( "#contacts li" ).click(function() {
         console.log("Click on friend");
+
+        $("#message_send").prop('disabled', true);
         contact_current.className = 'change_chat';
         $(this).attr('class', 'active change_chat');
         let new_friend_id = $(this).attr("value");
-        console.log("New friend id: " + new_friend_id);
         let new_friend_src = document.getElementById(new_friend_id).src;
         let new_friend_name = document.getElementsByClassName("name " + new_friend_id)[0].value;
         let new_friend_status = document.getElementsByClassName("status " + new_friend_id)[0].value;
+
+        console.log("New friend id: " + new_friend_id);
         console.log("New friend src: " + new_friend_src);
         console.log("New friend name: " + new_friend_name);
         console.log("New friend status: " + new_friend_status);
@@ -161,8 +181,9 @@ const display_message = function (content, date, own = true, img = "https://stat
 
         //TO TO: number of messages
         console.log("Changing chat_friend_id value from " + document.getElementById("chat_friend_id").value);
-        document.getElementById("chat_friend_id").value = new_friend_id;
         console.log("To " + document.getElementById("chat_friend_id").value);
+
+        document.getElementById("chat_friend_id").value = new_friend_id;
         contact_current = document.getElementsByClassName("active change_chat")[0];
         friend_id = new_friend_id;
         friend_photo = new_friend_src;

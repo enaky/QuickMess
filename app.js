@@ -57,9 +57,9 @@ const http = require("http").Server(app);
 const io = require("socket.io");
 
 //integrating socketio
-socket = io(http);
+serverSocket = io(http);
 let allUsers = {};
-socket.on("connection", socket => {
+serverSocket.on("connection", socket => {
     console.log("Got connected socket Id : " + socket.id);
 
     const clientIp = socket.request.connection.remoteAddress;
@@ -83,7 +83,7 @@ socket.on("connection", socket => {
             receiver: data["friend_id"],
             date: moment()
         });
-        chatDatabase.insertMessage(data["user_id"], data["friend_id"], message_to_insert).then(function(){
+        chatDatabase.insertMessage(data["user_id"], data["friend_id"], message_to_insert).then(function () {
             console.log("Message Insertion was succesfull")
         });
 
@@ -92,7 +92,7 @@ socket.on("connection", socket => {
             if (allUsers.hasOwnProperty(key)) {
                 if (key === data["friend_id"]) {
                     console.log("User socket connected. Send data to him.");
-                    socket.to(allUsers[key]["socket"].id).emit("received", data);
+                    serverSocket.to(allUsers[key]["socket"].id).emit("received", data);
                     break;
                 }
             }
@@ -101,18 +101,22 @@ socket.on("connection", socket => {
         //save chat to the database
     });
 
-    socket.on("change friend", function (data) {
+    socket.on("change friend", async function (data) {
         console.log("\nUser: " + data["user_id"] + " changed his friend stream to: " + data["friend_id"]);
         //broadcast message to everyone in port:5000 except yourself.
         for (let key in allUsers) {
             if (allUsers.hasOwnProperty(key)) {
                 if (key === data["user_id"]) {
                     allUsers[key]["friend_id"] = data["friend_id"];
+
+                    let messages = await chatDatabase.getMessages(key, allUsers[key]["friend_id"])
+                    console.log("Extracted messages from the database. Trying to send an approvement");
+                    serverSocket.to(socket.id).emit("change friend approved", messages);
                     break;
                 }
             }
         }
-        console.log();
+
         //save chat to the database
     });
     socket.on('disconnect', function () {

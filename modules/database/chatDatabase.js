@@ -14,10 +14,11 @@ module.exports = {
                 let dbo = db.db("quickMess");
                 dbo.collection("chats").updateOne(
                     {
-                        $and: [
-                            {'users': {'$elemMatch': {_id: ObjectId(user_1)} } },
-                            {'users': {'$elemMatch': {_id: ObjectId(user_2)} } }
-                        ]
+                        'users': {$all: [
+                                {$elemMatch: { $eq: ObjectId(user_1)}},
+                                {$elemMatch: { $eq: ObjectId(user_2)}}
+                                ]
+                        }
                     },
                     {$push: {messages: message}}, function (err) {
                         if (err) throw err;
@@ -33,13 +34,12 @@ module.exports = {
             MongoClient.connect(url, {useUnifiedTopology: true,}, function (err, db) {
                 if (err) throw err;
                 let dbo = db.db("quickMess");
-                dbo.collection("chats").updateOne(
-                    {
-                        $and: [
-                            {'users': {'$elemMatch': {_id: ObjectId(user_1)} } },
-                            {'users': {'$elemMatch': {_id: ObjectId(user_2)} } }
-                        ]
-                    },
+                dbo.collection("chats").updateOne({
+                        'users': {$all: [
+                                {$elemMatch: { $eq: ObjectId(user_1)}},
+                                {$elemMatch: { $eq: ObjectId(user_2)}}
+                            ]}
+                        },
                     {$set: {'users': [ObjectId(user_1), ObjectId(user_2)]}}, { upsert: true },function (err) {
                         if (err) throw err;
                         resolve();
@@ -56,10 +56,10 @@ module.exports = {
                 let dbo = db.db("quickMess");
                 dbo.collection("chats").findOne(
                     {
-                        $and: [
-                            {'users': {'$elemMatch': {_id: ObjectId(user_1)} } },
-                            {'users': {'$elemMatch': {_id: ObjectId(user_2)} } }
-                        ]
+                        'users': {$all: [
+                                {$elemMatch: { $eq: ObjectId(user_1)}},
+                                {$elemMatch: { $eq: ObjectId(user_2)}}
+                            ]}
                     },
                     function (err, result) {
                         if (err) throw err;

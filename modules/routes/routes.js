@@ -122,11 +122,10 @@ module.exports = {
             if (typeof req.session.user != "undefined") {
                 user = req.session.user;
                 friends = await auth.getFriendsById(req.session.user._id);
-                friends = friends.map(id => id.toString());
                 friends = await auth.getUsersBasicInfoByMultipleIds(friends);
                 if (friends.length > 0){
                     currentFriend = friends[0];
-                    messages = await chatDatabase.getMessages(currentFriend._id.toString(), user._id.toString())
+                    messages = await chatDatabase.getMessages(currentFriend._id, user._id);
                 } else {
                     currentFriend = undefined;
                     messages = [];
@@ -141,7 +140,8 @@ module.exports = {
             socket_enable: true,
             friends: friends,
             currentFriend: currentFriend,
-            messages: messages
+            messages: messages,
+            moment: moment
         });
     },
 
@@ -222,7 +222,7 @@ module.exports = {
         } else if (req.body["user-operation"] === "add"){
             console.log("Friend Request for: " + req.body.user_id + " de la " + req.body.user_request_id);
             await auth.insertFriendRequest(req.body.user_id, req.body.user_request_id)
-            res.redirect("/");
+            res.redirect("/discover");
         }
     },
 
@@ -248,7 +248,11 @@ module.exports = {
         } catch(exception){
             console.log("Error in frienshipNotification. Probably user is not logged in.")
         }
-        res.redirect("/");
+        if (typeof req.body.currentpage != "undefined"){
+            res.redirect("/" + req.body.currentpage);
+        } else {
+            res.redirect("/");
+        }
     },
 
     friendsGet: async function (req, res) {
@@ -294,7 +298,7 @@ module.exports = {
         } catch(exception){
             console.log("Error in frienshipNotification. Probably user is not logged in.")
         }
-        res.redirect("/");
+        res.redirect("/friends");
     },
     viewProfile: async function (req, res) {
         //console.log('cookies: ', req.cookies);
