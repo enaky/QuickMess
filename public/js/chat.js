@@ -166,6 +166,7 @@ const display_message = function (content, date, own = true, img = "https://stat
         console.log("change friend inbox accepted");
         console.log(messages);
         if (messages != null){
+            console.log(JSON.stringify(messages));
             document.getElementById("friend_number_of_messages").innerHTML = messages.length;
             for( let i = 0; i < messages.length; i++){
                 let date = moment(messages[i].date).format('YYYY-MM-DD, HH:mm:ss')
@@ -176,14 +177,14 @@ const display_message = function (content, date, own = true, img = "https://stat
                 }
             }
         } else {
-            document.getElementById("friend_number_of_messages").innerHTML = 0 + " Messages";
+            document.getElementById("friend_number_of_messages").innerHTML = 0;
         }
-        $("#message_send").prop('disabled', false);
+        //$("#message_send").prop('disabled', false);
     });
     $(document).on("click", "#contacts li", function () {
         console.log("Click on friend");
 
-        $("#message_send").prop('disabled', true);
+        //$("#message_send").prop('disabled', true);
         contact_current.className = 'change_chat';
         $(this).attr('class', 'active change_chat');
         let new_friend_id = $(this).data("value");

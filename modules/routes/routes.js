@@ -114,6 +114,10 @@ module.exports = {
     },
 
     registerGet: function (req, res) {
+        if (req.session.user) {   //if logged
+            res.redirect("/");
+            return;
+        }
         let error = req.cookies["error"];
         res.clearCookie("error");
         res.render('register', {countries: countries, error: error});
@@ -196,6 +200,7 @@ module.exports = {
         res.render('chat', {
             user: req.session.user,
             enable_chat_css: true,
+            enable_index_css: true,
             socket_enable: true,
             friends: friends,
             currentFriend: currentFriend,
@@ -335,11 +340,11 @@ module.exports = {
         console.log("Friend Remove Request for: " + req.body.user_id + " de la " + req.body.user_id_to_remove);
         try{
             let user_id = req.body["user_id"];
-            let user_who_requested_friendship = req.body["friend_id"];
+            let friend_id = req.body["friend_id"];
             if (req.body["friend-operation"] === "remove"){
-                await auth.removeFriendship(user_id, user_who_requested_friendship);
+                await auth.removeFriendship(user_id, friend_id);
             } else {
-                req.session.view_profile = user_who_requested_friendship;
+                req.session.view_profile = friend_id;
                 res.redirect("/view-profile");
                 return;
             }
@@ -384,6 +389,7 @@ module.exports = {
             enable_index_css: true,
             error: error,
             moment: moment,
+            disable_user_welcome: true,
             friendRequests: friend_requests,
             enable_people_css: true
         });

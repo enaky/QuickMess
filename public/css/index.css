@@ -1,6 +1,6 @@
 #profile_photo{
     padding: 5px;
-    border: 2px solid #e1b1f6;
+    border: 2px solid #e1b1f6 !important;
     border-radius: 4px;
 }
 

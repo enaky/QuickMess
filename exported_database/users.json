@@ -1,0 +1,1515 @@
+[{
+  "_id": {
+    "$oid": "5ed2ab0099304e3208dd8127"
+  },
+  "posts": [
+    {
+      "_id": {
+        "$oid": "5ed6d4003dfeba6190ff9883"
+      },
+      "message": "Astăzi sunt fericit că am implementat ștergerea postărilor.",
+      "owner": {
+        "$oid": "5ed2ab0099304e3208dd8127"
+      },
+      "date": {
+        "$date": "2020-06-02T22:34:40.598Z"
+      }
+    }
+  ],
+  "friends": [
+    {
+      "$oid": "5ed3da1d563fad2fbcbb6b5e"
+    },
+    {
+      "$oid": "5ed3e199563fad2fbcbb6b66"
+    },
+    {
+      "$oid": "5ed2b25f99304e3208dd812a"
+    },
+    {
+      "$oid": "5ed7058b4a3f8d6cb0bb0f69"
+    },
+    {
+      "$oid": "5ed7104cacec6c68584c278e"
+    },
+    {
+      "$oid": "5ed70f0dacec6c68584c278c"
+    },
+    {
+      "$oid": "5ed6ec1e81c767272412f0cb"
+    },
+    {
+      "$oid": "5ed3df67563fad2fbcbb6b60"
+    }
+  ],
+  "username": "enaki",
+  "password": "e44fd3d0a98f1078ce9a9e8b262f47466a7cd3149450e4e83d4dcd03e25e474d",
+  "email": "enachi98@gmail.com",
+  "birthDay": {
+    "$date": "1998-05-13T00:00:00Z"
+  },
+  "firstName": "Vasile",
+  "lastName": "Enachi",
+  "role": "user",
+  "gender": "male",
+  "city": "Ungheni",
+  "country": "Moldova",
+  "status": "offline",
+  "profileImagePath": "images/male.png",
+  "friendRequests": [],
+  "friendRequestsSentByMe": []
+},{
+  "_id": {
+    "$oid": "5ed2abb399304e3208dd8128"
+  },
+  "posts": [],
+  "friends": [
+    {
+      "$oid": "5ed3df67563fad2fbcbb6b60"
+    }
+  ],
+  "username": "pedro",
+  "password": "ee5cd7d5d96c8874117891b2c92a036f96918e66c102bc698ae77542c186f981",
+  "email": "pedro@pedro.com",
+  "birthDay": {
+    "$date": "1980-02-29T00:00:00Z"
+  },
+  "firstName": "Pedro",
+  "lastName": "Del-Castillio",
+  "role": "user",
+  "gender": "male",
+  "city": "Madrid",
+  "country": "Spain",
+  "status": "offline",
+  "profileImagePath": "images/pedro.jpg",
+  "friendRequests": [],
+  "friendRequestsSentByMe": []
+},{
+  "_id": {
+    "$oid": "5ed2b25f99304e3208dd812a"
+  },
+  "posts": [],
+  "friends": [
+    {
+      "$oid": "5ed7058b4a3f8d6cb0bb0f69"
+    },
+    {
+      "$oid": "5ed2ab0099304e3208dd8127"
+    },
+    {
+      "$oid": "5ed6ef209e9c6d5f8825cf98"
+    },
+    {
+      "$oid": "5ed6ec1e81c767272412f0cb"
+    },
+    {
+      "$oid": "5ed6421838a90d453073e570"
+    },
+    {
+      "$oid": "5ed6ee589e9c6d5f8825cf96"
+    }
+  ],
+  "username": "ricardo",
+  "password": "65304dac3823069673aa9d3b90dcb9f44938e2d12f58509addc915d08922b64b",
+  "email": "ricardo@ricardo-is-cool.com",
+  "birthDay": {
+    "$date": "1985-12-25T00:00:00Z"
+  },
+  "firstName": "Ricardo",
+  "lastName": "Sanchez",
+  "role": "user",
+  "gender": "male",
+  "city": "Fortaleza",
+  "country": "Brazil",
+  "status": "offline",
+  "profileImagePath": "images/ricardo.png",
+  "friendRequests": [
+    {
+      "$oid": "5ed6f4b2bf8558399871c383"
+    },
+    {
+      "$oid": "5ed6f66ea863b22eb0ac40dd"
+    },
+    {
+      "$oid": "5ed704d64a3f8d6cb0bb0f67"
+    }
+  ],
+  "friendRequestsSentByMe": []
+},{
+  "_id": {
+    "$oid": "5ed3da1d563fad2fbcbb6b5e"
+  },
+  "posts": [
+    {
+      "_id": {
+        "$oid": "5ed3da66563fad2fbcbb6b5f"
+      },
+      "message": "Am o veste proastă pentru voi. Cei din anul 3 vor da restanța la toamnă.",
+      "owner": {
+        "$oid": "5ed3da1d563fad2fbcbb6b5e"
+      },
+      "date": {
+        "$date": "2020-05-31T16:25:10.351Z"
+      }
+    }
+  ],
+  "friends": [
+    {
+      "$oid": "5ed2ab0099304e3208dd8127"
+    },
+    {
+      "$oid": "5ed3df67563fad2fbcbb6b60"
+    },
+    {
+      "$oid": "5ed6ee589e9c6d5f8825cf96"
+    }
+  ],
+  "friendRequests": [
+    {
+      "$oid": "5ed6f66ea863b22eb0ac40dd"
+    },
+    {
+      "$oid": "5ed3e199563fad2fbcbb6b66"
+    },
+    {
+      "$oid": "5ed3e083563fad2fbcbb6b61"
+    },
+    {
+      "$oid": "5ed70f0dacec6c68584c278c"
+    }
+  ],
+  "friendRequestsSentByMe": [],
+  "username": "strugariu",
+  "password": "92fc230ef532eb9d34c92c868760003aa424b51ebe6fe79ce0eb3da829f35239",
+  "email": "strugariu@gmail.com",
+  "birthDay": {
+    "$date": "1980-06-06T00:00:00Z"
+  },
+  "firstName": "Răducu",
+  "lastName": "Strugariu",
+  "role": "user",
+  "gender": "male",
+  "city": "Iași",
+  "country": "Romania",
+  "status": "offline",
+  "profileImagePath": "images/strugariu.png"
+},{
+  "_id": {
+    "$oid": "5ed3df67563fad2fbcbb6b60"
+  },
+  "posts": [
+    {
+      "_id": {
+        "$oid": "5ed74dc1ea7d4a3a00c020e5"
+      },
+      "message": "Din păcate notele la al doilea test sunt prea mari.",
+      "owner": {
+        "$oid": "5ed3df67563fad2fbcbb6b60"
+      },
+      "date": {
+        "$date": "2020-06-03T07:14:09.651Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "5ed75186ea7d4a3a00c020e7"
+      },
+      "message": "Am",
+      "owner": {
+        "$oid": "5ed3df67563fad2fbcbb6b60"
+      },
+      "date": {
+        "$date": "2020-06-03T07:30:14.881Z"
+      }
+    }
+  ],
+  "friends": [
+    {
+      "$oid": "5ed2abb399304e3208dd8128"
+    },
+    {
+      "$oid": "5ed63b0f38a90d453073e56e"
+    },
+    {
+      "$oid": "5ed2ab0099304e3208dd8127"
+    },
+    {
+      "$oid": "5ed3da1d563fad2fbcbb6b5e"
+    },
+    {
+      "$oid": "5ed3e083563fad2fbcbb6b61"
+    },
+    {
+      "$oid": "5ed3e199563fad2fbcbb6b66"
+    },
+    {
+      "$oid": "5ed705214a3f8d6cb0bb0f68"
+    },
+    {
+      "$oid": "5ed7104cacec6c68584c278e"
+    },
+    {
+      "$oid": "5ed6f66ea863b22eb0ac40dd"
+    }
+  ],
+  "friendRequests": [
+    {
+      "$oid": "5ed7058b4a3f8d6cb0bb0f69"
+    },
+    {
+      "$oid": "5ed6f4b2bf8558399871c383"
+    },
+    {
+      "$oid": "5ed70f0dacec6c68584c278c"
+    },
+    {
+      "$oid": "5ed6f93da863b22eb0ac40df"
+    }
+  ],
+  "friendRequestsSentByMe": [],
+  "username": "alexandrescu",
+  "password": "a22e81477f64d1effc4076bd26a4573ed0cf3f6a9e0de68f338be327ed952506",
+  "email": "alexandrescu@tuiasi.ro",
+  "birthDay": {
+    "$date": "1970-12-31T00:00:00Z"
+  },
+  "firstName": "Adrian",
+  "lastName": "Alexandrescu",
+  "role": "user",
+  "gender": "male",
+  "city": "Iași",
+  "country": "Romania",
+  "status": "offline",
+  "profileImagePath": "images/alexandrescu.png"
+},{
+  "_id": {
+    "$oid": "5ed3e083563fad2fbcbb6b61"
+  },
+  "posts": [
+    {
+      "_id": {
+        "$oid": "5ed3e0ae563fad2fbcbb6b62"
+      },
+      "message": "Site de chiloți, ca oricare altul.",
+      "owner": {
+        "$oid": "5ed3e083563fad2fbcbb6b61"
+      },
+      "date": {
+        "$date": "2020-05-31T16:51:58.254Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "5ed3e0bc563fad2fbcbb6b63"
+      },
+      "message": "Securitate zero",
+      "owner": {
+        "$oid": "5ed3e083563fad2fbcbb6b61"
+      },
+      "date": {
+        "$date": "2020-05-31T16:52:12.077Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "5ed3e0cd563fad2fbcbb6b64"
+      },
+      "message": "Și pe urmă vă întrebață de ce mănânc studenți la micul dejun.",
+      "owner": {
+        "$oid": "5ed3e083563fad2fbcbb6b61"
+      },
+      "date": {
+        "$date": "2020-05-31T16:52:29.631Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "5ed3e0d5563fad2fbcbb6b65"
+      },
+      "message": "Aaaaaaaașa",
+      "owner": {
+        "$oid": "5ed3e083563fad2fbcbb6b61"
+      },
+      "date": {
+        "$date": "2020-05-31T16:52:37.373Z"
+      }
+    }
+  ],
+  "friends": [
+    {
+      "$oid": "5ed6421838a90d453073e570"
+    },
+    {
+      "$oid": "5ed63b0f38a90d453073e56e"
+    },
+    {
+      "$oid": "5ed6f93da863b22eb0ac40df"
+    },
+    {
+      "$oid": "5ed3df67563fad2fbcbb6b60"
+    },
+    {
+      "$oid": "5ed6f4b2bf8558399871c383"
+    },
+    {
+      "$oid": "5ed6ee589e9c6d5f8825cf96"
+    }
+  ],
+  "friendRequests": [
+    {
+      "$oid": "5ed6f66ea863b22eb0ac40dd"
+    },
+    {
+      "$oid": "5ed3e199563fad2fbcbb6b66"
+    }
+  ],
+  "friendRequestsSentByMe": [
+    {
+      "$oid": "5ed3da1d563fad2fbcbb6b5e"
+    },
+    {
+      "$oid": "5ed6ef209e9c6d5f8825cf98"
+    }
+  ],
+  "username": "zaharia",
+  "password": "488141fb137571b65aff34226386c6ec7dc8657939aa0520b4d04d54a3e16749",
+  "email": "zaharia@mike.tuiasi.ro",
+  "birthDay": {
+    "$date": "1977-11-17T00:00:00Z"
+  },
+  "firstName": "Mike",
+  "lastName": "Zaharia",
+  "role": "user",
+  "gender": "male",
+  "city": "Iași",
+  "country": "Romania",
+  "status": "offline",
+  "profileImagePath": "images/zaharia.png"
+},{
+  "_id": {
+    "$oid": "5ed3e199563fad2fbcbb6b66"
+  },
+  "posts": [
+    {
+      "_id": {
+        "$oid": "5ed3e1fc563fad2fbcbb6b67"
+      },
+      "message": "Repartiția exponențial negativă are o importanță deosebită în studiul sistemelor cu elemente discrete, deoarece procesele care cuprind doar variabile de acest tip sunt mai ușor de studiat. ",
+      "owner": {
+        "$oid": "5ed3e199563fad2fbcbb6b66"
+      },
+      "date": {
+        "$date": "2020-05-31T16:57:32.158Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "5ed3e20b563fad2fbcbb6b68"
+      },
+      "message": "Să considerăm mai întâi un flux Poissonian de rată medie λ, care alimentează cu cereri un sistem de servire. Durata dintre 2 cereri consecutive are așadar o repartiție exponențial negativă de același parametru λ.",
+      "owner": {
+        "$oid": "5ed3e199563fad2fbcbb6b66"
+      },
+      "date": {
+        "$date": "2020-05-31T16:57:47.548Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "5ed3e217563fad2fbcbb6b69"
+      },
+      "message": "Faptul că în intervalul de timp (0, y] evenimentul așteptat nu s-a produs, nu aduce nici o informație suplimentară cu privire la ce se va întâmpla în continuare; sau altfel spus asta nu modifică probabilitatea de producere a evenimentului în perioada următoare.",
+      "owner": {
+        "$oid": "5ed3e199563fad2fbcbb6b66"
+      },
+      "date": {
+        "$date": "2020-05-31T16:57:59.554Z"
+      }
+    }
+  ],
+  "friends": [
+    {
+      "$oid": "5ed2ab0099304e3208dd8127"
+    },
+    {
+      "$oid": "5ed7058b4a3f8d6cb0bb0f69"
+    },
+    {
+      "$oid": "5ed3df67563fad2fbcbb6b60"
+    },
+    {
+      "$oid": "5ed6f66ea863b22eb0ac40dd"
+    },
+    {
+      "$oid": "5ed70f0dacec6c68584c278c"
+    },
+    {
+      "$oid": "5ed6ee589e9c6d5f8825cf96"
+    }
+  ],
+  "friendRequests": [],
+  "friendRequestsSentByMe": [
+    {
+      "$oid": "5ed3da1d563fad2fbcbb6b5e"
+    },
+    {
+      "$oid": "5ed3e083563fad2fbcbb6b61"
+    }
+  ],
+  "username": "cascaval",
+  "password": "d8f2aa5146bdebc20f821ddac0e41d67ae6414f2e2e233043acf1a7dcd23965e",
+  "email": "cascaval@tuiasi.ro",
+  "birthDay": {
+    "$date": "1977-05-04T00:00:00Z"
+  },
+  "firstName": "Petru",
+  "lastName": "Cașcaval",
+  "role": "user",
+  "gender": "male",
+  "city": "Iași",
+  "country": "Romania",
+  "status": "offline",
+  "profileImagePath": "images/cascaval.png"
+},{
+  "_id": {
+    "$oid": "5ed4059c7c133519f04a974d"
+  },
+  "posts": [
+    {
+      "_id": {
+        "$oid": "5ed711a9acec6c68584c2793"
+      },
+      "message": "Din nou!",
+      "owner": {
+        "$oid": "5ed4059c7c133519f04a974d"
+      },
+      "date": {
+        "$date": "2020-06-03T02:57:45.235Z"
+      }
+    }
+  ],
+  "friends": [
+    {
+      "$oid": "5ed70f0dacec6c68584c278c"
+    },
+    {
+      "$oid": "5ed7058b4a3f8d6cb0bb0f69"
+    },
+    {
+      "$oid": "5ed6ec1e81c767272412f0cb"
+    }
+  ],
+  "friendRequests": [],
+  "friendRequestsSentByMe": [],
+  "username": "maria",
+  "password": "94aec9fbed989ece189a7e172c9cf41669050495152bc4c1dbf2a38d7fd85627",
+  "email": "maria@maria-db.com",
+  "birthDay": {
+    "$date": "1998-04-04T00:00:00Z"
+  },
+  "firstName": "Maria",
+  "lastName": "Meșina",
+  "role": "user",
+  "gender": "female",
+  "city": "Ialoveni",
+  "country": "Moldova",
+  "status": "offline",
+  "profileImagePath": "images/maria.jpg"
+},{
+  "_id": {
+    "$oid": "5ed63b0f38a90d453073e56e"
+  },
+  "posts": [
+    {
+      "_id": {
+        "$oid": "5ed63b9138a90d453073e56f"
+      },
+      "message": "Dreaming is my passion!",
+      "owner": {
+        "$oid": "5ed63b0f38a90d453073e56e"
+      },
+      "date": {
+        "$date": "2020-06-02T11:44:17.834Z"
+      }
+    }
+  ],
+  "friends": [
+    {
+      "$oid": "5ed3e083563fad2fbcbb6b61"
+    },
+    {
+      "$oid": "5ed6421838a90d453073e570"
+    },
+    {
+      "$oid": "5ed6f4b2bf8558399871c383"
+    },
+    {
+      "$oid": "5ed6f93da863b22eb0ac40df"
+    },
+    {
+      "$oid": "5ed7104cacec6c68584c278e"
+    },
+    {
+      "$oid": "5ed3df67563fad2fbcbb6b60"
+    }
+  ],
+  "friendRequests": [
+    {
+      "$oid": "5ed70f0dacec6c68584c278c"
+    }
+  ],
+  "friendRequestsSentByMe": [],
+  "username": "ilioi",
+  "password": "3c05990671d1d93cd294b0832aa196c0df20a9ca1dc143edfe17265f02c84965",
+  "email": "ilioi@gmail.com",
+  "birthDay": {
+    "$date": "1998-09-30T00:00:00Z"
+  },
+  "firstName": "Александр",
+  "lastName": "Илиой",
+  "role": "user",
+  "gender": "male",
+  "city": "Moscow",
+  "country": "Russia",
+  "status": "offline",
+  "profileImagePath": "images/ilioi.png"
+},{
+  "_id": {
+    "$oid": "5ed6421838a90d453073e570"
+  },
+  "posts": [
+    {
+      "_id": {
+        "$oid": "5ed6428538a90d453073e571"
+      },
+      "message": "Îi bat pe toți la cs, dar pierd de la enaki, el e șeful meu.",
+      "owner": {
+        "$oid": "5ed6421838a90d453073e570"
+      },
+      "date": {
+        "$date": "2020-06-02T12:13:57.789Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "5ed7286629fd0030cc007677"
+      },
+      "message": "Vasile e cel mai tare!!",
+      "owner": {
+        "$oid": "5ed6421838a90d453073e570"
+      },
+      "date": {
+        "$date": "2020-06-03T04:34:46.619Z"
+      }
+    }
+  ],
+  "friends": [
+    {
+      "$oid": "5ed6f4b2bf8558399871c383"
+    },
+    {
+      "$oid": "5ed7104cacec6c68584c278e"
+    },
+    {
+      "$oid": "5ed6fb94a863b22eb0ac40e1"
+    },
+    {
+      "$oid": "5ed2b25f99304e3208dd812a"
+    },
+    {
+      "$oid": "5ed3e083563fad2fbcbb6b61"
+    },
+    {
+      "$oid": "5ed6f66ea863b22eb0ac40dd"
+    },
+    {
+      "$oid": "5ed6f93da863b22eb0ac40df"
+    },
+    {
+      "$oid": "5ed63b0f38a90d453073e56e"
+    }
+  ],
+  "friendRequests": [],
+  "friendRequestsSentByMe": [],
+  "username": "ionut",
+  "password": "682b34d52f1c97c08cc387b2aacf9871aebb2fbe28e91fd1b5ce9c9ef59b3280",
+  "email": "ionut@gmail.com",
+  "birthDay": {
+    "$date": "1998-12-27T00:00:00Z"
+  },
+  "firstName": "Ionuț",
+  "lastName": "Marcel",
+  "role": "user",
+  "gender": "male",
+  "city": "Vaslui",
+  "country": "Romania",
+  "status": "offline",
+  "profileImagePath": "images/ionut.jpg"
+},{
+  "_id": {
+    "$oid": "5ed6ec1e81c767272412f0cb"
+  },
+  "posts": [
+    {
+      "_id": {
+        "$oid": "5ed717dcd7a31655d003fa11"
+      },
+      "message": "Am invatat un cantec nou!",
+      "owner": {
+        "$oid": "5ed6ec1e81c767272412f0cb"
+      },
+      "date": {
+        "$date": "2020-06-03T03:24:12.458Z"
+      }
+    }
+  ],
+  "friends": [
+    {
+      "$oid": "5ed2b25f99304e3208dd812a"
+    },
+    {
+      "$oid": "5ed4059c7c133519f04a974d"
+    },
+    {
+      "$oid": "5ed6ef209e9c6d5f8825cf98"
+    },
+    {
+      "$oid": "5ed6f66ea863b22eb0ac40dd"
+    },
+    {
+      "$oid": "5ed2ab0099304e3208dd8127"
+    },
+    {
+      "$oid": "5ed7058b4a3f8d6cb0bb0f69"
+    }
+  ],
+  "friendRequests": [],
+  "friendRequestsSentByMe": [],
+  "username": "postolachi",
+  "password": "5db83a5f25ab0c60106459ebbb30288d7bee83ce48ad2955b6415d3eba2a5824",
+  "email": "postolachi@css.student.tuiasi.ro",
+  "birthDay": {
+    "$date": "1997-05-31T00:00:00Z"
+  },
+  "firstName": "Vasile",
+  "lastName": "Postolachi",
+  "role": "user",
+  "gender": "male",
+  "city": "Chișinău",
+  "country": "Moldova",
+  "status": "offline",
+  "profileImagePath": "images/postolachi.jpg"
+},{
+  "_id": {
+    "$oid": "5ed6ee589e9c6d5f8825cf96"
+  },
+  "posts": [
+    {
+      "_id": {
+        "$oid": "5ed7714fea7d4a3a00c02108"
+      },
+      "message": "I am so happy",
+      "owner": {
+        "$oid": "5ed6ee589e9c6d5f8825cf96"
+      },
+      "date": {
+        "$date": "2020-06-03T09:45:51.016Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "5ed77156ea7d4a3a00c02109"
+      },
+      "message": "Cause today I found my friends ...",
+      "owner": {
+        "$oid": "5ed6ee589e9c6d5f8825cf96"
+      },
+      "date": {
+        "$date": "2020-06-03T09:45:58.669Z"
+      }
+    }
+  ],
+  "friends": [
+    {
+      "$oid": "5ed7058b4a3f8d6cb0bb0f69"
+    },
+    {
+      "$oid": "5ed3e199563fad2fbcbb6b66"
+    },
+    {
+      "$oid": "5ed2b25f99304e3208dd812a"
+    },
+    {
+      "$oid": "5ed3da1d563fad2fbcbb6b5e"
+    },
+    {
+      "$oid": "5ed3e083563fad2fbcbb6b61"
+    },
+    {
+      "$oid": "5ed6fce7a863b22eb0ac40e3"
+    },
+    {
+      "$oid": "5ed705214a3f8d6cb0bb0f68"
+    },
+    {
+      "$oid": "5ed70f0dacec6c68584c278c"
+    },
+    {
+      "$oid": "5ed7104cacec6c68584c278e"
+    }
+  ],
+  "friendRequests": [],
+  "friendRequestsSentByMe": [
+    {
+      "$oid": "5ed6fb94a863b22eb0ac40e1"
+    }
+  ],
+  "username": "diana",
+  "password": "1b2fc9341a16ae4e30082965d537ae47c21a0f27fd43eab78330ed81751ae6db",
+  "email": "diana@css-student.tuiasi.ro",
+  "birthDay": {
+    "$date": "1998-01-16T00:00:00Z"
+  },
+  "firstName": "Diana-Elena",
+  "lastName": "Sandu",
+  "role": "user",
+  "gender": "female",
+  "city": "Iași",
+  "country": "Romania",
+  "status": "offline",
+  "profileImagePath": "images/diana.png"
+},{
+  "_id": {
+    "$oid": "5ed6eee59e9c6d5f8825cf97"
+  },
+  "posts": [],
+  "friends": [],
+  "friendRequests": [],
+  "friendRequestsSentByMe": [],
+  "username": "petrica",
+  "password": "cfc69509e75147cd497199fdc27421aa32a976be4eaa1e06b5baff696ad27a43",
+  "email": "ppetrica@gmail.com",
+  "birthDay": {
+    "$date": "1999-03-04T00:00:00Z"
+  },
+  "firstName": "Petru",
+  "lastName": "Petrica",
+  "role": "user",
+  "gender": "male",
+  "city": "Chișinău",
+  "country": "Moldova",
+  "status": "offline",
+  "profileImagePath": "images/male.png"
+},{
+  "_id": {
+    "$oid": "5ed6ef209e9c6d5f8825cf98"
+  },
+  "posts": [
+    {
+      "_id": {
+        "$oid": "5ed6ef3d9e9c6d5f8825cf99"
+      },
+      "message": "Mă cheamă Cătălin, dar puteți sa îmi spuneți ȘEFU!",
+      "owner": {
+        "$oid": "5ed6ef209e9c6d5f8825cf98"
+      },
+      "date": {
+        "$date": "2020-06-03T00:30:53.757Z"
+      }
+    }
+  ],
+  "friends": [
+    {
+      "$oid": "5ed2b25f99304e3208dd812a"
+    },
+    {
+      "$oid": "5ed704d64a3f8d6cb0bb0f67"
+    },
+    {
+      "$oid": "5ed6ec1e81c767272412f0cb"
+    }
+  ],
+  "friendRequests": [
+    {
+      "$oid": "5ed3e083563fad2fbcbb6b61"
+    }
+  ],
+  "friendRequestsSentByMe": [],
+  "username": "corlotean",
+  "password": "4a48d40e41b94e680a27f853411b56bbb7fb39dea87eef86189b33f9646a3abe",
+  "email": "corlotean@gmail.com",
+  "birthDay": {
+    "$date": "1997-06-03T00:00:00Z"
+  },
+  "firstName": "Cătalin",
+  "lastName": "Corlotean",
+  "role": "user",
+  "gender": "male",
+  "city": "Iași",
+  "country": "Romania",
+  "status": "offline",
+  "profileImagePath": "images/sefu.png"
+},{
+  "_id": {
+    "$oid": "5ed6f169bf8558399871c382"
+  },
+  "posts": [],
+  "friends": [],
+  "friendRequests": [],
+  "friendRequestsSentByMe": [],
+  "username": "koni",
+  "password": "cbb97993ea12cf5f645fffda008224ec04267feb90f3f9e41217f4c3e5cd2b01",
+  "email": "koni@gmail.com",
+  "birthDay": {
+    "$date": "1998-07-22T00:00:00Z"
+  },
+  "firstName": "Andreea",
+  "lastName": "Alexandra",
+  "role": "user",
+  "gender": "female",
+  "city": "Iași",
+  "country": "Romania",
+  "status": "offline",
+  "profileImagePath": "images/female.jpg"
+},{
+  "_id": {
+    "$oid": "5ed6f4b2bf8558399871c383"
+  },
+  "posts": [
+    {
+      "_id": {
+        "$oid": "5ed706794a3f8d6cb0bb0f74"
+      },
+      "message": "Mă auziți?",
+      "owner": {
+        "$oid": "5ed6f4b2bf8558399871c383"
+      },
+      "date": {
+        "$date": "2020-06-03T02:10:01.639Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "5ed706844a3f8d6cb0bb0f75"
+      },
+      "message": "Haideți să nu vorbesc singur!",
+      "owner": {
+        "$oid": "5ed6f4b2bf8558399871c383"
+      },
+      "date": {
+        "$date": "2020-06-03T02:10:12.485Z"
+      }
+    }
+  ],
+  "friends": [
+    {
+      "$oid": "5ed6421838a90d453073e570"
+    },
+    {
+      "$oid": "5ed63b0f38a90d453073e56e"
+    },
+    {
+      "$oid": "5ed3e083563fad2fbcbb6b61"
+    }
+  ],
+  "friendRequests": [
+    {
+      "$oid": "5ed6f66ea863b22eb0ac40dd"
+    }
+  ],
+  "friendRequestsSentByMe": [
+    {
+      "$oid": "5ed3df67563fad2fbcbb6b60"
+    },
+    {
+      "$oid": "5ed2b25f99304e3208dd812a"
+    }
+  ],
+  "username": "pantilimonescu",
+  "password": "932daaa072c776b72b36b87f52ec7e2034d7038755895f694e6a5a6de14ffaf9",
+  "email": "pantilimonescu@tuiasi.ro",
+  "birthDay": {
+    "$date": {
+      "$numberLong": "-132364800000"
+    }
+  },
+  "firstName": "Florin",
+  "lastName": "Pantilimonescu",
+  "role": "user",
+  "gender": "male",
+  "city": "Iași",
+  "country": "Romania",
+  "status": "offline",
+  "profileImagePath": "images/pantilimonescu.jpg"
+},{
+  "_id": {
+    "$oid": "5ed6f566bf8558399871c384"
+  },
+  "posts": [],
+  "friends": [],
+  "friendRequests": [],
+  "friendRequestsSentByMe": [],
+  "username": "dorcu",
+  "password": "e22d4bfce026068776485252367e89adb4d2ab2c5a38a3d4a55e031200ad4e69",
+  "email": "dorcu@gmail.com",
+  "birthDay": {
+    "$date": "1998-07-08T00:00:00Z"
+  },
+  "firstName": "Andrei",
+  "lastName": "Dorcu",
+  "role": "user",
+  "gender": "male",
+  "city": "Bucharest",
+  "country": "Romania",
+  "status": "offline",
+  "profileImagePath": "images/dorcu.jpg"
+},{
+  "_id": {
+    "$oid": "5ed6f66ea863b22eb0ac40dd"
+  },
+  "posts": [],
+  "friends": [
+    {
+      "$oid": "5ed6ec1e81c767272412f0cb"
+    },
+    {
+      "$oid": "5ed6421838a90d453073e570"
+    },
+    {
+      "$oid": "5ed3df67563fad2fbcbb6b60"
+    },
+    {
+      "$oid": "5ed3e199563fad2fbcbb6b66"
+    }
+  ],
+  "friendRequests": [],
+  "friendRequestsSentByMe": [
+    {
+      "$oid": "5ed3e083563fad2fbcbb6b61"
+    },
+    {
+      "$oid": "5ed3da1d563fad2fbcbb6b5e"
+    },
+    {
+      "$oid": "5ed705214a3f8d6cb0bb0f68"
+    },
+    {
+      "$oid": "5ed2b25f99304e3208dd812a"
+    },
+    {
+      "$oid": "5ed6f4b2bf8558399871c383"
+    }
+  ],
+  "username": "lupu",
+  "password": "2120ae80a6461dacae8bf5d31d4ffcbe2068e17c2f82061ad80f3b09d1a6308b",
+  "email": "lupu@gmail.com",
+  "birthDay": {
+    "$date": "1980-10-23T00:00:00Z"
+  },
+  "firstName": "Robert",
+  "lastName": "Lupu",
+  "role": "user",
+  "gender": "male",
+  "city": "Iași",
+  "country": "Romania",
+  "status": "offline",
+  "profileImagePath": "images/lupu.png"
+},{
+  "_id": {
+    "$oid": "5ed6f7eea863b22eb0ac40de"
+  },
+  "posts": [],
+  "friends": [],
+  "friendRequests": [],
+  "friendRequestsSentByMe": [],
+  "username": "herghelegiu",
+  "password": "16e6c468eba994f332b1eb80b76e2b3064bf17d7fa39fc02de4658682d03196d",
+  "email": "herghelegiu@gmail.com",
+  "birthDay": {
+    "$date": "1985-10-03T00:00:00Z"
+  },
+  "firstName": "Paul",
+  "lastName": "Herghelegiu",
+  "role": "user",
+  "gender": "male",
+  "city": "Iași",
+  "country": "Romania",
+  "status": "offline",
+  "profileImagePath": "images/herghelegiu.png"
+},{
+  "_id": {
+    "$oid": "5ed6f93da863b22eb0ac40df"
+  },
+  "posts": [],
+  "friends": [
+    {
+      "$oid": "5ed6421838a90d453073e570"
+    },
+    {
+      "$oid": "5ed63b0f38a90d453073e56e"
+    },
+    {
+      "$oid": "5ed3e083563fad2fbcbb6b61"
+    },
+    {
+      "$oid": "5ed705214a3f8d6cb0bb0f68"
+    },
+    {
+      "$oid": "5ed70f0dacec6c68584c278c"
+    }
+  ],
+  "friendRequests": [],
+  "friendRequestsSentByMe": [
+    {
+      "$oid": "5ed3df67563fad2fbcbb6b60"
+    }
+  ],
+  "username": "muraru",
+  "password": "1c4ae08f794b755099f2c63ede569ac296ff539fee4eeecd4307315c4e53db22",
+  "email": "muraru@gmail.com",
+  "birthDay": {
+    "$date": "1998-11-19T00:00:00Z"
+  },
+  "firstName": "Alex",
+  "lastName": "Muraru",
+  "role": "user",
+  "gender": "male",
+  "city": "Iași",
+  "country": "Romania",
+  "status": "offline",
+  "profileImagePath": "images/muraru.jpg"
+},{
+  "_id": {
+    "$oid": "5ed6fb3ea863b22eb0ac40e0"
+  },
+  "posts": [],
+  "friends": [],
+  "friendRequests": [],
+  "friendRequestsSentByMe": [],
+  "username": "amarandei",
+  "password": "16bc8f02062d8c524f56b09b89f810d7fe23add12612e2da2650a3422a683165",
+  "email": "amarandei@gmail.com",
+  "birthDay": {
+    "$date": "1972-10-19T00:00:00Z"
+  },
+  "firstName": "Cristian",
+  "lastName": "Amarandei",
+  "role": "user",
+  "gender": "male",
+  "city": "Iași",
+  "country": "Romania",
+  "status": "offline",
+  "profileImagePath": "images/amarandei.png"
+},{
+  "_id": {
+    "$oid": "5ed6fb94a863b22eb0ac40e1"
+  },
+  "posts": [],
+  "friends": [
+    {
+      "$oid": "5ed6421838a90d453073e570"
+    }
+  ],
+  "friendRequests": [
+    {
+      "$oid": "5ed6ee589e9c6d5f8825cf96"
+    }
+  ],
+  "friendRequestsSentByMe": [],
+  "username": "azoicai",
+  "password": "4a34232335b8ee2c4f8720af4e0cb87ef13a510af79959c2a713cb2d053d1053",
+  "email": "diana-georgiana@student.tuiasi.ro",
+  "birthDay": {
+    "$date": "1998-02-20T00:00:00Z"
+  },
+  "firstName": "Diana",
+  "lastName": "Azoicăi",
+  "role": "user",
+  "gender": "female",
+  "city": "Iași",
+  "country": "Romania",
+  "status": "offline",
+  "profileImagePath": "images/female.jpg"
+},{
+  "_id": {
+    "$oid": "5ed6fc96a863b22eb0ac40e2"
+  },
+  "posts": [],
+  "friends": [],
+  "friendRequests": [],
+  "friendRequestsSentByMe": [],
+  "username": "serban",
+  "password": "869ef2ce413a81a376706cd339f59b2a1a83dfd5eacc5a1ad41f2744bb6e0261",
+  "email": "serban@gmail.com",
+  "birthDay": {
+    "$date": "1980-06-03T00:00:00Z"
+  },
+  "firstName": "Elena",
+  "lastName": "Șerban",
+  "role": "user",
+  "gender": "female",
+  "city": "Iași",
+  "country": "Romania",
+  "status": "offline",
+  "profileImagePath": "images/serban.png"
+},{
+  "_id": {
+    "$oid": "5ed6fce7a863b22eb0ac40e3"
+  },
+  "posts": [],
+  "friends": [
+    {
+      "$oid": "5ed6ee589e9c6d5f8825cf96"
+    }
+  ],
+  "friendRequests": [],
+  "friendRequestsSentByMe": [],
+  "username": "martha",
+  "password": "7dbef27a673fea6454664f4fbe9685f3bc3cf1813eea89267bc99641e4d59517",
+  "email": "martha@gmail.com",
+  "birthDay": {
+    "$date": "1998-05-21T00:00:00Z"
+  },
+  "firstName": "Martha",
+  "lastName": "Bejan",
+  "role": "user",
+  "gender": "female",
+  "city": "Iași",
+  "country": "Romania",
+  "status": "offline",
+  "profileImagePath": "images/female.jpg"
+},{
+  "_id": {
+    "$oid": "5ed704d64a3f8d6cb0bb0f67"
+  },
+  "posts": [
+    {
+      "_id": {
+        "$oid": "5ed7131aacec6c68584c279c"
+      },
+      "message": "Father, everyone is starting to pay attention to me again because of the new millennium. I-I'm kinda making a comeback!",
+      "owner": {
+        "$oid": "5ed704d64a3f8d6cb0bb0f67"
+      },
+      "date": {
+        "$date": "2020-06-03T03:03:54.594Z"
+      }
+    }
+  ],
+  "friends": [
+    {
+      "$oid": "5ed705214a3f8d6cb0bb0f68"
+    },
+    {
+      "$oid": "5ed70f0dacec6c68584c278c"
+    },
+    {
+      "$oid": "5ed6ef209e9c6d5f8825cf98"
+    },
+    {
+      "$oid": "5ed7058b4a3f8d6cb0bb0f69"
+    }
+  ],
+  "friendRequests": [],
+  "friendRequestsSentByMe": [
+    {
+      "$oid": "5ed2b25f99304e3208dd812a"
+    }
+  ],
+  "username": "jesus",
+  "password": "a54e71f0e17f5aaf7946e66ab42cf3b1fd4e61d60581736c9f0eb1c3f794eb7c",
+  "email": "jesus@god.com",
+  "birthDay": {
+    "$date": {
+      "$numberLong": "-62119958400000"
+    }
+  },
+  "firstName": "Jesus",
+  "lastName": "Christ",
+  "role": "user",
+  "gender": "male",
+  "city": "Bucharest",
+  "country": "Romania",
+  "status": "offline",
+  "profileImagePath": "images/jesus.png"
+},{
+  "_id": {
+    "$oid": "5ed705214a3f8d6cb0bb0f68"
+  },
+  "posts": [
+    {
+      "_id": {
+        "$oid": "5ed70fc0acec6c68584c278d"
+      },
+      "message": "I am evil, so please treat pe seriously!",
+      "owner": {
+        "$oid": "5ed705214a3f8d6cb0bb0f68"
+      },
+      "date": {
+        "$date": "2020-06-03T02:49:36.617Z"
+      }
+    }
+  ],
+  "friends": [
+    {
+      "$oid": "5ed7058b4a3f8d6cb0bb0f69"
+    },
+    {
+      "$oid": "5ed70f0dacec6c68584c278c"
+    },
+    {
+      "$oid": "5ed704d64a3f8d6cb0bb0f67"
+    },
+    {
+      "$oid": "5ed6f93da863b22eb0ac40df"
+    },
+    {
+      "$oid": "5ed3df67563fad2fbcbb6b60"
+    },
+    {
+      "$oid": "5ed6ee589e9c6d5f8825cf96"
+    }
+  ],
+  "friendRequests": [
+    {
+      "$oid": "5ed6f66ea863b22eb0ac40dd"
+    }
+  ],
+  "friendRequestsSentByMe": [],
+  "username": "bunny",
+  "password": "e9c43c5dcf143fdc4173b5a9d62dfabcd704d436aad8b2034df993f44ee49e2b",
+  "email": "bunny@evil.com",
+  "birthDay": {
+    "$date": "2012-11-03T00:00:00Z"
+  },
+  "firstName": "Bunny",
+  "lastName": "The-Evil",
+  "role": "user",
+  "gender": "male",
+  "city": "Iași",
+  "country": "Romania",
+  "status": "offline",
+  "profileImagePath": "images/bunny.png"
+},{
+  "_id": {
+    "$oid": "5ed7058b4a3f8d6cb0bb0f69"
+  },
+  "posts": [
+    {
+      "_id": {
+        "$oid": "5ed706b24a3f8d6cb0bb0f76"
+      },
+      "message": "Pika pi!",
+      "owner": {
+        "$oid": "5ed7058b4a3f8d6cb0bb0f69"
+      },
+      "date": {
+        "$date": "2020-06-03T02:10:58.696Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "5ed718add7a31655d003fa1a"
+      },
+      "message": "Pikachu!",
+      "owner": {
+        "$oid": "5ed7058b4a3f8d6cb0bb0f69"
+      },
+      "date": {
+        "$date": "2020-06-03T03:27:41.513Z"
+      }
+    }
+  ],
+  "friends": [
+    {
+      "$oid": "5ed705214a3f8d6cb0bb0f68"
+    },
+    {
+      "$oid": "5ed2b25f99304e3208dd812a"
+    },
+    {
+      "$oid": "5ed2ab0099304e3208dd8127"
+    },
+    {
+      "$oid": "5ed4059c7c133519f04a974d"
+    },
+    {
+      "$oid": "5ed70f0dacec6c68584c278c"
+    },
+    {
+      "$oid": "5ed3e199563fad2fbcbb6b66"
+    },
+    {
+      "$oid": "5ed6ec1e81c767272412f0cb"
+    },
+    {
+      "$oid": "5ed7104cacec6c68584c278e"
+    },
+    {
+      "$oid": "5ed6ee589e9c6d5f8825cf96"
+    },
+    {
+      "$oid": "5ed704d64a3f8d6cb0bb0f67"
+    }
+  ],
+  "friendRequests": [],
+  "friendRequestsSentByMe": [
+    {
+      "$oid": "5ed3df67563fad2fbcbb6b60"
+    }
+  ],
+  "username": "pikachu",
+  "password": "43999461d22f67840fcd9b8824293eaa4f18146e57b2c651bcd925e3b3e4e429",
+  "email": "pikachu@gmail.com",
+  "birthDay": {
+    "$date": "2002-10-24T00:00:00Z"
+  },
+  "firstName": "Pikachu",
+  "lastName": "Pikachu",
+  "role": "user",
+  "gender": "male",
+  "city": "Ungheni",
+  "country": "Moldova",
+  "status": "offline",
+  "profileImagePath": "images/pikachu.png"
+},{
+  "_id": {
+    "$oid": "5ed70f0dacec6c68584c278c"
+  },
+  "posts": [
+    {
+      "_id": {
+        "$oid": "5ed76a0cea7d4a3a00c02103"
+      },
+      "message": "Oh, my dear Bucefal, I miss you so much. I can't find your profile page ...",
+      "owner": {
+        "$oid": "5ed70f0dacec6c68584c278c"
+      },
+      "date": {
+        "$date": "2020-06-03T09:14:52.380Z"
+      }
+    }
+  ],
+  "friends": [
+    {
+      "$oid": "5ed705214a3f8d6cb0bb0f68"
+    },
+    {
+      "$oid": "5ed4059c7c133519f04a974d"
+    },
+    {
+      "$oid": "5ed7058b4a3f8d6cb0bb0f69"
+    },
+    {
+      "$oid": "5ed704d64a3f8d6cb0bb0f67"
+    },
+    {
+      "$oid": "5ed2ab0099304e3208dd8127"
+    },
+    {
+      "$oid": "5ed6f93da863b22eb0ac40df"
+    },
+    {
+      "$oid": "5ed3e199563fad2fbcbb6b66"
+    },
+    {
+      "$oid": "5ed6ee589e9c6d5f8825cf96"
+    }
+  ],
+  "friendRequests": [],
+  "friendRequestsSentByMe": [
+    {
+      "$oid": "5ed3df67563fad2fbcbb6b60"
+    },
+    {
+      "$oid": "5ed3da1d563fad2fbcbb6b5e"
+    },
+    {
+      "$oid": "5ed63b0f38a90d453073e56e"
+    }
+  ],
+  "username": "macedon",
+  "password": "9744ef537e67720014db6709cd7f5821e10ea496df158ff926f3de83f0f2214f",
+  "email": "macedon@greece.com",
+  "birthDay": {
+    "$date": {
+      "$numberLong": "-51834902400000"
+    }
+  },
+  "firstName": "Alexander",
+  "lastName": "Macedon",
+  "role": "user",
+  "gender": "male",
+  "city": "Pella",
+  "country": "Greece",
+  "status": "offline",
+  "profileImagePath": "images/macedon.png"
+},{
+  "_id": {
+    "$oid": "5ed7104cacec6c68584c278e"
+  },
+  "posts": [
+    {
+      "_id": {
+        "$oid": "5ed710eeacec6c68584c278f"
+      },
+      "message": "Alexander, I miss you ...",
+      "owner": {
+        "$oid": "5ed7104cacec6c68584c278e"
+      },
+      "date": {
+        "$date": "2020-06-03T02:54:38.401Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "5ed71124acec6c68584c2791"
+      },
+      "message": "We had a dream, together!",
+      "owner": {
+        "$oid": "5ed7104cacec6c68584c278e"
+      },
+      "date": {
+        "$date": "2020-06-03T02:55:32.249Z"
+      }
+    }
+  ],
+  "friends": [
+    {
+      "$oid": "5ed2ab0099304e3208dd8127"
+    },
+    {
+      "$oid": "5ed6421838a90d453073e570"
+    },
+    {
+      "$oid": "5ed7058b4a3f8d6cb0bb0f69"
+    },
+    {
+      "$oid": "5ed63b0f38a90d453073e56e"
+    },
+    {
+      "$oid": "5ed3df67563fad2fbcbb6b60"
+    },
+    {
+      "$oid": "5ed6ee589e9c6d5f8825cf96"
+    }
+  ],
+  "friendRequests": [],
+  "friendRequestsSentByMe": [],
+  "username": "bucefal",
+  "password": "b9a477e0f7da0cac99b9aa743bf01259f7ecca3a7cdfa84d88f8daa80eaf0fad",
+  "email": "bucefal@greece.com",
+  "birthDay": {
+    "$date": {
+      "$numberLong": "-51866438400000"
+    }
+  },
+  "firstName": "Bucefal",
+  "lastName": "The-Great",
+  "role": "user",
+  "gender": "male",
+  "city": "Athens",
+  "country": "Greece",
+  "status": "offline",
+  "profileImagePath": "images/bucefal.png"
+}]
