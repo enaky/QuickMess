@@ -6,9 +6,9 @@
             <div class="card mb-sm-3 mb-md-0 contacts_card">
                 <div class="card-header bg-dark">
                     <div class="input-group">
-                        <input type="text" placeholder="Search..." name="" class="form-control search">
+                        <input id="search_chat_button_value" type="text" placeholder="Search..." name="" class="form-control search">
                         <div class="input-group-prepend bg-orange">
-                            <span class="input-group-text search_btn "><i class="fas fa-search "></i></span>
+                            <span id="search_chat_button" class="input-group-text search_btn "><i class="fas fa-search "></i></span>
                         </div>
                     </div>
                 </div>
@@ -17,9 +17,9 @@
                         <% if (typeof friends != "undefined" && typeof currentFriend != "undefined")
                         for (let i = 0 ;i < friends.length; i++){
                         if (friends[i]._id === currentFriend._id){ %>
-                        <li class="active change_chat" value="<%= friends[i]._id %>">
+                        <li class="active change_chat" data-value="<%= friends[i]._id %>">
                             <% } else { %>
-                        <li class="change_chat" value="<%= friends[i]._id %>">
+                        <li class="change_chat" data-value="<%= friends[i]._id %>">
                             <% } %>
                             <div class="d-flex bd-highlight">
                                 <div class="img_cont">
