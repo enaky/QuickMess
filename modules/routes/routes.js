@@ -114,6 +114,10 @@ module.exports = {
     },
 
     registerGet: function (req, res) {
+        if (req.session.user) {   //if logged
+            res.redirect("/");
+            return;
+        }
         let error = req.cookies["error"];
         res.clearCookie("error");
         res.render('register', {countries: countries, error: error});
@@ -196,6 +200,7 @@ module.exports = {
         res.render('chat', {
             user: req.session.user,
             enable_chat_css: true,
+            enable_index_css: true,
             socket_enable: true,
             friends: friends,
             currentFriend: currentFriend,

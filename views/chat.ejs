@@ -10,7 +10,32 @@
 </div>
 <div class="container-fluid h-100 pt-5 w-100">
     <div class="row justify-content-center h-100">
-        <div class="col-md-4 col-xl-54 chat">
+        <div class="card col-12 col-lg-5 col-xl-2 col-md-6 col-sm-12 mx-5 mb-5 align-self-start profile_container px-2 "
+             style="width: 100%;">
+            <% if (typeof user != "undefined"){ %>
+                <img class="card-img-top mt-3" id="profile_photo" src="<%= user.profileImagePath %>"
+                     alt="images/male.png">
+            <% } else { %>
+                <img class="card-img-top mt-3" id="profile_photo" src="images/male.png" alt="images/male.png">
+            <% } %>
+            <div class="card-body">
+
+                <% if (typeof user != "undefined") { %>
+                    <h4 id="profile_name" class="card-title text-center"><%= user.firstName %> <%= user.lastName %></h4>
+                    <p class="card-text">Age: <span id="profile_age"><%= user.age %></span></p>
+                    <p class="card-text">Email: <span id="profile_email"><%= user.email %></span></p>
+                    <p class="card-text">Country: <span id="profile_country"><%= user.country %></span></p>
+                    <p class="card-text">City: <span id="profile_city"><%= user.city %></span></p>
+                <% } else { %>
+                    <h2 id="profile_name" class="card-title">Ricardo Sanchez</h2>
+                    <p class="card-text">Age: <span id="profile_age"></span></p>
+                    <p class="card-text">Email: <span id="profile_email"></span></p>
+                    <p class="card-text">Country: <span id="profile_country"></span></p>
+                    <p class="card-text">City: <span id="profile_city"></span></p>
+                <% } %>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-6 col-xl-3 chat">
             <div class="card mb-sm-3 mb-md-0 contacts_card">
                 <div class="card-header bg-dark">
                     <div class="input-group">
@@ -53,7 +78,7 @@
                 <div class="card-footer bg-dark"></div>
             </div>
         </div>
-        <div class="col-md-8 col-xl-6 chat ">
+        <div class="col-md-12 col-lg-12 col-xl-6 chat ">
             <div class="card ">
                 <div class="card-header msg_head bg-dark">
                     <div class="d-flex bd-highlight">
@@ -65,7 +90,9 @@
                             </div>
                             <div class="user_info">
                                 <span id="friend_firstname">Chat with <%= currentFriend.firstName %></span>
-                                <p><span id="friend_number_of_messages"><%= messages.length %></span> Messages</p>
+                                <p>
+                                    <span id="friend_number_of_messages"><%= (typeof messages != "undefined") ? messages.length : 0 %></span>
+                                    Messages</p>
                             </div>
                         <% } %>
                     </div>

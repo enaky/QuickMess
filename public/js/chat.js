@@ -176,7 +176,7 @@ const display_message = function (content, date, own = true, img = "https://stat
                 }
             }
         } else {
-            document.getElementById("friend_number_of_messages").innerHTML = 0 + " Messages";
+            document.getElementById("").innerHTML = 0;
         }
         $("#message_send").prop('disabled', false);
     });
