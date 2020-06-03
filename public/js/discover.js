@@ -1,5 +1,5 @@
 function add_user_in_discover(users, user_id) {
-    let html_text
+    let html_text;
     if (users.length > 1){
         html_text = '<div class="card-deck">'
     } else {
@@ -24,7 +24,7 @@ function add_user_in_discover(users, user_id) {
             html_text += ' <div class="card-footer">';
             html_text += ' <form action="/discover" method="post">';
             html_text += ' <input type="hidden" name="user_id" value="' + users[i]._id + '">';
-            if (typeof (user) != "undefined") {
+            if (typeof (user_id) != "undefined") {
                 html_text += ' <input type="hidden" name="user_request_id" value="' + user_id + '">';
             }
             html_text += ' <div class="row">';
@@ -58,7 +58,7 @@ $(document).on("click", "#discover_people_search", function () {
         data: {"value": value_to_search},
         success: function (result) {
             console.log(result);
-            add_user_in_discover(result["users"], result["user"].user_id);
+            add_user_in_discover(result["users"], result["user"]._id);
         },
         error: function (e) {
             console.log(e.status);

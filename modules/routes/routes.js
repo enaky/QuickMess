@@ -340,7 +340,7 @@ module.exports = {
         console.log("Friend Remove Request for: " + req.body.user_id + " de la " + req.body.user_id_to_remove);
         try{
             let user_id = req.body["user_id"];
-            let user_who_requested_friendship = req.body["friend_id"];
+            let user_who_requested_friendship = req.body["user_request_id"];
             if (req.body["friend-operation"] === "remove"){
                 await auth.removeFriendship(user_id, user_who_requested_friendship);
             } else {
