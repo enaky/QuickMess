@@ -4,6 +4,7 @@ body{
 
 html, body {
     height: 100%;
+    background-image: radial-gradient( circle 1224px at 10.6% 8.8%,  rgba(255,255,255,1) 0%, rgb(238, 223, 204) 100.2% );
 }
 
 footer, nav {
@@ -70,11 +71,16 @@ nav ul li a{
 }
 
 
-
 .card-text{
     font-weight: bold;
 }
 
 #profile_age, #profile_email, #profile_city, #profile_country{
-    color: #82ccdd;
+    color: #79008e;
+}
+
+h1{
+    background: -webkit-linear-gradient(45deg, #9f0097, #00ff95 80%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }

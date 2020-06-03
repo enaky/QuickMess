@@ -65,8 +65,12 @@ const other_message = function (content, date, img) {
     messages.scrollTop = messages.scrollHeight;
 };
 
-const add_user = function(name, online= false, img="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"){
+const add_user = function(friend){
+    console.log("Trying to insert " + JSON.stringify(friend));
+    console.log(friend._id);
     let li_element = document.createElement("li");
+    li_element.className = "change_chat";
+    li_element.dataset.value = (friend._id).toString();
 
     let div_element = document.createElement("div");
     div_element.className = "d-flex bd-highlight";
@@ -75,11 +79,12 @@ const add_user = function(name, online= false, img="https://static.turbosquid.co
     div_element_11.className = "img_cont";
 
         let img_element = document.createElement("img");
-        img_element.src = img;
+        img_element.src = friend.profileImagePath;
         img_element.className = "rounded-circle user_img";
+        img_element.id = friend._id;
 
         let span_element = document.createElement("span");
-        span_element.className = online ? "online_icon" : "online_icon offline";
+        span_element.className = "online_icon " + friend.status;
 
         div_element_11.appendChild(img_element);
         div_element_11.appendChild(span_element);
@@ -87,12 +92,23 @@ const add_user = function(name, online= false, img="https://static.turbosquid.co
 
     let div_element_12 = document.createElement("div");
     div_element_12.className = "user_info";
+        let input_element_1 = document.createElement("input");
+        input_element_1.className = "name " + friend._id;
+        input_element_1.value = friend.firstName;
+        let input_element_2 = document.createElement("input");
+        input_element_2.className = "status " + friend._id;
+        input_element_2.value = friend.status;
+        input_element_1.setAttribute("type", "hidden");
+        input_element_2.setAttribute("type", "hidden");
+
         let span_element_2 = document.createElement("span");
-        span_element_2.innerHTML = name;
+        span_element_2.innerHTML = friend.firstName + " " + friend.lastName;
 
         let p_element = document.createElement("p");
-        p_element.innerHTML = name + " is " + (online ? "online" : "offline");
+        p_element.innerHTML = name + " is " + friend["status"];
 
+    div_element_12.appendChild(input_element_1);
+    div_element_12.appendChild(input_element_2);
     div_element_12.appendChild(span_element_2);
     div_element_12.appendChild(p_element);
 
@@ -102,6 +118,7 @@ const add_user = function(name, online= false, img="https://static.turbosquid.co
     li_element.appendChild(div_element);
     contacts.appendChild(li_element);
     contacts.scrollTop = contacts.scrollHeight;
+    console.log("Finished inserting");
 };
 
 
@@ -163,14 +180,13 @@ const display_message = function (content, date, own = true, img = "https://stat
         }
         $("#message_send").prop('disabled', false);
     });
-
-    $( "#contacts li" ).click(function() {
+    $(document).on("click", "#contacts li", function () {
         console.log("Click on friend");
 
         $("#message_send").prop('disabled', true);
         contact_current.className = 'change_chat';
         $(this).attr('class', 'active change_chat');
-        let new_friend_id = $(this).attr("value");
+        let new_friend_id = $(this).data("value");
         let new_friend_src = document.getElementById(new_friend_id).src;
         let new_friend_name = document.getElementsByClassName("name " + new_friend_id)[0].value;
         let new_friend_status = document.getElementsByClassName("status " + new_friend_id)[0].value;
@@ -196,5 +212,25 @@ const display_message = function (content, date, own = true, img = "https://stat
         socket.emit("change friend", {"user_id": user_id, "friend_id": friend_id});
 
         messages.innerHTML = "";
+    });
+    $(document).on("click", "#search_chat_button", function () {
+        let value_to_search = $("#search_chat_button_value").val();
+        console.log("Chat to search: " + value_to_search);
+        $.ajax({
+            async: false,
+            type: "POST",
+            url: "/search-friend",
+            data: {"value": value_to_search},
+            success: function (result) {
+                console.log(result["users"]);
+                contacts.innerHTML = '';
+                for (let i = 0; i < result["users"].length; i++){
+                    add_user(result["users"][i]);
+                }
+            },
+            error: function (e) {
+                console.log(e.status);
+            }
+        });
     });
 })();

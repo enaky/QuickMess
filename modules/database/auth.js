@@ -13,7 +13,6 @@ const getUserBasicInfoMap = function(users){
             username: user.username,
             firstName: user.firstName,
             lastName: user.lastName,
-            username: user.username,
             age: utilities.calculateAge(user.birthDay),
             status: user.status,
             city: user.city,
@@ -278,6 +277,23 @@ module.exports = {
                     }
                     db.close();
                 });
+            });
+        });
+    },
+
+    removePost: async function(user_id, post_id){
+        return new Promise((resolve, reject) => {
+            MongoClient.connect(url, {useUnifiedTopology: true,}, function (err, db) {
+                if (err) throw err;
+                let dbo = db.db("quickMess");
+                dbo.collection("users").updateOne(
+                    {_id: ObjectId(user_id)},
+                    {$pull: {"posts" : {_id: ObjectId(post_id)}}}, function (err, res) {
+                        if (err) throw err;
+                        resolve();
+                        db.close();
+                    }
+                )
             });
         });
     },

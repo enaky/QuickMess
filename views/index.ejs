@@ -1,6 +1,6 @@
 <div class="container text-center">
     <div class='container-fluid'>
-        <h1 class="m-1" style="color: red">Welcome<% if (typeof user != "undefined"){ %>, <%= user.firstName %><% } %>!
+        <h1 class="m-1">Welcome<% if (typeof user != "undefined"){ %>, <%= user.firstName %><% } %>!
         </h1>
     </div>
 </div>
@@ -14,10 +14,10 @@
             <% } else { %>
                 <img class="card-img-top mt-3" id="profile_photo" src="images/male.png" alt="images/male.png">
             <% } %>
-            <div class="card-body mt-2">
+            <div class="card-body">
 
                 <% if (typeof user != "undefined") { %>
-                    <h4 id="profile_name" class="card-title"><%= user.firstName %> <%= user.lastName %></h4>
+                    <h4 id="profile_name" class="card-title text-center"><%= user.firstName %> <%= user.lastName %></h4>
                     <p class="card-text">Age: <span id="profile_age"><%= user.age %></span></p>
                     <p class="card-text">Email: <span id="profile_email"><%= user.email %></span></p>
                     <p class="card-text">Country: <span id="profile_country"><%= user.country %></span></p>
@@ -60,10 +60,19 @@
                 for (let i = 0; i < user.posts.length; i++){ %>
 
                     <div class="post my-4">
+                        <form action="post-delete" method="post">
+                            <input name="user_id" value="<%= user._id %>" hidden>
+                            <input name="post_id" value="<%= user.posts[i]._id %>" hidden>
+                            <button type="submit" class="close custom_delete_button" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </form>
+
                         <div class="mx-4 mt-4 post_text"><%= user.posts[i].message %></div>
                         <div class="text-right mb-2 mx-3"
                              style="color: darkcyan"><%= moment(user.posts[i].date).format('MMMM Do YYYY, HH:mm:ss') %></div>
                     </div>
+
                 <% }} %>
             </div>
         </div>

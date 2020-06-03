@@ -9,6 +9,7 @@
 
     <link rel="icon" href="/images/quickmess.ico" type="image/x-icon"/>
     <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/exit_button.css">
     <% if (typeof enable_chat_css != "undefined" && enable_chat_css){ %>
         <link rel="stylesheet" type="text/css" href="/css/chat.css">
     <% }
@@ -38,22 +39,24 @@
         <li class="navbar-item pl-5 pr-5 ml-5 mr-5">
             <img src="/images/quickmesslogo.png" alt="" style="height:50px">
         </li>
-        <li class="nav-item">
-            <a class="nav-link p-2" href="/"><i class="fas fa-home"></i> Home</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link p-2" href="/chat"><i class="fas fa-envelope"></i> Message</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link p-2" href="/friends"><i class="fas fa-user-friends"></i> Friends</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link p-2" href="/discover"><i class="fa fa-search" aria-hidden="true"></i> Discover</a>
-        </li>
+        <%if (typeof user != "undefined"){%>
+            <li class="nav-item">
+                <a class="nav-link p-2" href="/"><i class="fas fa-home"></i> Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link p-2" href="/chat"><i class="fas fa-envelope"></i> Message</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link p-2" href="/friends"><i class="fas fa-user-friends"></i> Friends</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link p-2" href="/discover"><i class="fa fa-search" aria-hidden="true"></i> Discover</a>
+            </li>
 
-        <li class="nav-item">
-            <a class="nav-link p-2" href="/logout"><i class="fas fa-sign-out-alt" aria-hidden="true"></i> Log Out</a>
-        </li>
+            <li class="nav-item">
+                <a class="nav-link p-2" href="/logout"><i class="fas fa-sign-out-alt" aria-hidden="true"></i> Log Out</a>
+            </li>
+        <%}%>
         <% if (typeof role != "undefined" && role === "admin") { %>
             <li class="nav-item">
                 <a class="nav-link p-2" href="/admin"><i class="fa fa-user-secret" aria-hidden="true"></i> Admin</a>
@@ -90,6 +93,8 @@
 <script src="/js/socket.js"></script>
 <script src="/js/index.js"></script>
 <script src="/js/script.js"></script>
+<script src="/js/discover.js"></script>
+<script src="/js/friend_search.js"></script>
 <% if (typeof socket_enable != "undefined" && socket_enable ){%>
     <script src="/js/chat.js"></script>
 <%} %>
