@@ -1,11 +1,11 @@
 [
   {
     "name": "Romania",
-    "cities": ["Iasi", "Bucharest", "Vaslui", "Timisoara"]
+    "cities": ["Iași", "Bucharest", "Vaslui", "Timișoara"]
   },
   {
     "name": "Moldova",
-    "cities": ["Ungheni", "Chisinau", "Ialoveni"]
+    "cities": ["Ungheni", "Chișinău", "Ialoveni"]
   },
   {
     "name": "Spain",

@@ -1,6 +1,6 @@
 <div class="container text-center">
     <div class='container-fluid'>
-        <h1 class="m-3" style="color: red">Welcome<% if (typeof user != "undefined"){ %>, <%= user.firstName %><% } %>!
+        <h1 class="m-3">Welcome<% if (typeof user != "undefined"){ %>, <%= user.firstName %><% } %>!
         </h1>
     </div>
 </div>
@@ -14,10 +14,10 @@
             <% } else { %>
                 <img class="card-img-top mt-3" id="profile_photo" src="images/male.png" alt="images/male.png">
             <% } %>
-            <div class="card-body mt-2">
+            <div class="card-body">
 
                 <% if (typeof user != "undefined") { %>
-                    <h4 id="profile_name" class="card-title"><%= user.firstName %> <%= user.lastName %></h4>
+                    <h4 id="profile_name" class="text-center card-title"><%= user.firstName %> <%= user.lastName %></h4>
                     <p class="card-text">Age: <span id="profile_age"><%= user.age %></span></p>
                     <p class="card-text">Email: <span id="profile_email"><%= user.email %></span></p>
                     <p class="card-text">Country: <span id="profile_country"><%= user.country %></span></p>

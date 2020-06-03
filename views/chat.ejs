@@ -1,14 +1,24 @@
 <!-- Template used and adapted to my case: https://bootsnipp.com/snippets/nNg98 -->
-
+<div class="container text-center">
+    <div class='container-fluid'>
+        <h1 class="mt-2">Welcome
+            <% if (typeof user != "undefined"){ %>, <%= user.firstName %>
+            <% } %>
+            !
+        </h1>
+    </div>
+</div>
 <div class="container-fluid h-100 pt-5 w-100">
     <div class="row justify-content-center h-100">
         <div class="col-md-4 col-xl-54 chat">
             <div class="card mb-sm-3 mb-md-0 contacts_card">
                 <div class="card-header bg-dark">
                     <div class="input-group">
-                        <input id="search_chat_button_value" type="text" placeholder="Search..." name="" class="form-control search">
+                        <input id="search_chat_button_value" type="text" placeholder="Search..." name=""
+                               class="form-control search">
                         <div class="input-group-prepend bg-orange">
-                            <span id="search_chat_button" class="input-group-text search_btn "><i class="fas fa-search "></i></span>
+                            <span id="search_chat_button" class="input-group-text search_btn "><i
+                                        class="fas fa-search "></i></span>
                         </div>
                     </div>
                 </div>
@@ -55,7 +65,7 @@
                             </div>
                             <div class="user_info">
                                 <span id="friend_firstname">Chat with <%= currentFriend.firstName %></span>
-                                <p> <span id="friend_number_of_messages"><%= messages.length %></span> Messages</p>
+                                <p><span id="friend_number_of_messages"><%= messages.length %></span> Messages</p>
                             </div>
                         <% } %>
                     </div>
@@ -104,16 +114,22 @@
                                 <input id="chat_user_id" value="<%= user._id %>" hidden/>
                                 <input id="chat_friend_id" value="<%= currentFriend._id %>" hidden/>
                                 <input id="chat_user_photo" value="<%= user.profileImagePath %>" hidden/>
-                            <% } %>
-                            <textarea id="message" name="" class="form-control type_msg"
-                                      placeholder="Type your message..."></textarea>
+                                <textarea id="message" name="" class="form-control type_msg"
+                                          placeholder="Type your message..."></textarea>
                             <div class="input-group-append">
                                 <button id="message_send" type=submit class="input-group-text send_btn"><i
                                             class="fas fa-location-arrow"></i></button>
+                                <% } else { %>
+                                    <textarea class="form-control type_msg" placeholder="Type your message..."
+                                              disabled></textarea>
+                                    <div class="input-group-append">
+                                        <button class="input-group-text send_btn" disabled><i
+                                                    class="fas fa-location-arrow"></i></button>
+                                    </div>
+                                <% } %>
                             </div>
                         </div>
                     </form>
-
                 </div>
             </div>
         </div>
