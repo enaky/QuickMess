@@ -389,6 +389,7 @@ module.exports = {
             enable_index_css: true,
             error: error,
             moment: moment,
+            disable_user_welcome: true,
             friendRequests: friend_requests,
             enable_people_css: true
         });
