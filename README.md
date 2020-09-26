@@ -3,8 +3,11 @@
 This project represents a social network application written in node.js.
 Database used is mongoDB. 
 
+![Diagram](https://github.com/enaky/QuickMess/blob/master/Documentation/diagrams/diagram.png)
+
 #### Notes
 * Passwords are stored encrypted in the database (encryption realised on client side)
+* Created users will have a default image according to his genre. Change user avatar functionality is not yet implemented.
 
 #### Functionalities implemented
 * Login/ register
@@ -19,7 +22,7 @@ Server runs on port 2014.
 
 ```http://localhost:2014/```
 
-Passwords coincide with usernames and [images names](https://github.com/enaky/QuickMess/tree/master/public/images).
+Passwords coincide with usernames and [images names](https://github.com/enaky/QuickMess/tree/master/QuickMessApp/public/images).
 
 #### Some users:
 - enaki
@@ -36,7 +39,7 @@ Passwords coincide with usernames and [images names](https://github.com/enaky/Qu
 3. Install [mongoDb Compass](https://www.mongodb.com/products/compass) in order to visualize and load data. After installed:
     * Create a database called quickMess
     * Create a collection called users and load data from [users.json](https://github.com/enaky/QuickMess/blob/master/Documentation/exported_database/users.json)
-    * Create a collection called chats and load data from [chats.json](https://github.com/enaky/QuickMess/blob/master/Documentation/exported_database/users.json)
+    * Create a collection called chats and load data from [chats.json](https://github.com/enaky/QuickMess/blob/master/Documentation/exported_database/chats.json)
 3. Change directory to QuickMessApp
 2. Run the following commands:
     * ```npm install``` in order to install the dependencies this project relies on.
